@@ -32,18 +32,18 @@ var ui = {
 						uuid:"data_1",
 						inputConfig:[
 							{
-								valName:"param1",
-								valValue:"val1"
+								varName:"param1",
+								varValue:"var1"
 							},{
-								valName:"param2",
-								valValue:"{{自定义变量_XXX}}"
+								varName:"param2",
+								varValue:"{{自定义变量_XXX}}"
 							},{
-								valName:"param3",
-								valValue:"{{内置变量_query['param3']}}"
+								varName:"param3",
+								varValue:"{{内置变量_query['param3']}}"
 							}
 						],
 						outputConfig:{
-							valName: "userList"
+							varName: "userList"
 						}
 					},
 					fields:[
@@ -59,7 +59,7 @@ var ui = {
 		]
 	},
 	buzzs:{
-		val:[
+		var:[
 		],
 		func:[
 		]

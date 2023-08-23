@@ -7,41 +7,41 @@ var data = [
 		inputs:[
 			{
 				name:"参数1",
-				valName:"param1"
+				varName:"param1"
 			},{
 				name:"参数2",
-				valName:"param2"
+				varName:"param2"
 			},{
 				name:"参数3",
-				valName:"param3"
+				varName:"param3"
 			}
 		],
 		outputs:[
 			{
 				name:"用户信息",
 				dataType:"Object"
-				valName: "userInfo",
+				varName: "userInfo",
 				objDesc:[
 					{
 						name:"字段1",
-						valName:"field1"
+						varName:"field1"
 					},{
 						name:"字段2",
-						valName:"field2"
+						varName:"field2"
 					}
 				]
 
 			},{
 				name:"用户列表",
 				dataType:"Array"
-				valName: "userList",
+				varName: "userList",
 				objDesc:[
 					{
 						name:"字段1",
-						valName:"field1"
+						varName:"field1"
 					},{
 						name:"字段2",
-						valName:"field2"
+						varName:"field2"
 					}
 				]							
 			}
