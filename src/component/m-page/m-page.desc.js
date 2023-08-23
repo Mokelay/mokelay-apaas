@@ -41,6 +41,7 @@ var desc = {
 	eventsDesc:[
 		{}
 	],
+	attributesEditorView:null,
 	supportAttributeConfig:false,
 	supportActionConfig:true,
 	supportStyleConfig:true
