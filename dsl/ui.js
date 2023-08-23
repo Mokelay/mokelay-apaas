@@ -1,5 +1,6 @@
 var ui = {
 	uuid:"ui_1",
+	appUUID:"app_1234",
 	title:"测试页面",
 	status:"Dev",
 	description:"这是一个测试DSL",
