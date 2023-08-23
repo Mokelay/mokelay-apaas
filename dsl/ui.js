@@ -51,8 +51,8 @@ var ui = {
 						{}
 					]
 				},
-				style:{},
-				events:{},
+				styles:{},
+				actions:{},
 			}
 		],
 		modals:[
