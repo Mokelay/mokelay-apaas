@@ -1,4 +1,4 @@
-var component_desc = {
+{
 	name:"页面组件",
 	icon:"", //如何配置？
 	tagName: "m-page",
