@@ -3,25 +3,28 @@ var data = [
 		uuid:"data_1",
 		name:"接口数据1",
 		apiName:"load_data_list",
-		method:"get",
+		method:"GET",
 		inputs:[
 			{
-				name:"参数1",
-				varName:"param1"
+				varShowName:"参数1",
+				varCodeName:"param1",
+				varDataType:"String"
 			},{
-				name:"参数2",
-				varName:"param2"
+				varShowName:"参数2",
+				varCodeName:"param2",
+				varDataType:"Integer"
 			},{
-				name:"参数3",
-				varName:"param3"
+				varShowName:"参数3",
+				varCodeName:"param3",
+				varDataType:"Boolean"
 			}
 		],
 		outputs:[
 			{
-				name:"用户信息",
-				dataType:"Object"
-				varName: "userInfo",
-				objDesc:[
+				varShowName:"用户信息",
+				varCodeName: "userInfo",
+				varDataType:"Object"
+				varDataDesc:[
 					{
 						name:"字段1",
 						varName:"field1"
@@ -32,10 +35,10 @@ var data = [
 				]
 
 			},{
-				name:"用户列表",
-				dataType:"Array"
-				varName: "userList",
-				objDesc:[
+				varShowName:"用户列表",
+				varCodeName: "userList",
+				varDataType:"Array"
+				varDataDesc:[
 					{
 						name:"字段1",
 						varName:"field1"

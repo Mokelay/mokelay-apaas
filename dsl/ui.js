@@ -9,10 +9,11 @@ var ui = {
 		name:"页面",
 		component:"m-page",
 		category:"Container",
-		layouts:"",//待定
-		attributes:{},
-		style:{},
-		events:{},
+
+		attributes:[],
+		styles:[],
+		events:[],
+
 		children:[
 			{
 				uuid:"view_1_1",
@@ -58,10 +59,6 @@ var ui = {
 			{}
 		]
 	},
-	buzzs:{
-		var:[
-		],
-		func:[
-		]
-	}
+	customVars:[],
+	customFuncs:[]
 }
