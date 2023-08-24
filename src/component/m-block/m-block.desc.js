@@ -1,7 +1,7 @@
 var desc = {
-	name:"文本",
+	name:"区块",
 	icon:"", //如何配置？
-	tagName: "m-text",
+	tagName: "m-block",
 	attributesDesc:[
 		{
 		}
