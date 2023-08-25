@@ -2,7 +2,7 @@ var data = [
 	{
 		uuid:"data_1",
 		name:"接口数据1",
-		apiName:"load_data_list",
+		apiName:"load_data_list", // legao的alias
 		method:"GET",
 		inputs:[
 			{

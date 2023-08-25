@@ -21,39 +21,49 @@ var ui = {
 				name:"文本1",
 				component:"m-text",
 				category:"Single",
-				attributes:{},
-				style:{},
-				events:{},
+				attributes:[
+					{
+						varCodeName:"content",
+						value:"文本内容1",
+						i18n:true,
+						i18nConfig:[
+							"zh-cn":"文本内容1",
+							"en-us":"Text Content 1"
+						]
+					}
+				],
+				style:[],
+				events:[],
 			},{
 				uuid:"view_1_2",
 				name:"数据表格1",
 				component:"m-table",
 				category:"Single",
-				attributes:{
-					ds:{
-						uuid:"data_1",
-						inputConfig:[
-							{
-								varName:"param1",
-								varValue:"var1"
-							},{
-								varName:"param2",
-								varValue:"{{自定义变量_XXX}}"
-							},{
-								varName:"param3",
-								varValue:"{{内置变量_query['param3']}}"
+				attributes:[
+					{
+						varCodeName:"ds",
+						value:{
+							uuid:"data_1",
+							inputConfig:[
+								{
+									varName:"param1",
+									varValue:"var1"
+								},{
+									varName:"param2",
+									varValue:"{{自定义变量_XXX}}"
+								},{
+									varName:"param3",
+									varValue:"{{内置变量_query['param3']}}"
+								}
+							],
+							outputConfig:{
+								varName: "userList"
 							}
-						],
-						outputConfig:{
-							varName: "userList"
 						}
-					},
-					fields:[
-						{}
-					]
-				},
-				styles:{},
-				actions:{},
+					}
+				],
+				styles:[],
+				actions:[],
 			}
 		],
 		modals:[
