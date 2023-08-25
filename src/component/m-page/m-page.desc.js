@@ -36,10 +36,24 @@ var desc = {
 				}
 			],
 			returnDataType:null
+		},
+		{
+			funcShowName:"",
+			funcCodeName:"",
+			params:[]
 		}
 	],
 	eventsDesc:[
-		{}
+		{
+			eventShowName:"鼠标滑入",
+			eventCodeName:"mousemovein"
+			params:[]
+		},
+		{
+			eventShowName:"鼠标滑出",
+			eventCodeName:"mousemoveout"
+			params:[]
+		}
 	],
 	attributesEditorView:null,
 	supportAttributeConfig:false,
