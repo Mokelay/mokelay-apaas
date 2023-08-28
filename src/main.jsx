@@ -14,6 +14,7 @@ window.__Mokelay.InternalVar = {
 	Current_Terminal:"PC"
 }
 
+
 // 加载内置函数
 
 
