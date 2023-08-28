@@ -1,4 +1,4 @@
-var internalbuzzs = {
+export default {
 	/*
 	内置变量_是否编辑状态
 	内置变量_所处终端

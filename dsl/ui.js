@@ -1,4 +1,4 @@
-var ui = {
+export default {
 	uuid:"ui_1",
 	appUUID:"app_1234",
 	title:"测试页面",
@@ -26,10 +26,10 @@ var ui = {
 						varCodeName:"content",
 						value:"文本内容1",
 						i18n:true,
-						i18nConfig:[
+						i18nConfig:{
 							"zh-cn":"文本内容1",
 							"en-us":"Text Content 1"
-						]
+						}
 					}
 				],
 				style:[],

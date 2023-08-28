@@ -1,4 +1,4 @@
-var app = {
+export default {
 	uuid:"app_1234",
 	icon:"",
 	name:"测试应用",

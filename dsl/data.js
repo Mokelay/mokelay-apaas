@@ -1,4 +1,4 @@
-var data = [
+export default [
 	{
 		uuid:"data_1",
 		name:"接口数据1",
@@ -23,7 +23,7 @@ var data = [
 			{
 				varShowName:"用户信息",
 				varCodeName: "userInfo",
-				varDataType:"Object"
+				varDataType:"Object",
 				varDataDesc:[
 					{
 						name:"字段1",
@@ -37,7 +37,7 @@ var data = [
 			},{
 				varShowName:"用户列表",
 				varCodeName: "userList",
-				varDataType:"Array"
+				varDataType:"Array",
 				varDataDesc:[
 					{
 						name:"字段1",
