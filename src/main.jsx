@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 // 初始化全局配置
 window.__Mokelay = {
 };
@@ -16,7 +19,9 @@ window.__Mokelay.InternalVar = {
 
 
 // 加载内置函数
+window.__Mokelay.InternalFunc = {
 
+}
 
 // 如果是编辑器状态，加载编辑器组件
 
