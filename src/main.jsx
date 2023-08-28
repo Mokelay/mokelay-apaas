@@ -34,8 +34,12 @@ window.__Mokelay.InternalFunc = {
 }
 
 // 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试
+
+//App信息
 import app from '../dsl/app.js';
+//UI信息
 import ui from '../dsl/ui.js';
+//依赖的数据源
 import data from '../dsl/data.js';
 
 // 渲染DSL
