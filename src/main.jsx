@@ -30,7 +30,19 @@ window.__Mokelay.InternalVar = {
 
 // 加载内置函数
 window.__Mokelay.InternalFunc = {
+	//内置函数_设置页面标题
+	setTitle:function(title){
+		document.title = title;
+	},
 
+	//内置函数_打开链接
+	openUrl:function(url){},
+
+	//内置函数_显示组件
+	showView:function(viewUUID){},
+
+	//内置函数_隐藏组件
+	hideView:function(viewUUID){}
 }
 
 // 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试

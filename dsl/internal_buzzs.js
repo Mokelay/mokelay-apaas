@@ -29,8 +29,20 @@ export default {
 	internalFunc:[
 		{
 			uuid:"",
+			funcShowName:"内置函数_设置页面标题",
+			funcCodeName:"setTitle",
+			params:[
+				{
+					varShowName:"页面标题",
+					varCodeName:"title",
+					dataType:"String"
+				}
+			],
+			returnDataType:null
+		},{
+			uuid:"",
 			funcShowName:"内置函数_打开链接",
-			funcCodeName:"OpenUrl",
+			funcCodeName:"openUrl",
 			params:[
 				{
 					varShowName:"URL地址",
