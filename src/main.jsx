@@ -19,31 +19,14 @@ import '@fontsource/roboto/700.css';
 window.__Mokelay = {
 };
 
+
+//加载内置巴斯
+import internalBuzzs from './util/internal_buzzs.jsx';
+
 // 加载内置变量
-window.__Mokelay.InternalVar = {
-	//内置变量_是否编辑状态
-	Is_Edit_Status:true,
-	//内置变量_所处终端
-	Current_Terminal:"PC"
-}
-
-
+window.__Mokelay.InternalVar = internalBuzzs['internalVar'];
 // 加载内置函数
-window.__Mokelay.InternalFunc = {
-	//内置函数_设置页面标题
-	setTitle:function(title){
-		document.title = title;
-	},
-
-	//内置函数_打开链接
-	openUrl:function(url){},
-
-	//内置函数_显示组件
-	showView:function(viewUUID){},
-
-	//内置函数_隐藏组件
-	hideView:function(viewUUID){}
-}
+window.__Mokelay.InternalFunc = internalBuzzs['internalFunc'];
 
 // 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试
 
