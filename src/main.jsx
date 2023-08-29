@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom/client'
 
 
 // 加载MUI基础组件库
-import Button from '@mui/material/Button';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import M_Page from './component/m_page/m_page.jsx';
+import M_Text from './component/m_text/m_text.jsx';
 
 
 // 如果是编辑器状态，加载编辑器组件
@@ -25,8 +22,10 @@ import internalBuzzs from './util/internal_buzzs.jsx';
 
 // 加载内置变量
 window.__Mokelay.InternalVar = internalBuzzs['internalVar'];
+window.__Mokelay.InternalVarDesc = internalBuzzs['internalVarDesc'];
 // 加载内置函数
 window.__Mokelay.InternalFunc = internalBuzzs['internalFunc'];
+window.__Mokelay.InternalFuncDesc = internalBuzzs['internalFuncDesc'];
 
 // 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试
 

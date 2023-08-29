@@ -2,7 +2,7 @@ var desc = {
 	version:"1.0.0",
 	name:"页面",
 	icon:"", //如何配置？
-	tagName: "m-page",
+	tagName: "m_page",
 	attributesDesc:[
 		{
 			varShowName: "View配置列表",
