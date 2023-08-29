@@ -1,7 +1,7 @@
-var desc = {
-	name:"按钮",
+export default {
+	name:"文本",
 	icon:"", //如何配置？
-	tagName: "m-button",
+	tagName: "m_text",
 	attributesDesc:[
 		{
 		}
@@ -13,9 +13,7 @@ var desc = {
 	eventsDesc:[
 		{}
 	],
-	attributesEditorView:{
-		
-	},
+	attributesEditorView:{},
 	supportAttributeConfig:true,
 	supportActionConfig:true,
 	supportStyleConfig:true

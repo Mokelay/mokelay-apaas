@@ -1,7 +1,7 @@
-var desc = {
-	name:"区块",
+export default {
+	name:"按钮",
 	icon:"", //如何配置？
-	tagName: "m-block",
+	tagName: "m_button",
 	attributesDesc:[
 		{
 		}

@@ -1,7 +1,7 @@
-var desc = {
-	name:"文本",
+export default  {
+	name:"区块",
 	icon:"", //如何配置？
-	tagName: "m_text",
+	tagName: "m_block",
 	attributesDesc:[
 		{
 		}
@@ -13,7 +13,9 @@ var desc = {
 	eventsDesc:[
 		{}
 	],
-	attributesEditorView:{},
+	attributesEditorView:{
+		
+	},
 	supportAttributeConfig:true,
 	supportActionConfig:true,
 	supportStyleConfig:true

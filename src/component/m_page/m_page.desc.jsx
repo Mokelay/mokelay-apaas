@@ -1,4 +1,4 @@
-var desc = {
+export default {
 	version:"1.0.0",
 	name:"页面",
 	icon:"", //如何配置？

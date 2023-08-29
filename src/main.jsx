@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom/client'
 // 加载MUI基础组件库
 import M_Page from './component/m_page/m_page.jsx';
 import M_Text from './component/m_text/m_text.jsx';
+import M_Button from './component/m_button/m_button.jsx';
+import M_Block from './component/m_block/m_block.jsx';
 
 
 // 如果是编辑器状态，加载编辑器组件
