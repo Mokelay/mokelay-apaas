@@ -1,5 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createElement } from 'react';
+import { createRoot } from 'react-dom/client';
+
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
 
 
 // 加载MUI基础组件库
@@ -35,12 +38,17 @@ window.__Mokelay.InternalFuncDesc = internalBuzzs['internalFuncDesc'];
 //App信息
 import app from '../dsl/app.js';
 //UI信息
-import ui from '../dsl/ui.js';
+import ui0 from '../dsl/ui0.js';
+import ui1 from '../dsl/ui1.js';
 //依赖的数据源
 import data from '../dsl/data.js';
 
 // 渲染DSL
-const rootElement = document.getElementById('root');
-console.log(app);
-console.log(ui);
-console.log(data);
+var view = ui1['view'];
+const root = createRoot(document.getElementById('root'));
+var el = createElement(
+	eval(view['component']),
+	{content:'你好'},
+	null
+);
+root.render(el);
