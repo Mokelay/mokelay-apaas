@@ -45,10 +45,18 @@ import data from '../dsl/data.js';
 
 // 渲染DSL
 var view = ui1['view'];
+
+//处理属性
+var attributes = view['attributes'] || [];
+var pros = {};
+attributes.map(function(attr){
+	pros[attr['varCodeName']] = attr['value'];
+});
+
 const root = createRoot(document.getElementById('root'));
 var el = createElement(
 	eval(view['component']),
-	{content:'你好'},
+	pros,
 	null
 );
 root.render(el);

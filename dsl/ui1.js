@@ -11,7 +11,12 @@ export default {
 		component:"M_Text",
 		category:"Single",
 
-		attributes:[],
+		attributes:[
+			{
+				varCodeName:"content",
+				value:"测试一下",
+			}
+		],
 		styles:[],
 		events:[],
 
