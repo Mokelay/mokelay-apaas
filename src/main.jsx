@@ -10,6 +10,7 @@ import M_Block from './component/m_block/m_block.jsx';
 
 
 // 如果是编辑器状态，加载编辑器组件
+import M_Layout_Edit from './editor/m_layout_edit/m_layout_edit.jsx';
 
 // 加载自定义组件库，加载完成后，后续还可以还可以动态加载
 
