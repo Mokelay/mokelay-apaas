@@ -45,5 +45,24 @@ export default {
 		        reject(error);
 		    });
 		});
+	},
+
+	post : function(url, param, options) {
+	    return this.invoke(_.extend({
+	        url: url,
+	        method: 'post',
+	        data: Qs.stringify(param),
+	        headers: {
+	            'Content-Type': 'application/x-www-form-urlencoded'
+	        }
+	    }, options));
+	},
+
+	get : function(url, param, options) {
+	    return this.invoke(_.extend({
+	        url: url,
+	        method: 'get',
+	        params: param
+	    }, options));
 	}
 };
