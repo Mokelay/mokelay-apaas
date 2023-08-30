@@ -1,7 +1,7 @@
 export default {
 	name:"文本",
 	icon:"", //如何配置？
-	tagName: "m_text",
+	tagName: "M_Text",
 	attributesDesc:[
 		{
 		}

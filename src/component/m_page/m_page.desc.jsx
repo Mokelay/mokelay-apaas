@@ -2,7 +2,7 @@ export default {
 	version:"1.0.0",
 	name:"页面",
 	icon:"", //如何配置？
-	tagName: "m_page",
+	tagName: "M_Page",
 	attributesDesc:[
 		{
 			varShowName: "View配置列表",

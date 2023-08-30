@@ -1,7 +1,7 @@
 export default {
 	name:"按钮",
 	icon:"", //如何配置？
-	tagName: "m_button",
+	tagName: "M_Button",
 	attributesDesc:[
 		{
 		}
