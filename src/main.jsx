@@ -53,6 +53,15 @@ var _render= function(view){
 	});
 	pros['key'] = view['uuid'];
 
+	//处理样式
+	var styles = view['styles'];
+
+	//处理动作
+	var actions = view['actions'];
+
+	//处理模态
+	var modals = view['modals'];
+
 	//处理子节点
 	var children = [];
 	var childViews = view['children'] || [];
@@ -68,7 +77,4 @@ var _render= function(view){
 }
 
 // 渲染DSL
-const root = createRoot(document.getElementById('root'));
-var view = ui1['view'];
-
-root.render(_render(view));
+createRoot(document.getElementById('root')).render(_render(ui1['view']));

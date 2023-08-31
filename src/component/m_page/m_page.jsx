@@ -5,6 +5,6 @@
 
 import { useState } from 'react';
 
-export default function M_Page({views}){
+export default function M_Page({children}){
 
 }
