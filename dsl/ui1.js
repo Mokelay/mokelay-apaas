@@ -14,13 +14,27 @@ export default {
 		attributes:[
 			{
 				varCodeName:"content",
-				value:"测试一下",
+				value:"测试一下_1",
 			}
 		],
 		styles:[],
 		events:[],
 
-		children:[],
+		children:[
+			{
+				uuid:"view_2",
+				name:"文本",
+				component:"M_Text",
+				category:"Single",
+
+				attributes:[
+					{
+						varCodeName:"content",
+						value:"测试一下_2",
+					}
+				]
+			}
+		],
 		modals:[{}]
 	},
 	customVars:[],

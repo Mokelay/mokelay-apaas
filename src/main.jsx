@@ -43,20 +43,32 @@ import ui1 from '../dsl/ui1.js';
 //依赖的数据源
 import data from '../dsl/data.js';
 
+//统一的View渲染
+var _render= function(view){
+	//处理属性
+	var attributes = view['attributes'] || [];
+	var pros = {};
+	attributes.map(function(attr){
+		pros[attr['varCodeName']] = attr['value'];
+	});
+	pros['key'] = view['uuid'];
+
+	//处理子节点
+	var children = [];
+	var childViews = view['children'] || [];
+	childViews.map(function(childView){
+		children.push(_render(childView));
+	});
+
+	return createElement(
+		eval(view['component']),
+		pros,
+		children
+	);
+}
+
 // 渲染DSL
+const root = createRoot(document.getElementById('root'));
 var view = ui1['view'];
 
-//处理属性
-var attributes = view['attributes'] || [];
-var pros = {};
-attributes.map(function(attr){
-	pros[attr['varCodeName']] = attr['value'];
-});
-
-const root = createRoot(document.getElementById('root'));
-var el = createElement(
-	eval(view['component']),
-	pros,
-	null
-);
-root.render(el);
+root.render(_render(view));
