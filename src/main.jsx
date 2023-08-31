@@ -1,5 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createElement } from 'react';
+import { createRoot } from 'react-dom/client';
+
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
 
 
 // 加载MUI基础组件库
@@ -35,12 +38,43 @@ window.__Mokelay.InternalFuncDesc = internalBuzzs['internalFuncDesc'];
 //App信息
 import app from '../dsl/app.js';
 //UI信息
-import ui from '../dsl/ui.js';
+import ui0 from '../dsl/ui0.js';
+import ui1 from '../dsl/ui1.js';
 //依赖的数据源
 import data from '../dsl/data.js';
 
+//统一的View渲染
+var _render= function(view){
+	//处理属性
+	var attributes = view['attributes'] || [];
+	var pros = {};
+	attributes.map(function(attr){
+		pros[attr['varCodeName']] = attr['value'];
+	});
+	pros['key'] = view['uuid'];
+
+	//处理样式
+	var styles = view['styles'];
+
+	//处理动作
+	var actions = view['actions'];
+
+	//处理模态
+	var modals = view['modals'];
+
+	//处理子节点
+	var children = [];
+	var childViews = view['children'] || [];
+	childViews.map(function(childView){
+		children.push(_render(childView));
+	});
+
+	return createElement(
+		eval(view['component']),
+		pros,
+		children
+	);
+}
+
 // 渲染DSL
-const rootElement = document.getElementById('root');
-console.log(app);
-console.log(ui);
-console.log(data);
+createRoot(document.getElementById('root')).render(_render(ui1['view']));
