@@ -55,7 +55,8 @@ var _render= function(view){
 	var styles = view['styles'];
 
 	//处理动作
-	var actions = view['actions'];
+	var actions = view['actions'] || [];
+	actions.map();
 
 	//处理模态
 	var modals = view['modals'];
