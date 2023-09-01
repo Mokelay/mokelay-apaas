@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _ from 'underscore';
+import _ from 'lodash';
 import Qs from 'qs';
 
 export default {
@@ -48,7 +48,7 @@ export default {
 	},
 
 	post : function(url, param, options) {
-	    return this.invoke(_.extend({
+	    return this.invoke(_.assignIn({
 	        url: url,
 	        method: 'post',
 	        data: Qs.stringify(param),
@@ -59,7 +59,7 @@ export default {
 	},
 
 	get : function(url, param, options) {
-	    return this.invoke(_.extend({
+	    return this.invoke(_.assignIn({
 	        url: url,
 	        method: 'get',
 	        params: param

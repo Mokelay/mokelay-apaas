@@ -1,9 +1,7 @@
-import { createElement } from 'react';
+import React, { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 
-// import React from 'react'
-// import ReactDOM from 'react-dom/client'
-
+import './styles/index.less'
 
 // 加载MUI基础组件库
 import M_Page from './component/m_page/m_page.jsx';
