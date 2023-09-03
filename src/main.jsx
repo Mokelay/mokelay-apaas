@@ -58,6 +58,7 @@ var _render = function (view) {
 
   //处理模态
   var modals = view['modals'];
+  //每一层的modal处理方式抽象
 
   //处理子节点
   var children = [];
