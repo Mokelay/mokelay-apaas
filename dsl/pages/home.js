@@ -15,7 +15,18 @@ export default {
 				attributes:[
 					{
 						varCodeName:"content",
-						value:"'Hello word!'"
+						value:"Hello word!"
+					}
+				]
+			},{
+				uuid:"view_1_2",
+				name:"文本2",
+				component:"M_Text",
+				category:"Single",
+				attributes:[
+					{
+						varCodeName:"content",
+						value:"Hello word2!"
 					}
 				]
 			}
