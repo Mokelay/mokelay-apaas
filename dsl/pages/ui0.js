@@ -8,7 +8,7 @@ export default {
 	view:{
 		uuid:"view_1",
 		name:"页面",
-		component:"m-page",
+		component:"M_Page",
 		category:"Container",
 
 		attributes:[],
@@ -19,7 +19,7 @@ export default {
 			{
 				uuid:"view_1_1",
 				name:"文本1",
-				component:"m-text",
+				component:"M_Text",
 				category:"Single",
 				attributes:[
 					{
@@ -37,7 +37,7 @@ export default {
 			},{
 				uuid:"view_1_2",
 				name:"数据表格1",
-				component:"m-table",
+				component:"M_Table",
 				category:"Single",
 				attributes:[
 					{

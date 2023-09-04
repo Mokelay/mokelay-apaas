@@ -1,7 +1,6 @@
 import React, { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-
-import App from './app';
+import {HashRouter as Router, Routes, Route , Navigate,useParams,useLocation } from 'react-router-dom';
 
 import './styles/index.less';
 
@@ -33,13 +32,24 @@ window.__Mokelay.InternalFuncDesc = internalBuzzs['internalFuncDesc'];
 
 //App信息
 import app from '../dsl/app.js';
-//UI信息
-import ui0 from '../dsl/ui0.js';
-import ui1 from '../dsl/ui1.js';
 //依赖的数据源
 import data from '../dsl/data.js';
 
-//统一的View渲染
+//导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
+const uiConfigList = import.meta.globEager('../dsl/pages/*.js');
+const uiMap = {};
+Object.keys(uiConfigList).forEach(function (uiConfig) {
+  const uiName = uiConfig.substr(uiConfig.lastIndexOf('/')+1,uiConfig.lastIndexOf('.')-uiConfig.lastIndexOf('/')-1);
+  uiMap[uiName] = uiConfigList[uiConfig].default;
+});
+
+/**
+ * 统一的View渲染函数
+ * 适用于任何UI的render，比如Page, Container,编辑器面板等
+ * 
+ * @param {统一View JSON对象} view 
+ * @returns 
+ */
 var _render = function (view) {
   //处理属性
   var attributes = view['attributes'] || [];
@@ -54,7 +64,7 @@ var _render = function (view) {
 
   //处理动作
   var actions = view['actions'] || [];
-  actions.map();
+  // actions.map();
 
   //处理模态
   var modals = view['modals'];
@@ -69,6 +79,30 @@ var _render = function (view) {
 
   return createElement(eval(view['component']), pros, children);
 };
+
+function UIRender(){
+  return _render(uiMap[useParams()['ui_uuid']]['view']);
+}
+
+/**
+ * 文件路径即为页面路由
+ * @param {*} props
+ * @returns
+ */
+function App(props) {
+  return (
+    <Router>
+      <Routes>
+        {/* 读取本地JS配置，方便联调 */}
+        <Route path="/:ui_uuid" element={<UIRender/>} />
+
+        {/* 单独处理默认首页，404页面，以及layout */}
+        {/* <Route path="/" element={<BasicLayout />}></Route> */}
+        {/* <Route index path="/" element={<Navigate to="/home" />} /> */}
+      </Routes>
+    </Router>
+  );
+}
 
 // 渲染DSL
 createRoot(document.getElementById('root')).render(<App />); //  view的渲染放在m_page里
