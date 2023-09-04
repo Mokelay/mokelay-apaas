@@ -5,6 +5,10 @@ export default {
 	description:"用于测试的一个应用",
 	i18n:true,
 	languageSupport:["zh-cn","en-us"],
+	pages:{
+		Page_Default:"home",
+		Page_404:"404"
+	},
 	i18nName:[
 		{
 			lang:"zh-cn",

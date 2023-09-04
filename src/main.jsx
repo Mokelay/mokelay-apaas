@@ -82,19 +82,29 @@ var _render = function (view) {
 };
 
 function UIRender(){
-  return _render(uiMap[useParams()['ui_uuid']]['view']);
+  var params = useParams() || {};
+  var uiUUID = params['ui_uuid'];
+  var ui = uiMap[uiUUID];
+  if(ui){
+    return _render(ui['view']);
+  }else{
+    // 如果找不到配置，则返回到404页面
+    return _render(uiMap[app['pages']['Page_404']]['view']);
+  }
 }
 
 // 渲染DSL
 createRoot(document.getElementById('root')).render(
   <Router>
     <Routes>
+      {/* 处理默认首页 */}
+      <Route index path="/" element={<Navigate to={app['pages']['Page_Default']} />} />
+
       {/* 读取本地JS配置，方便联调 */}
       <Route path="/:ui_uuid" element={<UIRender/>} />
 
-      {/* 单独处理默认首页，404页面，以及layout */}
+      {/* 单独处理layout */}
       {/* <Route path="/" element={<BasicLayout />}></Route> */}
-      {/* <Route index path="/" element={<Navigate to="/home" />} /> */}
     </Routes>
   </Router>
 );
