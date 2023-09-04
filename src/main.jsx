@@ -5,6 +5,7 @@ import {HashRouter as Router, Routes, Route , Navigate,useParams,useLocation } f
 import './styles/index.less';
 
 // 加载MUI基础组件库
+// TODO 需要批量处理
 import M_Page from './component/m_page/m_page.jsx';
 import M_Text from './component/m_text/m_text.jsx';
 import M_Button from './component/m_button/m_button.jsx';
@@ -84,25 +85,16 @@ function UIRender(){
   return _render(uiMap[useParams()['ui_uuid']]['view']);
 }
 
-/**
- * 文件路径即为页面路由
- * @param {*} props
- * @returns
- */
-function App(props) {
-  return (
-    <Router>
-      <Routes>
-        {/* 读取本地JS配置，方便联调 */}
-        <Route path="/:ui_uuid" element={<UIRender/>} />
-
-        {/* 单独处理默认首页，404页面，以及layout */}
-        {/* <Route path="/" element={<BasicLayout />}></Route> */}
-        {/* <Route index path="/" element={<Navigate to="/home" />} /> */}
-      </Routes>
-    </Router>
-  );
-}
-
 // 渲染DSL
-createRoot(document.getElementById('root')).render(<App />); //  view的渲染放在m_page里
+createRoot(document.getElementById('root')).render(
+  <Router>
+    <Routes>
+      {/* 读取本地JS配置，方便联调 */}
+      <Route path="/:ui_uuid" element={<UIRender/>} />
+
+      {/* 单独处理默认首页，404页面，以及layout */}
+      {/* <Route path="/" element={<BasicLayout />}></Route> */}
+      {/* <Route index path="/" element={<Navigate to="/home" />} /> */}
+    </Routes>
+  </Router>
+);

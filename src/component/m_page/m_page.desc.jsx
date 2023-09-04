@@ -6,7 +6,7 @@ export default {
 	attributesDesc:[
 		{
 			varShowName: "View配置列表",
-			varCodeName,"views",
+			varCodeName:"views",
 			varDataType:"Array",
 			varDataDesc:null, //此处描述View的数据结构，因为不是用于配置的，所以就不用写DSL了
 			defaultValue:[]
@@ -25,13 +25,13 @@ export default {
 			params:[
 				{
 					varShowName: "宽度",
-					varCodeName,"width",
+					varCodeName:"width",
 					varDataType:"Integer",
 					defaultValue:1024
 				},
 				{
 					varShowName: "高度",
-					varCodeName,"height",
+					varCodeName:"height",
 					varDataType:"Integer",
 					defaultValue:768
 				}
@@ -47,12 +47,12 @@ export default {
 	eventsDesc:[
 		{
 			eventShowName:"鼠标滑入",
-			eventCodeName:"mousemovein"
+			eventCodeName:"mousemovein",
 			params:[]
 		},
 		{
 			eventShowName:"鼠标滑出",
-			eventCodeName:"mousemoveout"
+			eventCodeName:"mousemoveout",
 			params:[]
 		}
 	],
