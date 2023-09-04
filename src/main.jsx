@@ -11,6 +11,7 @@ import M_Page from './component/m_page/m_page.jsx';
 import M_Text from './component/m_text/m_text.jsx';
 import M_Button from './component/m_button/m_button.jsx';
 import M_Block from './component/m_block/m_block.jsx';
+import M_Table from './component/m_table/m_table.jsx';
 
 // 如果是编辑器状态，加载编辑器组件
 import M_Layout_Edit from './editor/m_layout_edit/m_layout_edit.jsx';
