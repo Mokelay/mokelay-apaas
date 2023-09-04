@@ -2,6 +2,7 @@ import React, { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import {HashRouter as Router, Routes, Route , Navigate,useParams,useLocation } from 'react-router-dom';
 
+// 全局样式
 import './styles/index.less';
 
 // 加载MUI基础组件库
@@ -81,6 +82,11 @@ var _render = function (view) {
   return createElement(eval(view['component']), pros, children);
 };
 
+/**
+ * 渲染UI
+ * 
+ * @returns DOM
+ */
 function UIRender(){
   var params = useParams() || {};
   var uiUUID = params['ui_uuid'];
