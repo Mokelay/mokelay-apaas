@@ -1,6 +1,6 @@
 export default {
-	uuid:"ui_1",
-	appUUID:"app_1234",
+	uuid:"sample1",
+	appUUID:"app_demo",
 	title:"测试页面",
 	status:"Dev",
 	description:"这是一个测试DSL",

@@ -1,6 +1,6 @@
 export default {
   "uuid": "404",
-  "appUUID": "mokelay",
+  "appUUID": "app_demo_2",
   "title": "404",
   "view": {
     "uuid": "404_page",

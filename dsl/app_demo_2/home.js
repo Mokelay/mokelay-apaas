@@ -1,6 +1,6 @@
 export default {
   uuid: 'home',
-  appUUID: 'mokelay',
+  appUUID: 'app_demo_2',
   title: 'Home',
   view: {
     uuid: 'home_page',
