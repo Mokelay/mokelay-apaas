@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import {HashRouter as Router, Routes, Route , Navigate,useParams,useLocation } from 'react-router-dom';
+import {HashRouter as Router, Routes, Route , Navigate,useParams,useNavigate,useLocation } from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
@@ -34,16 +34,29 @@ window.__Mokelay.InternalFuncDesc = internalBuzzs['internalFuncDesc'];
 // 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试
 
 //App信息
-import app from '../dsl/app.js';
+import appList from '../dsl/app_list.js';
+
 //依赖的数据源
 import data from '../dsl/data.js';
 
 //导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
-const uiConfigList = import.meta.globEager('../dsl/pages/*.js');
-const uiMap = {};
-Object.keys(uiConfigList).forEach(function (uiConfig) {
-  const uiName = uiConfig.substr(uiConfig.lastIndexOf('/')+1,uiConfig.lastIndexOf('.')-uiConfig.lastIndexOf('/')-1);
-  uiMap[uiName] = uiConfigList[uiConfig].default;
+const appMap = {};
+appList.map(function(_app){
+  appMap[_app['uuid']] = {
+    app:_app,
+    uiMap:{}
+  }
+});
+const fs = import.meta.globEager('../dsl/*/*.js');
+Object.keys(fs).forEach(function (f) {
+  var _tmp = f.split("/");
+  if(_tmp.length == 4){
+    const appUUID = _tmp[2];
+    const uiUUID = f.substr(f.lastIndexOf('/')+1,f.lastIndexOf('.')-f.lastIndexOf('/')-1);
+    if(appMap[appUUID]){
+      appMap[appUUID]['uiMap'][uiUUID] = fs[f].default;
+    }
+  }
 });
 
 /**
@@ -89,15 +102,33 @@ var _render = function (view) {
  * @returns DOM
  */
 function UIRender(){
+  //获取Params参数
   var params = useParams() || {};
+  var appUUID = params['app_uuid'];
   var uiUUID = params['ui_uuid'];
-  var ui = uiMap[uiUUID];
-  if(ui){
-    return _render(ui['view']);
+
+  var appInfo = appMap[appUUID];
+
+  if(appInfo){
+    var app = appInfo['app'];
+    var uiMap = appInfo['uiMap']; 
+    var ui = uiMap[uiUUID];
+
+    if(ui){
+      return _render(ui['view']);
+    }else{
+      // 如果找不到配置，则返回该APP配置的404页面
+      return _render(uiMap[app['pages']['Page_404']]['view']);
+    }
   }else{
-    // 如果找不到配置，则返回到404页面
-    return _render(uiMap[app['pages']['Page_404']]['view']);
+    //TODO 找不到对应的APP信息，如何配置页面？
   }
+}
+
+function aa(params){
+  // var params = useParams() || {};
+  console.log(params);
+  // return "hahaha";
 }
 
 // 渲染DSL
@@ -105,10 +136,17 @@ createRoot(document.getElementById('root')).render(
   <Router>
     <Routes>
       {/* 处理默认首页 */}
-      <Route index path="/" element={<Navigate to={app['pages']['Page_Default']} />} />
+      {/* TODO 如何配置全局的默认首页 */}
+      {/* <Route index element={<Navigate to={"aaa"} />} /> */}
 
       {/* 读取本地JS配置，方便联调 */}
-      <Route path="/:ui_uuid" element={<UIRender/>} />
+      <Route path="/:app_uuid/">
+        {/* APP的默认首页  TODO 如何在这里获取到APP信息*/}
+        {/* <Route index element={<Navigate to={app['pages']['Page_Default']} />} /> */}
+
+        {/* 对应到APP的具体页面 */}
+        <Route path="/:app_uuid/:ui_uuid" element={<UIRender/>} />
+      </Route>
 
       {/* 单独处理layout */}
       {/* <Route path="/" element={<BasicLayout />}></Route> */}
