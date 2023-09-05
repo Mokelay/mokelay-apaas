@@ -93,6 +93,7 @@ var _render = function (view) {
     children.push(_render(childView));
   });
 
+  //TODO eval的处理不是太好
   return createElement(eval(view['component']), pros, children);
 };
 
@@ -135,12 +136,6 @@ function UIRender(){
   }else{
     //TODO 找不到对应的APP信息，如何配置页面？
   }
-}
-
-function aa(params){
-  // var params = useParams() || {};
-  console.log(params);
-  // return "hahaha";
 }
 
 // 渲染DSL
