@@ -112,13 +112,25 @@ function UIRender(){
   if(appInfo){
     var app = appInfo['app'];
     var uiMap = appInfo['uiMap']; 
-    var ui = uiMap[uiUUID];
 
-    if(ui){
-      return _render(ui['view']);
+    //APP默认首页
+    var pageDefault = app['pages']['Page_Default'];
+    //APP的404页面
+    var page404 = app['pages']['Page_404'];
+
+    if(typeof uiUUID == "undefined"){
+      //处理APP首页
+      return _render(uiMap[pageDefault]['view']);
     }else{
-      // 如果找不到配置，则返回该APP配置的404页面
-      return _render(uiMap[app['pages']['Page_404']]['view']);
+      //获取目标UI
+      var ui = uiMap[uiUUID];
+
+      if(ui){
+        return _render(ui['view']);
+      }else{
+        // 如果找不到配置，则返回该APP配置的404页面
+        return _render(uiMap[page404]['view']);
+      }
     }
   }else{
     //TODO 找不到对应的APP信息，如何配置页面？
@@ -137,12 +149,12 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       {/* 处理默认首页 */}
       {/* TODO 如何配置全局的默认首页 */}
-      {/* <Route index element={<Navigate to={"aaa"} />} /> */}
+      <Route index element={<Navigate to={"/app_demo/home"} />} />
 
       {/* 读取本地JS配置，方便联调 */}
       <Route path="/:app_uuid/">
-        {/* APP的默认首页  TODO 如何在这里获取到APP信息*/}
-        {/* <Route index element={<Navigate to={app['pages']['Page_Default']} />} /> */}
+        {/* APP的默认首页*/}
+        <Route index element={<UIRender/>} />
 
         {/* 对应到APP的具体页面 */}
         <Route path="/:app_uuid/:ui_uuid" element={<UIRender/>} />
