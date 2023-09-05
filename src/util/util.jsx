@@ -64,5 +64,16 @@ export default {
 	        method: 'get',
 	        params: param
 	    }, options));
+	},
+
+	/**
+	 * 解析字符串
+	 * DEMO
+	 * {{内置变量_是否编辑状态}} {{内置变量_localStorage.item.abc}}
+     * => {{window.__Mokelay.InternalVar['Is_Edit_Status']}} {{window.__Mokelay.InternalVar['localStorage']['item']['abc']}}
+	 * @param {字符串} str 
+	 */
+	resolve:function(str){
+		return null;
 	}
 };

@@ -71,7 +71,10 @@ var _render = function (view) {
   var attributes = view['attributes'] || [];
   var pros = {};
   attributes.map(function (attr) {
-    pros[attr['varCodeName']] = attr['value'];
+    var proName = attr['varCodeName'];
+    // 针对String类型的value，是否统一解析变量
+    var proValue = attr['value'];
+    pros[proName] = proValue;
   });
   pros['key'] = view['uuid'];
 
