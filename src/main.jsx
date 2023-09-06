@@ -1,14 +1,5 @@
-import React, { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useParams,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
@@ -27,7 +18,7 @@ import Util from './util/util.jsx';
 
 // 初始化全局配置
 window.__Mokelay = {
-  componentMap
+  componentMap,
 };
 
 //加载内置巴斯
