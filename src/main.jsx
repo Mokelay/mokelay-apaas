@@ -20,14 +20,11 @@ Object.values(baseComponents).forEach(function (baseComp) {
   componentMap[baseComp.default.name] = baseComp.default;
 });
 
-// 如果是编辑器状态，加载编辑器组件
-// import M_Layout_Edit from './editor/m_layout_edit';
-
 // 加载自定义组件库，加载完成后，后续还可以还可以动态加载
 
 // 初始化全局配置
 window.__Mokelay = {
-  componentMap,
+  componentMap
 };
 
 //加载内置巴斯
