@@ -29,6 +29,7 @@ window.__Mokelay = {
 
 //加载内置巴斯
 import internalBuzzs from './util/internal_buzzs.jsx';
+import Util from './util/util.jsx';
 
 // 加载内置变量
 window.__Mokelay.InternalVar = internalBuzzs['internalVar'];
@@ -66,47 +67,6 @@ Object.keys(fs).forEach(function (f) {
 });
 
 /**
- * 统一的View渲染函数
- * 适用于任何UI的render，比如Page, Container,编辑器面板等
- *
- * @param {统一View JSON对象} view
- * @returns
- */
-var _render = function (view) {
-  //处理属性
-  var attributes = view['attributes'] || [];
-  var pros = {};
-  attributes.map(function (attr) {
-    var proName = attr['varCodeName'];
-    // 针对String类型的value，是否统一解析变量
-    var proValue = attr['value'];
-    pros[proName] = proValue;
-  });
-  pros['key'] = view['uuid'];
-
-  //处理样式
-  var styles = view['styles'];
-
-  //处理动作
-  var actions = view['actions'] || [];
-  // actions.map();
-
-  //处理模态
-  var modals = view['modals'];
-  //每一层的modal处理方式抽象
-
-  //处理子节点
-  var children = [];
-  var childViews = view['children'] || [];
-  childViews.map(function (childView) {
-    children.push(_render(childView));
-  });
-
-  //TODO eval的处理不是太好
-  return createElement(window.__Mokelay.componentMap[view['component']], pros, children);
-};
-
-/**
  * 渲染UI
  *
  * @returns DOM
@@ -130,16 +90,16 @@ function UIRender() {
 
     if (typeof uiUUID == 'undefined') {
       //处理APP首页
-      return _render(uiMap[pageDefault]['view']);
+      return Util.renderView(uiMap[pageDefault]['view']);
     } else {
       //获取目标UI
       var ui = uiMap[uiUUID];
 
       if (ui) {
-        return _render(ui['view']);
+        return Util.renderView(ui['view']);
       } else {
         // 如果找不到配置，则返回该APP配置的404页面
-        return _render(uiMap[page404]['view']);
+        return Util.renderView(uiMap[page404]['view']);
       }
     }
   } else {

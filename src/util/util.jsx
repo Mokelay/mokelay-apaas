@@ -1,6 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import Qs from 'qs';
+import React, { createElement } from 'react';
 
 export default {
   invoke: function (options) {
@@ -89,6 +90,46 @@ export default {
       ),
     );
   },
+
+  /**
+  * 统一的View渲染函数
+  * 适用于任何UI的render，比如Page, Container,编辑器面板等
+  *
+  * @param {统一View JSON对象} view
+  * @returns
+  */
+  renderView : function (view) {
+    var t = this;
+    //处理属性
+    var attributes = view['attributes'] || [];
+    var pros = {};
+    attributes.map(function (attr) {
+      var proName = attr['varCodeName'];
+      // 针对String类型的value，是否统一解析变量
+      var proValue = attr['value'];
+      pros[proName] = proValue;
+    });
+    pros['key'] = view['uuid'];
+
+    //处理样式
+    var styles = view['styles'];
+
+    //处理动作
+    var actions = view['actions'] || [];
+    // actions.map();
+
+    //处理模态
+    var modals = view['modals'];
+    //每一层的modal处理方式抽象
+
+    //处理子节点
+    var children = [];
+    var childViews = view['children'] || [];
+    childViews.map(function (childView) {
+      children.push(t.renderView(childView));
+    });
+    return createElement(window.__Mokelay.componentMap[view['component']], pros, children);
+},
 
   /**
    * 解析字符串
