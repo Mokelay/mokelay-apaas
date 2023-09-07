@@ -176,6 +176,39 @@ export default function M_Layout_Edit() {
           </div>
         </div>
       </div>
+
+      <div className="global-accessory-layer">
+        <div
+          data-role="ghost"
+          className="canvas-ghost-container"
+          style={{ transform: 'translate(570.405px, 322.979px)', opacity: '0.8' }}
+        >
+          <div className="canvas-ghost-icon">
+            <svg
+              fill="currentColor"
+              stroke="none"
+              preserveAspectRatio="xMidYMid meet"
+              width="1em"
+              height="1em"
+              viewBox="0 0 480 480"
+              className="done-icon "
+              style={{ color: 'currentcolor' }}
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M66 113.664C54.9543 113.664 46 122.543 46 133.496V250.504C46 261.457 54.9543 270.336 66 270.336H116L125 310H66C32.8629 310 6 283.363 6 250.504V133.496C6 100.637 32.8629 74 66 74H414C447.137 74 474 100.637 474 133.496V248.521C474 281.38 447.137 306.034 414 306.034L358 268.353H414C425.046 268.353 434 259.474 434 248.521V133.496C434 122.543 425.046 113.664 414 113.664H66Z"
+              />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M152.46 235.443C148.349 215.386 169.626 199.722 187.556 209.605L356.277 302.599C376.628 313.816 370.751 344.521 347.696 347.429L289.738 354.741L343.85 429.2L311.492 452.715L258.866 380.301L236.652 427.723C226.887 448.568 196.221 445.043 191.441 422.526L172.983 335.579L152.46 235.443ZM293.91 313.898L198.605 261.368L212.141 327.41L220.664 367.559L237.169 332.324C240.662 324.868 247.731 319.724 255.899 318.693L293.91 313.898Z"
+              />
+            </svg>
+          </div>
+          <div className="canvas-ghost-title">按钮</div>
+        </div>
+      </div>
     </>
   );
 }
