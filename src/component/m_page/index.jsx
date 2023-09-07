@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * M_Page
  *
@@ -9,13 +10,30 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 // eslint-disable-next-line react/prop-types
-const M_Page = forwardRef(function M_Page({ children }, ref) {
+const M_Page = forwardRef(function M_Page(
+  {
+    children,
+    onMouseDown,
+    onMouseEnter,
+    onMouseLeave,
+    onMouseMove,
+    onMouseOut,
+    onMouseOver,
+    onMouseUp,
+  },
+  ref,
+) {
   useImperativeHandle(
     ref,
     () => {
       return {
-        reload() {
+        //刷新
+        refresh() {
           console.log('reload this page...');
+        },
+        //Resize
+        resize() {
+          console.log('resize this page...');
         },
       };
     },
@@ -31,40 +49,18 @@ const M_Page = forwardRef(function M_Page({ children }, ref) {
     </Grid>
   ));
 
-  const mouseDown = function () {
-    console.log('mouse down..');
-  };
-  const mouseEnter = function () {
-    console.log('mouse enter..');
-  };
-  const mouseLeave = function () {
-    console.log('mouse leave..');
-  };
-  const mouseMove = function (e) {
-    console.log(e);
-    console.log('mouse move..');
-  };
-  const mouseOut = function () {
-    console.log('mouse out..');
-  };
-  const mouseOver = function () {
-    console.log('mouse over..');
-  };
-  const mouseUp = function () {
-    console.log('mouse up..');
-  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
         container
         spacing={2}
-        onMouseDown={mouseDown}
-        onMouseEnter={mouseEnter}
-        onMouseLeave={mouseLeave}
-        onMouseMove={mouseMove}
-        onMouseOut={mouseOut}
-        onMouseOver={mouseOver}
-        onMouseUp={mouseUp}
+        onMouseDown={onMouseDown}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onMouseMove={onMouseMove}
+        onMouseOut={onMouseOut}
+        onMouseOver={onMouseOver}
+        onMouseUp={onMouseUp}
       >
         {ChildrenViews}
       </Grid>

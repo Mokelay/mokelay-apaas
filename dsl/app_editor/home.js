@@ -32,5 +32,12 @@ export default {
         ],
       },
     ],
+    actions: [
+      {
+        eventCodeName: 'onMouseDown',
+        targetUUId: 'view_1_1',
+        methodCodeName: 'updateContent',
+      },
+    ],
   },
 };

@@ -122,7 +122,27 @@ export default {
 
     //处理动作
     var actions = view['actions'] || [];
-    // actions.map();
+    actions.map(function (action) {
+      var eventCodeName = action['eventCodeName'];
+      var targetUUId = action['targetUUId'];
+      var methodCodeName = action['methodCodeName'];
+      //TODO 处理参数传递
+      // var paramsData = action['paramsData'];
+
+      pros[eventCodeName] = function () {
+        var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
+        if (targetEl) {
+          var method = targetEl['current'][methodCodeName];
+          if (method) {
+            method();
+          } else {
+            console.log('Can not find method:' + methodCodeName);
+          }
+        } else {
+          console.log('Can not find target dom:' + targetUUId);
+        }
+      };
+    });
 
     //处理模态
     var modals = view['modals'];
