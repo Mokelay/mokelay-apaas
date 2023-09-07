@@ -1,15 +1,25 @@
 import { createRoot } from 'react-dom/client';
+import { StrictMode } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
 
 // 加载基础组件库
-const componentMap = {};
+// eslint-disable-next-line react-refresh/only-export-components
+const ComponentMap = {};
 const baseComponents = import.meta.globEager(['./component/*/index.jsx', './editor/*/index.jsx']);
+// console.log(baseComponents);
 Object.values(baseComponents).forEach(function (baseComp) {
-  componentMap[baseComp.default.name] = baseComp.default;
+  var compName = baseComp.default.name;
+  if (compName == undefined) {
+    compName = baseComp.default.render.name;
+  }
+  ComponentMap[compName] = baseComp.default;
 });
+
+//存储所有组件的Key和Ref
+const ComponentInstantMap = {};
 
 //加载工具包
 import Util from './util/util.jsx';
@@ -18,7 +28,8 @@ import Util from './util/util.jsx';
 
 // 初始化全局配置
 window.__Mokelay = {
-  componentMap,
+  ComponentMap,
+  ComponentInstantMap,
 };
 
 //加载内置巴斯
@@ -60,6 +71,7 @@ Object.keys(fs).forEach(function (f) {
  *
  * @returns DOM
  */
+// eslint-disable-next-line react-refresh/only-export-components
 function UIRender() {
   //获取Params参数
   var params = useParams() || {};
@@ -98,23 +110,25 @@ function UIRender() {
 
 // 渲染DSL
 createRoot(document.getElementById('root')).render(
-  <Router>
-    <Routes>
-      {/* 处理默认首页 */}
-      {/* TODO 如何配置全局的默认首页 */}
-      <Route index element={<Navigate to={'/app_demo/home'} />} />
+  <StrictMode>
+    <Router>
+      <Routes>
+        {/* 处理默认首页 */}
+        {/* TODO 如何配置全局的默认首页 */}
+        <Route index element={<Navigate to={'/app_demo/home'} />} />
 
-      {/* 读取本地JS配置，方便联调 */}
-      <Route path="/:app_uuid/">
-        {/* APP的默认首页*/}
-        <Route index element={<UIRender />} />
+        {/* 读取本地JS配置，方便联调 */}
+        <Route path="/:app_uuid/">
+          {/* APP的默认首页*/}
+          <Route index element={<UIRender />} />
 
-        {/* 对应到APP的具体页面 */}
-        <Route path="/:app_uuid/:ui_uuid" element={<UIRender />} />
-      </Route>
+          {/* 对应到APP的具体页面 */}
+          <Route path="/:app_uuid/:ui_uuid" element={<UIRender />} />
+        </Route>
 
-      {/* 单独处理layout */}
-      {/* <Route path="/" element={<BasicLayout />}></Route> */}
-    </Routes>
-  </Router>,
+        {/* 单独处理layout */}
+        {/* <Route path="/" element={<BasicLayout />}></Route> */}
+      </Routes>
+    </Router>
+  </StrictMode>,
 );

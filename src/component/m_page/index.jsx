@@ -4,11 +4,24 @@
  * */
 
 // import React from 'react';
+import { forwardRef, useRef, useImperativeHandle } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 // eslint-disable-next-line react/prop-types
-export default function M_Page({ children }) {
+const M_Page = forwardRef(function M_Page({ children }, ref) {
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        reload() {
+          console.log('reload this page...');
+        },
+      };
+    },
+    [],
+  );
+
   children = children || [];
   //TODO xs={4} 的设置是在容器里，还是在组件里？
   // eslint-disable-next-line react/prop-types
@@ -57,4 +70,5 @@ export default function M_Page({ children }) {
       </Grid>
     </Box>
   );
-}
+});
+export default M_Page;
