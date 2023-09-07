@@ -1,0 +1,303 @@
+.nclc-screen-accessory {
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 9;
+}
+
+.nclc-selecting-box {
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transition: opacity .15s ease 0s;
+  transition: opacity .15s ease 0s;
+}
+
+.nclc-border.nclc-border-selecting {
+  border-color: #197aff;
+  border-style: dashed;
+  z-index: 2;
+}
+
+.nclc-selecting-box>.nclc-scrolled-box {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.nclc-border {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  will-change: transform,width,height;
+  z-index: 1;
+}
+
+.nclc-border-actionbar {
+  border-radius: 4px;
+  color: #fff;
+  gap: 0;
+}
+
+.nclc-border>.nclc-border-actionbar {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  grid-gap: 3px;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3px;
+  pointer-events: all;
+  position: absolute;
+  z-index: 10;
+}
+
+.nclc-context-crumbs {
+  background-color: #3370ff;
+  border: none;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0 0 0 7px;
+  position: relative;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-crumbs {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  background-color: #fff;
+  border: 1px solid #d0d3d6;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  color: hsla(0,0%,100%,.85);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+crumbs-item {
+  color: #fff;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-crumbs .nclc-context-crumbs-item {
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  grid-gap: 2px;
+  -webkit-align-items: center;
+  align-items: center;
+  color: #1f2329;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2px;
+  padding: 0 5px;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-crumbs .nclc-context-crumbs-item .label {
+  display: inline-block;
+  max-width: 120px;
+  overflow: hidden;
+  padding: 2px 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nclc-context-actions {
+  background-color: #3370ff;
+  border: none;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  color: #fff;
+  font-size: 12px;
+  padding-left: 5px;
+  position: relative;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-actions {
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: reverse;
+  -webkit-box-pack: end;
+  -moz-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  background-color: #fff;
+  border: 1px solid #d0d3d6;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  color: #2b2f36;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  font-size: 12px;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 0 8px;
+}
+
+.nclc-context-actions .nclc-context-actionitem {
+  opacity: 1;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-actions>.nclc-context-actionitem:not(:last-child) {
+  margin-left: 4px;
+}
+
+.nclc-border>.nclc-border-actionbar .nclc-context-actions>.nclc-context-actionitem {
+  -ms-flex-negative: 0;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  opacity: .8;
+  padding: 0 4px;
+}
+
+.universe-icon {
+  display: inline-block;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.universe-icon svg {
+  display: inline-block;
+  vertical-align: -0.14em;
+}
+
+.nclc-grid-width-modifier {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.nclc-grid-width-modifier .position-preview {
+  background: #3370ff;
+  height: 100%;
+  left: 0;
+  opacity: .15;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  width: 100%;
+}
+
+.nclc-grid-width-modifier .modifier-border {
+  border-radius: 2px;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.nclc-grid-width-modifier .modifier-handler.left-handler {
+  left: 0;
+  transform: translate(-2px,-50%);
+}
+
+.nclc-grid-width-modifier .modifier-handler {
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #3370ff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: ew-resize;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  pointer-events: all;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  z-index: 100;
+}
+
+.nclc-grid-width-modifier .modifier-handler.right-handler {
+  right: 0;
+  transform: translate(2px,-50%);
+}
+
+.nclc-grid-width-modifier .modifier-handler {
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #3370ff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: ew-resize;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  pointer-events: all;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  z-index: 100;
+}
+
+.nclc-grid-width-modifier .drag-state-tip {
+  background: #3370ff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  min-width: 30px;
+  padding: 0 8px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  visibility: hidden;
+  word-break: keep-all;
+  z-index: 100;
+}
