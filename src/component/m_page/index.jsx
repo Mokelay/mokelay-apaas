@@ -45,7 +45,7 @@ const M_Page = forwardRef(function M_Page(
   //TODO xs={4} 的设置是在容器里，还是在组件里？
   // eslint-disable-next-line react/prop-types
   const ChildrenViews = children.map((view) => (
-    <Grid key={view.key} item xs={8}>
+    <Grid key={view.key} item xs={12}>
       {view}
     </Grid>
   ));
