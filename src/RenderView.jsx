@@ -36,10 +36,16 @@ export function RenderView({ view }) {
     //TODO 这段逻辑如何可配置话
     //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件和数据；
     if (view['category'] == 'Container') {
-      pros['onMouseDown'] = function (e) {
-        // console.log(e);
-        window.parent.postMessage('MouseDown..', '*');
+      var f = function (e) {
+        console.log(e);
+        window.parent.postMessage('Receive edit event..', '*');
       };
+      //TODO 注册一系列需要编辑的交互事件
+      pros['onMouseDown'] = f;
+      pros['onMouseUp'] = f;
+      pros['onMouseLeave'] = f;
+      pros['onMouseEnter'] = f;
+      pros['onMouseMove'] = f;
     }
   } else {
     //如果是非编辑状态，渲染配置的actions
@@ -68,7 +74,7 @@ export function RenderView({ view }) {
 
   //处理模态
   // var modals = view['modals'];
-  //每一层的modal处理方式抽象
+  //TODO 每一层的modal处理方式抽象
 
   //处理子节点
   var children = [];
