@@ -6,7 +6,7 @@
 
 // import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -51,7 +51,7 @@ const M_Page = forwardRef(function M_Page(
   ));
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} ref={ref}>
       <Grid
         container
         spacing={2}

@@ -18,9 +18,6 @@ Object.values(baseComponents).forEach(function (baseComp) {
   ComponentMap[compName] = baseComp.default;
 });
 
-//存储所有组件的Key和Ref
-const ComponentInstantMap = {};
-
 //加载工具包
 import Util from './util/util.jsx';
 
@@ -29,7 +26,6 @@ import Util from './util/util.jsx';
 // 初始化全局配置
 window.__Mokelay = {
   ComponentMap,
-  ComponentInstantMap,
 };
 
 //加载内置巴斯
@@ -73,8 +69,13 @@ Object.keys(fs).forEach(function (f) {
  */
 // eslint-disable-next-line react-refresh/only-export-components
 function UIRender() {
-  //获取Params参数
   var params = useParams() || {};
+
+  //存储所有组件的Key和Ref
+  const ComponentInstantMap = {};
+  window.__Mokelay.ComponentInstantMap = ComponentInstantMap;
+
+  //获取Params参数
   var appUUID = params['app_uuid'];
   var uiUUID = params['ui_uuid'];
 
@@ -105,6 +106,7 @@ function UIRender() {
     }
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
+    return <div>Can not found any app</div>;
   }
 }
 

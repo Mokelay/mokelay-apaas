@@ -4,7 +4,7 @@
  *
  * */
 
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import { useState } from 'react';
 
 const M_Text = forwardRef(function M_Text({ initContent, maxLine = 1 }, ref) {

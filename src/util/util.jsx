@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import Qs from 'qs';
-import { createElement, forwardRef, useRef, useImperativeHandle } from 'react';
+import { createElement, useRef } from 'react';
 
 export default {
   invoke: function (options) {
@@ -99,6 +99,7 @@ export default {
    * @returns
    */
   renderView: function (view) {
+    var ref = useRef(null);
     var t = this;
     //处理属性
     var attributes = view['attributes'] || [];
@@ -114,7 +115,7 @@ export default {
     pros['key'] = view['uuid'];
 
     //处理ref
-    pros['ref'] = useRef(null);
+    pros['ref'] = ref;
     window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
 
     //处理样式

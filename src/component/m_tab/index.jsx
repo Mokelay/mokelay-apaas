@@ -3,7 +3,7 @@
  *
  * */
 // eslint-disable-next-line no-unused-vars
-import { forwardRef, useRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 const M_Tab = forwardRef(function M_Tab(props, ref) {
   useImperativeHandle(
@@ -13,5 +13,7 @@ const M_Tab = forwardRef(function M_Tab(props, ref) {
     },
     [],
   );
+
+  return <span ref={ref}></span>;
 });
 export default M_Tab;
