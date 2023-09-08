@@ -34,12 +34,11 @@ export function RenderView({ view }) {
   var editStatus = window.__Mokelay.InternalVar.Is_Edit_Status;
   if (editStatus) {
     //TODO 这段逻辑如何可配置话
-    //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件；
-    console.log(view['category']);
+    //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件和数据；
     if (view['category'] == 'Container') {
       pros['onMouseDown'] = function (e) {
-        console.log(e);
-        console.log('onMouseDown...');
+        // console.log(e);
+        window.parent.postMessage('MouseDown..', '*');
       };
     }
   } else {

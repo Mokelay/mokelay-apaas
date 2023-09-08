@@ -1,5 +1,5 @@
 import './style.css';
-import { forwardRef, useImperativeHandle } from 'react';
+import { useEffect, forwardRef, useImperativeHandle } from 'react';
 
 /**
  * M_Layout_edit
@@ -16,6 +16,21 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
     },
     [],
   );
+
+  useEffect(() => {
+    var f = function (e) {
+      try {
+        console.log(e.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    window.addEventListener('message', f);
+    return () => {
+      window.removeEventListener('message', f);
+    };
+  }, []);
 
   return (
     <>
