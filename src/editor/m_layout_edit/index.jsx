@@ -17,6 +17,7 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
     [],
   );
 
+  //接收来自渲染层的事件和数据
   useEffect(() => {
     var f = function (e) {
       try {

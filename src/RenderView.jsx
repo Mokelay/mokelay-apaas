@@ -37,8 +37,13 @@ export function RenderView({ view }) {
     //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件和数据；
     if (view['category'] == 'Container') {
       var f = function (e) {
-        console.log(e);
-        window.parent.postMessage('Receive edit event..', '*');
+        // TODO 封装需要传递给父级编辑层的数据
+        var data = {};
+        data['targetUUID'] = view['uuid'];
+        data['eventName'] = e._reactName;
+        data['clientX'] = e.clientX;
+        data['clientY'] = e.clientY;
+        window.parent.postMessage(JSON.stringify(data), '*');
       };
       //TODO 注册一系列需要编辑的交互事件
       pros['onMouseDown'] = f;
