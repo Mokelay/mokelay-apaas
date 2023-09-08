@@ -14,7 +14,7 @@ export default {
         category: 'Single',
         attributes: [
           {
-            varCodeName: 'content',
+            varCodeName: 'initContent',
             value: '这是Mokelay编辑器应用',
           },
         ],
@@ -26,7 +26,7 @@ export default {
         category: 'Single',
         attributes: [
           {
-            varCodeName: 'content',
+            varCodeName: 'initContent',
             value: '用于测试编辑器的',
           },
         ],

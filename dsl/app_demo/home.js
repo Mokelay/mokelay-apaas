@@ -7,29 +7,30 @@ export default {
     name: 'page',
     component: 'M_Page',
     children: [
-	{
-		uuid:"view_1_1",
-		name:"文本1",
-		component:"M_Text",
-		category:"Single",
-		attributes:[
-			{
-				varCodeName:"content",
-				value:"Hello word!"
-			}
-		]
-	},{
-		uuid:"view_1_2",
-		name:"文本2",
-		component:"M_Text",
-		category:"Single",
-		attributes:[
-			{
-				varCodeName:"content",
-				value:"Hello word2!"
-			}
-		]
-	}
-    ]
-  }
+      {
+        uuid: 'view_1_1',
+        name: '文本1',
+        component: 'M_Text',
+        category: 'Single',
+        attributes: [
+          {
+            varCodeName: 'initContent',
+            value: 'Hello word!',
+          },
+        ],
+      },
+      {
+        uuid: 'view_1_2',
+        name: '文本2',
+        component: 'M_Text',
+        category: 'Single',
+        attributes: [
+          {
+            varCodeName: 'initContent',
+            value: 'Hello word2!',
+          },
+        ],
+      },
+    ],
+  },
 };
