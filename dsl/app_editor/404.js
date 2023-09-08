@@ -8,7 +8,7 @@ export default {
     component: 'M_Page',
     children: [
       {
-        uuid: 'view_1_1',
+        uuid: 'view_1_1_a',
         name: '文本1',
         component: 'M_Text',
         category: 'Single',
