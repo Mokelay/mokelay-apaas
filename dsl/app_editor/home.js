@@ -35,7 +35,7 @@ export default {
     actions: [
       {
         eventCodeName: 'onMouseDown',
-        targetUUId: 'view_1_1',
+        targetUUId: 'view_1_1_d',
         methodCodeName: 'updateContent',
       },
     ],

@@ -19,7 +19,7 @@ Object.values(baseComponents).forEach(function (baseComp) {
 });
 
 //加载工具包
-import Util from './util/util.jsx';
+// import Util from './util/util.jsx';
 
 // 加载自定义组件库，加载完成后，后续还可以还可以动态加载
 
@@ -42,6 +42,7 @@ window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
 //App信息
 import appList from '../dsl/app_list.js';
+import { RenderView } from './RenderView';
 //导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
 const appMap = {};
 appList.map(function (_app) {
@@ -92,16 +93,16 @@ function UIRender() {
 
     if (typeof uiUUID == 'undefined') {
       //处理APP首页
-      return Util.renderView(uiMap[pageDefault]['view']);
+      return <RenderView view={uiMap[pageDefault]['view']} />;
     } else {
       //获取目标UI
       var ui = uiMap[uiUUID];
 
       if (ui) {
-        return Util.renderView(ui['view']);
+        return <RenderView view={ui['view']} />;
       } else {
         // 如果找不到配置，则返回该APP配置的404页面
-        return Util.renderView(uiMap[page404]['view']);
+        return <RenderView view={uiMap[page404]['view']} />;
       }
     }
   } else {
