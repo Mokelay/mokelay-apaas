@@ -1,5 +1,5 @@
 export default {
-	/*
+  /*
 	内置变量描述
 		内置变量_是否编辑状态
 		内置变量_所处终端
@@ -14,93 +14,95 @@ export default {
 		内置变量_sessionStorage
 		内置变量_navigator
 	*/
-	internalVarDesc:[
-		{
-			uuid:"internal_is_edit_status",
-			varShowName:"内置变量_是否编辑状态",
-			varCodeName:"Is_Edit_Status",
-			varDataType:"Boolean",
-			varDataDesc:{},
-			defaultValue:null
-		}
-	],
+  internalVarDesc: [
+    {
+      uuid: 'internal_is_edit_status',
+      varShowName: '内置变量_是否编辑状态',
+      varCodeName: 'Is_Edit_Status',
+      varDataType: 'Boolean',
+      varDataDesc: {},
+      defaultValue: null,
+    },
+  ],
 
-	//内置变量
-	internalVar:{
-		//内置变量_是否编辑状态
-		Is_Edit_Status:true,
-		//内置变量_所处终端
-		Current_Terminal:"PC"
-	},
+  //内置变量
+  internalVar: {
+    //内置变量_是否编辑状态
+    Is_Edit_Status: true,
+    //内置变量_所处终端
+    Current_Terminal: 'PC',
+  },
 
-	//内置函数
-	internalFunc:{
-		//内置函数_设置页面标题
-		setTitle:function(title){
-			document.title = title;
-		},
+  //内置函数
+  internalFunc: {
+    //内置函数_设置页面标题
+    setTitle: function (title) {
+      document.title = title;
+    },
 
-		//内置函数_打开链接
-		openUrl:function(url){},
+    //内置函数_打开链接
+    openUrl: function (url) {},
 
-		//内置函数_显示组件
-		showView:function(viewUUID){},
+    //内置函数_显示组件
+    showView: function (viewUUID) {},
 
-		//内置函数_隐藏组件
-		hideView:function(viewUUID){}
-	},
+    //内置函数_隐藏组件
+    hideView: function (viewUUID) {},
+  },
 
-
-	//内置函数描述
-	internalFuncDesc:[
-		{
-			uuid:"",
-			funcShowName:"内置函数_设置页面标题",
-			funcCodeName:"setTitle",
-			params:[
-				{
-					varShowName:"页面标题",
-					varCodeName:"title",
-					dataType:"String"
-				}
-			],
-			returnDataType:null
-		},{
-			uuid:"",
-			funcShowName:"内置函数_打开链接",
-			funcCodeName:"openUrl",
-			params:[
-				{
-					varShowName:"URL地址",
-					varCodeName:"url",
-					dataType:"String"
-				}
-			],
-			returnDataType:null
-		},{
-			uuid:"",
-			funcShowName:"内置函数_显示组件",
-			funcCodeName:"showView",
-			params:[
-				{
-					varShowName:"组件UUID",
-					varCodeName:"viewUUID",
-					dataType:"String"
-				}
-			],
-			returnDataType:null
-		},{
-			uuid:"",
-			funcShowName:"内置函数_隐藏组件",
-			funcCodeName:"hideView",
-			params:[
-				{
-					varShowName:"组件UUID",
-					varCodeName:"viewUUID",
-					dataType:"String"
-				}
-			],
-			returnDataType:null
-		}
-	]
+  //内置函数描述
+  internalFuncDesc: [
+    {
+      uuid: '',
+      funcShowName: '内置函数_设置页面标题',
+      funcCodeName: 'setTitle',
+      params: [
+        {
+          varShowName: '页面标题',
+          varCodeName: 'title',
+          dataType: 'String',
+        },
+      ],
+      returnDataType: null,
+    },
+    {
+      uuid: '',
+      funcShowName: '内置函数_打开链接',
+      funcCodeName: 'openUrl',
+      params: [
+        {
+          varShowName: 'URL地址',
+          varCodeName: 'url',
+          dataType: 'String',
+        },
+      ],
+      returnDataType: null,
+    },
+    {
+      uuid: '',
+      funcShowName: '内置函数_显示组件',
+      funcCodeName: 'showView',
+      params: [
+        {
+          varShowName: '组件UUID',
+          varCodeName: 'viewUUID',
+          dataType: 'String',
+        },
+      ],
+      returnDataType: null,
+    },
+    {
+      uuid: '',
+      funcShowName: '内置函数_隐藏组件',
+      funcCodeName: 'hideView',
+      params: [
+        {
+          varShowName: '组件UUID',
+          varCodeName: 'viewUUID',
+          dataType: 'String',
+        },
+      ],
+      returnDataType: null,
+    },
+  ],
 };

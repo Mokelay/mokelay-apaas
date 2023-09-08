@@ -6,6 +6,7 @@ export default {
     uuid: 'home_page',
     name: 'page',
     component: 'M_Page',
+    category: 'Container',
     children: [
       {
         uuid: 'view_1_1',

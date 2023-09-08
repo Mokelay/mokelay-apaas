@@ -31,27 +31,41 @@ export function RenderView({ view }) {
   // var styles = view['styles'];
 
   //处理动作
-  var actions = view['actions'] || [];
-  actions.map(function (action) {
-    var eventCodeName = action['eventCodeName'];
-    var targetUUId = action['targetUUId'];
-    var methodCodeName = action['methodCodeName'];
-    //TODO 处理参数传递
-    // var paramsData = action['paramsData'];
-    pros[eventCodeName] = function () {
-      var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
-      if (targetEl) {
-        var method = targetEl['current'][methodCodeName];
-        if (method) {
-          method();
+  var editStatus = window.__Mokelay.InternalVar.Is_Edit_Status;
+  if (editStatus) {
+    //TODO 这段逻辑如何可配置话
+    //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件；
+    console.log(view['category']);
+    if (view['category'] == 'Container') {
+      pros['onMouseDown'] = function (e) {
+        console.log(e);
+        console.log('onMouseDown...');
+      };
+    }
+  } else {
+    //如果是非编辑状态，渲染配置的actions
+    var actions = view['actions'] || [];
+    actions.map(function (action) {
+      var eventCodeName = action['eventCodeName'];
+      var targetUUId = action['targetUUId'];
+      var methodCodeName = action['methodCodeName'];
+      //TODO 处理参数传递
+      // var paramsData = action['paramsData'];
+      pros[eventCodeName] = function () {
+        var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
+        if (targetEl) {
+          var method = targetEl['current'][methodCodeName];
+          if (method) {
+            method();
+          } else {
+            console.log('Can not find method:' + methodCodeName);
+          }
         } else {
-          console.log('Can not find method:' + methodCodeName);
+          console.log('Can not find target dom:' + targetUUId);
         }
-      } else {
-        console.log('Can not find target dom:' + targetUUId);
-      }
-    };
-  });
+      };
+    });
+  }
 
   //处理模态
   // var modals = view['modals'];
