@@ -1,4 +1,5 @@
 import './style.css';
+import { forwardRef, useImperativeHandle } from 'react';
 
 /**
  * M_Layout_edit
@@ -6,7 +7,16 @@ import './style.css';
  *
  *
  */
-export default function M_Layout_Edit() {
+const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
+  //暴露对外函数
+  useImperativeHandle(
+    ref,
+    () => {
+      return {};
+    },
+    [],
+  );
+
   return (
     <>
       <div className="nclc-screen-accessory">
@@ -211,4 +221,6 @@ export default function M_Layout_Edit() {
       </div>
     </>
   );
-}
+});
+
+export default M_Layout_Edit;

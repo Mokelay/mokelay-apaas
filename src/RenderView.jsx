@@ -28,7 +28,7 @@ export function RenderView({ view }) {
   window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
 
   //处理样式
-  var styles = view['styles'];
+  // var styles = view['styles'];
 
   //处理动作
   var actions = view['actions'] || [];
@@ -54,8 +54,9 @@ export function RenderView({ view }) {
   });
 
   //处理模态
-  var modals = view['modals'];
+  // var modals = view['modals'];
   //每一层的modal处理方式抽象
+
   //处理子节点
   var children = [];
   var childViews = view['children'] || [];

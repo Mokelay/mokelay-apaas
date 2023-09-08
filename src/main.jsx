@@ -18,9 +18,6 @@ Object.values(baseComponents).forEach(function (baseComp) {
   ComponentMap[compName] = baseComp.default;
 });
 
-//加载工具包
-// import Util from './util/util.jsx';
-
 // 加载自定义组件库，加载完成后，后续还可以还可以动态加载
 
 // 初始化全局配置
@@ -42,7 +39,6 @@ window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
 //App信息
 import appList from '../dsl/app_list.js';
-import { RenderView } from './RenderView';
 //导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
 const appMap = {};
 appList.map(function (_app) {
@@ -63,6 +59,7 @@ Object.keys(fs).forEach(function (f) {
   }
 });
 
+import { RenderView } from './RenderView';
 /**
  * 渲染UI
  *
