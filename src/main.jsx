@@ -21,9 +21,7 @@ Object.values(baseComponents).forEach(function (baseComp) {
 // 加载自定义组件库，加载完成后，后续还可以还可以动态加载
 
 // 初始化全局配置
-window.__Mokelay = {
-  ComponentMap,
-};
+window.__Mokelay.ComponentMap = ComponentMap;
 
 //加载内置巴斯
 import InternalBuzzs from './util/internal_buzzs.jsx';

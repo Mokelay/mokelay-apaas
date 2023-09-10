@@ -1,11 +1,12 @@
 export default {
-  uuid: 'home',
+  uuid: 'editor',
   appUUID: 'app_editor',
   title: 'Home',
   view: {
-    uuid: 'home_page',
+    uuid: 'view_edit_page',
     name: 'page',
     component: 'M_Page',
+
     children: [
       {
         uuid: 'view_1_1_d',
@@ -15,21 +16,23 @@ export default {
         attributes: [
           {
             varCodeName: 'initContent',
-            value: '这是Mokelay编辑器应用',
+            value: '欢迎来到Mokelay编辑器',
           },
         ],
       },
       {
-        uuid: 'view_1_2_e',
-        name: '文本2',
-        component: 'M_Text',
+        uuid: 'view_iframe',
+        name: '编辑Ifram',
+        component: 'M_Iframe',
         category: 'Single',
-        attributes: [
-          {
-            varCodeName: 'initContent',
-            value: '用于测试编辑器的',
-          },
-        ],
+        attributes: [{ varCodeName: 'url', value: 'edit.html#/app_demo/home' }],
+      },
+      {
+        uuid: 'view_layout_edit',
+        name: '编辑器',
+        component: 'M_Layout_Edit',
+        category: 'Single',
+        attributes: [],
       },
     ],
     actions: [

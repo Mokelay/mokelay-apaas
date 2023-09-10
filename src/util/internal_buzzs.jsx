@@ -28,7 +28,7 @@ export default {
   //内置变量
   internalVar: {
     //内置变量_是否编辑状态
-    Is_Edit_Status: true,
+    Is_Edit_Status: window.__Mokelay.Is_Edit_Status,
     //内置变量_所处终端
     Current_Terminal: 'PC',
   },
