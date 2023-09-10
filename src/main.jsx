@@ -1,6 +1,13 @@
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+  useLocation,
+} from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
@@ -66,6 +73,9 @@ import { RenderView } from './RenderView';
 // eslint-disable-next-line react-refresh/only-export-components
 function UIRender() {
   var params = useParams() || {};
+
+  //把目前URL里的query参数存储到内置变量中
+  window.__Mokelay.InternalVar.URL_Search_Params = new URLSearchParams(useLocation().search);
 
   //存储所有组件的Key和Ref
   const ComponentInstantMap = {};

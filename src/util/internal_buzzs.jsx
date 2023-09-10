@@ -31,6 +31,8 @@ export default {
     Is_Edit_Status: window.__Mokelay.Is_Edit_Status,
     //内置变量_所处终端
     Current_Terminal: 'PC',
+    //内置变量_URL Query 参数对象
+    URL_Search_Params: null,
   },
 
   //内置函数
@@ -48,6 +50,11 @@ export default {
 
     //内置函数_隐藏组件
     hideView: function (viewUUID) {},
+
+    //内置函数_获取URL Query值
+    getQueryValue: function (queryName) {
+      return window.__Mokelay.InternalVar.URL_Search_Params.get(queryName);
+    },
   },
 
   //内置函数描述
