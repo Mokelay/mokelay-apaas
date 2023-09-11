@@ -96,21 +96,22 @@ function UIRender() {
     //APP的404页面
     var page404 = app['pages']['Page_404'];
 
+    var renderUI = null;
     if (typeof uiUUID == 'undefined') {
-      //处理APP首页
-      return <RenderView view={uiMap[pageDefault]['view']} />;
+      //默认显示APP首页
+      renderUI = uiMap[pageDefault];
     } else {
       //获取目标UI
-      var ui = uiMap[uiUUID];
-
-      if (ui) {
-        document.title = ui['title'];
-        return <RenderView view={ui['view']} />;
-      } else {
+      renderUI = uiMap[uiUUID];
+      if (!renderUI) {
         // 如果找不到配置，则返回该APP配置的404页面
-        return <RenderView view={uiMap[page404]['view']} />;
+        renderUI = uiMap[page404];
       }
     }
+    document.title = renderUI['title'];
+    return <RenderView view={renderUI['view']} />;
+    // return <RenderView view={renderUI['view']} />;
+    // return <RenderView view={renderUI['view']} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
     return <div>Can not found any app</div>;
