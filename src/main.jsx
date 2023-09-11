@@ -104,6 +104,7 @@ function UIRender() {
       var ui = uiMap[uiUUID];
 
       if (ui) {
+        document.title = ui['title'];
         return <RenderView view={ui['view']} />;
       } else {
         // 如果找不到配置，则返回该APP配置的404页面
