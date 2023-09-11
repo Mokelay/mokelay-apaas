@@ -33,7 +33,7 @@ export function RenderView({ view }) {
   pros['ref'] = ref;
   window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
 
-  //处理样式
+  //TODO 处理样式
   // var styles = view['styles'];
 
   //处理动作
@@ -66,8 +66,6 @@ export function RenderView({ view }) {
       var targetUUId = action['targetUUId'];
       var methodCodeName = action['methodCodeName'];
       var paramsData = action['paramsData'] || [];
-      //TODO 处理参数传递
-      // var paramsData = action['paramsData'];
       pros[eventCodeName] = function () {
         var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
         if (targetEl) {
