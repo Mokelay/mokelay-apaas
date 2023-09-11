@@ -25,7 +25,7 @@ export default {
         name: '编辑Ifram',
         component: 'M_Iframe',
         category: 'Single',
-        attributes: [{ varCodeName: 'url', value: 'edit.html#/app_demo/home' }],
+        attributes: [{ varCodeName: 'url', value: "edit.html#{{getQueryValue('ui')}}" }],
       },
       {
         uuid: 'view_layout_edit',
@@ -40,6 +40,7 @@ export default {
         eventCodeName: 'onMouseDown',
         targetUUId: 'view_1_1_d',
         methodCodeName: 'updateContent',
+        paramsData: ['更新下内容...'],
       },
     ],
   },

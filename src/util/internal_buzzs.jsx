@@ -53,7 +53,12 @@ export default {
 
     //内置函数_获取URL Query值
     getQueryValue: function (queryName) {
-      return window.__Mokelay.InternalVar.URL_Search_Params.get(queryName);
+      var urlSP = window.__Mokelay.InternalVar.URL_Search_Params;
+      if (urlSP) {
+        return urlSP.get(queryName);
+      } else {
+        return null;
+      }
     },
   },
 

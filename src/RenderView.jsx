@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRef, createElement } from 'react';
+import Util from './util/util.jsx';
 
 /**
  * 统一的View渲染函数
@@ -15,8 +16,13 @@ export function RenderView({ view }) {
   var pros = {};
   attributes.map(function (attr) {
     var proName = attr['varCodeName'];
-    // 针对String类型的value，是否统一解析变量
+    // 针对String类型的value，统一解析变量
+    // console.log(Util.resolveVar('xxx{{Is_Edit_Status}}aa'));
+    // console.log(Util.executeStr("xxx{{getQueryValue('ui')}}aa"));
     var proValue = attr['value'];
+    if (typeof proValue == 'string') {
+      proValue = Util.executeStr(proValue);
+    }
     pros[proName] = proValue;
   });
 
@@ -59,6 +65,7 @@ export function RenderView({ view }) {
       var eventCodeName = action['eventCodeName'];
       var targetUUId = action['targetUUId'];
       var methodCodeName = action['methodCodeName'];
+      var paramsData = action['paramsData'] || [];
       //TODO 处理参数传递
       // var paramsData = action['paramsData'];
       pros[eventCodeName] = function () {
@@ -66,7 +73,7 @@ export function RenderView({ view }) {
         if (targetEl) {
           var method = targetEl['current'][methodCodeName];
           if (method) {
-            method();
+            method(...paramsData);
           } else {
             console.log('Can not find method:' + methodCodeName);
           }

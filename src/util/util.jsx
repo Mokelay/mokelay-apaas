@@ -91,14 +91,39 @@ export default {
   },
 
   /**
-   * 解析字符串
+   * 解析字符串变量
+   *
+   * VarCodeName -> VarShowName
+   *
    * DEMO
-   * {{内置变量_是否编辑状态}} {{内置变量_localStorage.item.abc}}
-   * => {{window.__Mokelay.InternalVar['Is_Edit_Status']}} {{window.__Mokelay.InternalVar['localStorage']['item']['abc']}}
+   * xxx{{Is_Edit_Status}}xxxaa
+   * =>
+   * xxx{{内置变量_是否编辑状态}}xxxaa
    * @param {字符串} str
    */
-  resolve: function (str) {
-    return transfer(str, window.__Mokelay.InternalVarDesc);
+  resolveVar: function (str) {
+    return transferVar(str, window.__Mokelay.InternalVarDesc);
+  },
+  /**
+   * 解析字符串函数
+   * @param {字符串} str
+   * @returns
+   */
+  resolveFunc: function (str) {
+    return transferFunc(str, window.__Mokelay.InternalFuncDesc);
+  },
+
+  /**
+   * 执行字符串
+   * @param {字符串} str
+   * @returns
+   */
+  executeStr: function (str) {
+    _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+    var compiled = _.template(str);
+    var data = Object.assign({}, window.__Mokelay.InternalVar, window.__Mokelay.InternalFunc);
+    // console.log(data);
+    return compiled(data);
   },
 };
 
@@ -140,27 +165,37 @@ export default {
  * xxx{{内置变量.是否编辑状态}}xxxaa{{内置变量.本地缓存.手机号}}xxxx
  *
  */
-function transfer(str, descTree) {
+function transferVar(str, descTree) {
   for (let i = 0; i < descTree.length; i++) {
     const varData = descTree[i];
     const varCodeName = varData.varCodeName;
     const varShowName = varData.varShowName;
     str = str.replace(new RegExp(`{{${varCodeName}}}`, 'g'), `{{${varShowName}}}`);
     if (varData.varDataDesc) {
-      str = transferNested(str, varData.varDataDesc, varCodeName, varShowName);
+      str = transferVarNested(str, varData.varDataDesc, varCodeName, varShowName);
     }
   }
   return str;
 }
-function transferNested(str, varDataDesc, parentCodeName, parentShowName) {
+function transferVarNested(str, varDataDesc, parentCodeName, parentShowName) {
   for (let i = 0; i < varDataDesc.length; i++) {
     const nestedVarData = varDataDesc[i];
     const nestedCodeName = `${parentCodeName}.${nestedVarData.varCodeName}`;
     const nestedShowName = `${parentShowName}.${nestedVarData.varShowName}`;
     str = str.replace(new RegExp(`{{${nestedCodeName}}}`, 'g'), `{{${nestedShowName}}}`);
     if (nestedVarData.varDataDesc) {
-      str = transferNested(str, nestedVarData.varDataDesc, nestedCodeName, nestedShowName);
+      str = transferVarNested(str, nestedVarData.varDataDesc, nestedCodeName, nestedShowName);
     }
   }
   return str;
+}
+
+/**
+ * 解析方法
+ *
+ * @param {字符串} str
+ * @param {方法描述Tree} descTree
+ */
+function transferFunc(str, descTree) {
+  //TODO
 }
