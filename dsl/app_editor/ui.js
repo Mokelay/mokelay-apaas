@@ -1,7 +1,7 @@
 export default {
-  uuid: 'editor',
+  uuid: 'editor_ui',
   appUUID: 'app_editor',
-  title: 'Home',
+  title: 'UI Editor',
   view: {
     uuid: 'view_edit_page',
     name: 'page',
@@ -16,7 +16,7 @@ export default {
         attributes: [
           {
             varCodeName: 'initContent',
-            value: '欢迎来到Mokelay编辑器',
+            value: '欢迎来到Mokelay UI编辑器',
           },
         ],
       },
