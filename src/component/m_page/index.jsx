@@ -30,11 +30,26 @@ const M_Page = forwardRef(function M_Page(
       return {
         //刷新
         refresh() {
-          console.log('reload this page...');
+          console.log('refresh this page...');
         },
         //Resize
-        resize() {
-          console.log('resize this page...');
+        resizeView() {
+          console.log('resize this view...');
+        },
+        sortView() {
+          console.log('sort this view...');
+        },
+        addNewView() {
+          console.log('add new view...');
+        },
+        copyView() {
+          console.log('copy view...');
+        },
+        createCopyView() {
+          console.log('create copy view...');
+        },
+        deleteView() {
+          console.log('delete view...');
         },
       };
     },

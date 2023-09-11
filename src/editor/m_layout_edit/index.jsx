@@ -54,7 +54,7 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
   function resizeView() {
     //TODO
     var editMokelay = window._Edit_Iframe.contentWindow.__Mokelay;
-    editMokelay.ComponentInstantMap.home_page.current.resize();
+    editMokelay.ComponentInstantMap.home_page.current.resizeView();
   }
 
   /**
