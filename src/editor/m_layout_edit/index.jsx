@@ -9,7 +9,6 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
  */
 const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
   const [active, setActive] = useState(false);
-  const [iframeEl, setIframeEl] = useState(null);
 
   //暴露对外函数
   useImperativeHandle(
@@ -18,17 +17,15 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
       return {
         /**
          * 激活布局编辑
-         *
-         * @param {告知渲染层的iframUUID} iframeUUID
          */
         active: function (e) {
+          //激活编辑模式
           setActive(true);
-
-          var iframe = e.target;
-          // console.log(iframe);
-          // console.log(iframe.contentWindow.__Mokelay);
-          iframe.contentWindow.postMessage(JSON.stringify({ a: 1 }), '*');
-          setIframeEl(iframe);
+          //设置编辑层所在iframe
+          window._Edit_Iframe = e.target;
+        },
+        action: function () {
+          resizeView();
         },
       };
     },
@@ -51,21 +48,14 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
     };
   }, []);
 
-  //TODO 发送给渲染层需要执行的action
-  function sendAction() {
-    var data = { a: 1 };
-    // var iframeEle = window.__Mokelay.ComponentInstantMap[iframeUUID].current;
-    iframeEl.contentWindow.postMessage(JSON.stringify(data), '*');
-    // console.log(e);
-    // iframeRef.current.contentWindow.postMessage('msg from edit', '*');
-    // window.parent.postMessage(JSON.stringify(data), '*');
-    //iframeRef.current.contentWindow.postMessage('msg from edit', '*');
-  }
-
   /**
    * Resize
    */
-  function resizeView() {}
+  function resizeView() {
+    //TODO
+    var editMokelay = window._Edit_Iframe.contentWindow.__Mokelay;
+    editMokelay.ComponentInstantMap.home_page.current.resize();
+  }
 
   /**
    * 排序
