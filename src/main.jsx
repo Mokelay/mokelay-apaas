@@ -110,8 +110,6 @@ function UIRender() {
     }
     document.title = renderUI['title'];
     return <RenderView view={renderUI['view']} />;
-    // return <RenderView view={renderUI['view']} />;
-    // return <RenderView view={renderUI['view']} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
     return <div>Can not found any app</div>;
