@@ -14,7 +14,7 @@ const M_Text = forwardRef(function M_Text({ initContent, maxLine = 1 }, ref) {
     ref,
     () => {
       return {
-        updateContent(newContent) {
+        updateContent(e, newContent) {
           setContent(newContent);
           console.log('Update content...');
         },

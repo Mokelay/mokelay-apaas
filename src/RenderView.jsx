@@ -66,12 +66,13 @@ export function RenderView({ view }) {
       var targetUUId = action['targetUUId'];
       var methodCodeName = action['methodCodeName'];
       var paramsData = action['paramsData'] || [];
-      pros[eventCodeName] = function () {
+      pros[eventCodeName] = function (e) {
+        // console.log(arguments);
         var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
         if (targetEl) {
           var method = targetEl['current'][methodCodeName];
           if (method) {
-            method(...paramsData);
+            method(e, ...paramsData);
           } else {
             console.log('Can not find method:' + methodCodeName);
           }

@@ -26,6 +26,14 @@ export default {
         component: 'M_Iframe',
         category: 'Single',
         attributes: [{ varCodeName: 'url', value: "edit.html#{{getQueryValue('ui')}}" }],
+        actions: [
+          {
+            eventCodeName: 'onLoad',
+            targetUUId: 'view_layout_edit',
+            methodCodeName: 'active',
+            paramsData: [],
+          },
+        ],
       },
       {
         uuid: 'view_layout_edit',

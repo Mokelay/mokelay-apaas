@@ -1,5 +1,5 @@
 import './style.css';
-import { useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 /**
  * M_Layout_edit
@@ -8,11 +8,29 @@ import { useEffect, forwardRef, useImperativeHandle } from 'react';
  *
  */
 const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
+  const [active, setActive] = useState(false);
+  const [iframeEl, setIframeEl] = useState(null);
+
   //暴露对外函数
   useImperativeHandle(
     ref,
     () => {
-      return {};
+      return {
+        /**
+         * 激活布局编辑
+         *
+         * @param {告知渲染层的iframUUID} iframeUUID
+         */
+        active: function (e) {
+          setActive(true);
+
+          var iframe = e.target;
+          // console.log(iframe);
+          // console.log(iframe.contentWindow.__Mokelay);
+          iframe.contentWindow.postMessage(JSON.stringify({ a: 1 }), '*');
+          setIframeEl(iframe);
+        },
+      };
     },
     [],
   );
@@ -33,6 +51,51 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
     };
   }, []);
 
+  //TODO 发送给渲染层需要执行的action
+  function sendAction() {
+    var data = { a: 1 };
+    // var iframeEle = window.__Mokelay.ComponentInstantMap[iframeUUID].current;
+    iframeEl.contentWindow.postMessage(JSON.stringify(data), '*');
+    // console.log(e);
+    // iframeRef.current.contentWindow.postMessage('msg from edit', '*');
+    // window.parent.postMessage(JSON.stringify(data), '*');
+    //iframeRef.current.contentWindow.postMessage('msg from edit', '*');
+  }
+
+  /**
+   * Resize
+   */
+  function resizeView() {}
+
+  /**
+   * 排序
+   */
+  function sortView() {}
+
+  /**
+   * 新加
+   */
+  function addNewView() {}
+
+  /**
+   * 拷贝DSL
+   */
+  function copyView() {}
+
+  /**
+   * 创建副本
+   */
+  function createCopyView() {}
+
+  /**
+   * 删除UI
+   */
+  function deleteView() {}
+
+  return <>{active && <Layout_Edit />}</>;
+});
+
+function Layout_Edit() {
   return (
     <>
       <div className="nclc-screen-accessory">
@@ -202,7 +265,6 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
           </div>
         </div>
       </div>
-
       <div className="global-accessory-layer">
         <div
           data-role="ghost"
@@ -237,6 +299,6 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
       </div>
     </>
   );
-});
+}
 
 export default M_Layout_Edit;
