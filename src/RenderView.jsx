@@ -22,6 +22,7 @@ export function RenderView({ view }) {
     var proValue = attr['value'];
     if (typeof proValue == 'string') {
       proValue = Util.executeStr(proValue);
+      //TODO 可以再加上国际化逻辑
     }
     pros[proName] = proValue;
   });

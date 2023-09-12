@@ -33,6 +33,8 @@ export default {
     Current_Terminal: 'PC',
     //内置变量_URL Query 参数对象
     URL_Search_Params: null,
+    //内置变量_当前语言
+    Current_Lang: 'zh_cn',
   },
 
   //内置函数

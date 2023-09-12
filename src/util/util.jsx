@@ -90,6 +90,10 @@ export default {
     );
   },
 
+  resolve: function (str) {
+    //TODO
+  },
+
   /**
    * 解析字符串变量
    *
@@ -99,6 +103,11 @@ export default {
    * xxx{{Is_Edit_Status}}xxxaa
    * =>
    * xxx{{内置变量_是否编辑状态}}xxxaa
+   *
+   * Current_Object:{a:1,b:2,c:"你好",d:"e"}
+   * "{{Current_Object}}" => "你好"
+   * "{{Current_Object.b}}" => "2"
+   *
    * @param {字符串} str
    */
   resolveVar: function (str) {
@@ -106,6 +115,11 @@ export default {
   },
   /**
    * 解析字符串函数
+   * "edit.html#{{getQueryValue('ui',{a:1,b:2})}}"
+   * =>
+   * "edit.html#{{内置函数_获取URL Query值('参数名:ui','')}}"
+   * {{内置函数名(参数1:参数值，参数2:参数值...)}}
+   *
    * @param {字符串} str
    * @returns
    */
