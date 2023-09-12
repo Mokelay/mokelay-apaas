@@ -17,7 +17,11 @@ const M_Link = forwardRef(function M_Link({ text, url }, ref) {
     [],
   );
 
-  return <Link href={url}>{text}</Link>;
+  return (
+    <Link href={url} underline="hover">
+      {text}
+    </Link>
+  );
 });
 
 export default M_Link;
