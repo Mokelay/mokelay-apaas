@@ -12,11 +12,12 @@ import {
 // 全局样式
 import './styles/index.less';
 
-// 加载基础组件库
+/**
+ * 加载基础组件库
+ */
 // eslint-disable-next-line react-refresh/only-export-components
 const ComponentMap = {};
 const baseComponents = import.meta.globEager(['./component/*/index.jsx', './editor/*/index.jsx']);
-// console.log(baseComponents);
 Object.values(baseComponents).forEach(function (baseComp) {
   var compName = baseComp.default.name;
   if (compName == undefined) {
@@ -24,15 +25,16 @@ Object.values(baseComponents).forEach(function (baseComp) {
   }
   ComponentMap[compName] = baseComp.default;
 });
-
-// 加载自定义组件库，加载完成后，后续还可以还可以动态加载
-
-// 初始化全局配置
 window.__Mokelay.ComponentMap = ComponentMap;
 
-//加载内置巴斯
-import InternalBuzzs from './util/internal_buzzs.jsx';
+/**
+ * TODO 加载自定义组件库，加载完成后，后续还可以还可以动态加载
+ */
 
+/**
+ * 加载内置巴斯 = 内置函数+内置变量
+ */
+import InternalBuzzs from './util/internal_buzzs.jsx';
 // 加载内置变量
 window.__Mokelay.InternalVar = InternalBuzzs['internalVar'];
 window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
@@ -40,8 +42,9 @@ window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
 window.__Mokelay.InternalFunc = InternalBuzzs['internalFunc'];
 window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
-// 通过URL获取页面参数，获取页面DSL， 目前可以先从dsl/目录里本地加载，方便测试
-
+/**
+ * 通过URL获取页面参数，获取页面DSL，目前可以先从dsl/ui/目录里本地加载，方便测试
+ */
 //App信息
 import appList from '../dsl/ui/app_list.js';
 //导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
@@ -116,14 +119,16 @@ function UIRender() {
   }
 }
 
-// 渲染DSL
+/**
+ * 开始正式渲染页面，挂载到root节点
+ */
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <Routes>
         {/* 处理默认首页 */}
         {/* TODO 如何配置全局的默认首页 */}
-        <Route index element={<Navigate to={'/app_demo/home'} />} />
+        <Route index element={<Navigate to={'/app_editor/'} />} />
 
         {/* 读取本地JS配置，方便联调 */}
         <Route path="/:app_uuid/">
