@@ -2,12 +2,12 @@ import './style.css';
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 /**
- * M_Layout_edit
+ * M_Ui_Edit
  * 包含 top-area left-area main-area right-area bottom-area 5个区域
  *
  *
  */
-const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
+const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
 
   //暴露对外函数
@@ -20,7 +20,7 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
          */
         active: function (e) {
           //激活编辑模式
-          setActive(true);
+          // setActive(true);
           //设置编辑层所在iframe
           window._Edit_Iframe = e.target;
         },
@@ -36,7 +36,13 @@ const M_Layout_Edit = forwardRef(function M_Layout_Edit(props, ref) {
   useEffect(() => {
     var f = function (e) {
       try {
-        console.log(e.data);
+        if (typeof e.data == 'string') {
+          var data = JSON.parse(e.data);
+          var eventName = data['eventName'];
+          if (eventName == 'onMouseDown') {
+            setActive(true);
+          }
+        }
       } catch (error) {
         console.log(error);
       }
@@ -291,4 +297,4 @@ function Layout_Edit() {
   );
 }
 
-export default M_Layout_Edit;
+export default M_Ui_Edit;

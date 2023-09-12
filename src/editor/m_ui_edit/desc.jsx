@@ -1,7 +1,7 @@
 export default {
-  name: "布局编辑器",
-  icon: "", //如何配置？
-  tagName: "M_Layout_Edit",
+  name: '布局编辑器',
+  icon: '', //如何配置？
+  tagName: 'M_Ui_Edit',
   attributesDesc: [
     {
       ds: {},

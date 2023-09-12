@@ -38,7 +38,7 @@ export default {
       {
         uuid: 'view_layout_edit',
         name: '编辑器',
-        component: 'M_Layout_Edit',
+        component: 'M_Ui_Edit',
         category: 'Single',
         attributes: [],
       },
