@@ -122,8 +122,6 @@ function UIRender() {
 /**
  * 开始正式渲染页面，挂载到root节点
  */
-// var root = ;
-// window.__Mokelay.Root =
 if (!window.__Mokelay.Root) {
   window.__Mokelay.Root = createRoot(document.getElementById('root'));
 }
