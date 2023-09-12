@@ -19,6 +19,22 @@ export default {
           },
         ],
       },
+      {
+        uuid: 'view_link_return',
+        name: '链接2',
+        component: 'M_Link',
+        category: 'Single',
+        attributes: [
+          {
+            varCodeName: 'text',
+            value: '返回首页',
+          },
+          {
+            varCodeName: 'url',
+            value: '#/app_editor/',
+          },
+        ],
+      },
     ],
   },
 };
