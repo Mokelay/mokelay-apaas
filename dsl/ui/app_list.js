@@ -39,7 +39,7 @@ export default [
     i18n: true,
     languageSupport: ['zh-cn', 'en-us'],
     pages: {
-      Page_Default: 'ui',
+      Page_Default: 'home',
       Page_404: '404',
     },
     i18nName: [
