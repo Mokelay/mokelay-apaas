@@ -33,8 +33,8 @@ export function RenderView({ view }) {
   pros['ref'] = ref;
   window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
 
-  //TODO 处理样式
-  // var styles = view['styles'];
+  //处理样式
+  pros['styles'] = view['styles'] || {};
 
   //处理动作
   var editStatus = window.__Mokelay.InternalVar.Is_Edit_Status;

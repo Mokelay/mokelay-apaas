@@ -7,6 +7,14 @@ export default {
     name: 'page',
     component: 'M_Page',
 
+    styles: {
+      layout: {},
+      spacing: {},
+      background: {},
+      border: {},
+      shadow: {},
+    },
+
     children: [
       {
         uuid: 'view_link_1',

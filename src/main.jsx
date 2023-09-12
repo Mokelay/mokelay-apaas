@@ -122,7 +122,12 @@ function UIRender() {
 /**
  * 开始正式渲染页面，挂载到root节点
  */
-createRoot(document.getElementById('root')).render(
+// var root = ;
+// window.__Mokelay.Root =
+if (!window.__Mokelay.Root) {
+  window.__Mokelay.Root = createRoot(document.getElementById('root'));
+}
+window.__Mokelay.Root.render(
   <StrictMode>
     <Router>
       <Routes>
