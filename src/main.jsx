@@ -1,3 +1,4 @@
+import Util from './util/util.jsx';
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
 import {
@@ -111,7 +112,7 @@ function UIRender() {
         renderUI = uiMap[page404];
       }
     }
-    document.title = renderUI['title'];
+    document.title = Util.executeStr(renderUI['title']);
     return <RenderView view={renderUI['view']} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
