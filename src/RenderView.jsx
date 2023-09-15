@@ -46,10 +46,21 @@ export function RenderView({ view }) {
       var f = function (e) {
         // TODO 封装需要传递给父级编辑层的数据
         var data = {};
-        data['targetUUID'] = view['uuid'];
+        // console.log(e);
+        data['containerUUID'] = view['uuid'];
         data['eventName'] = e._reactName;
-        data['clientX'] = e.clientX;
-        data['clientY'] = e.clientY;
+        if (e.target) {
+          data['rect'] = e.target.getBoundingClientRect();
+        }
+
+        // console.log(e.target.getBoundingClientRect());
+        // for (var key in e) {
+        //   if (typeof e[key] !== 'function' && typeof e[key] !== 'object') {
+        //     data[key] = e[key];
+        //   }
+        // }
+        //console.log(JSON.stringify(data));
+
         window.parent.postMessage(JSON.stringify(data), '*');
       };
       //TODO 注册一系列需要编辑的交互事件
