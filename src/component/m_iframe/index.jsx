@@ -6,8 +6,14 @@
 
 import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-const M_Iframe = forwardRef(function M_Iframe({ url, onLoad }, ref) {
+const M_Iframe = forwardRef(function M_Iframe({ url, onLoad, styles }, ref) {
   const iframeRef = useRef(null);
+  styles = styles || {};
+
+  var layoutSX = styles['layout'] || {};
+  var dimensionsSX = styles['dimensions'] || {};
+  var borderSX = styles['border'] || {};
+  var sx = Object.assign({}, layoutSX, dimensionsSX, borderSX);
 
   useImperativeHandle(
     ref,
@@ -28,7 +34,7 @@ const M_Iframe = forwardRef(function M_Iframe({ url, onLoad }, ref) {
     }
   }, []);
 
-  return <iframe ref={iframeRef} src={url} width="400px" height="300px" />;
+  return <iframe ref={iframeRef} src={url} style={sx} />;
 });
 
 export default M_Iframe;
