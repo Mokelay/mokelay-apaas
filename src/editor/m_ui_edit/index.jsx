@@ -74,22 +74,20 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   }, []);
 
   /**
-   * 显示容器内所有子元素的虚框
+   * 通过鼠标位置和容器对象，获取鼠标位置是否在容器某个组件里
    *
+   * @param {鼠标位置}} mousePosition
    * @param {*} containerUUID
+   * @returns
    */
-  function showChildrenBorder(mousePosition, containerUUID) {
-    // console.log(mousePosition);
+  function mouseInView(mousePosition, containerUUID) {
     //获取容器布局对象
     var containerRef =
       window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
 
     var childrenRefs = containerRef.current.getChildrenRefs() || [];
-    // console.log(childrenRefs);
-    var positions = [];
     var onlyShowPosition = null;
     childrenRefs.forEach(function (r) {
-      // console.log(r);
       var rect = r.current.getBoundingClientRect();
       if (
         mousePosition.x >= rect.x &&
@@ -99,13 +97,31 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       ) {
         onlyShowPosition = rect;
       }
-
-      positions.push(rect);
     });
-    // console.log(positions);
-    if (onlyShowPosition) {
-      setChildrenPositions([onlyShowPosition]);
+    return onlyShowPosition;
+  }
+
+  /**
+   * 显示容器内所有子元素的虚框
+   *
+   * @param {*} containerUUID
+   */
+  function showChildrenBorder(mousePosition, containerUUID) {
+    var viewPosition = mouseInView(mousePosition, containerUUID);
+    if (viewPosition) {
+      setChildrenPositions([viewPosition]);
     } else {
+      //获取容器布局对象
+      var containerRef =
+        window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
+
+      var childrenRefs = containerRef.current.getChildrenRefs() || [];
+      // console.log(childrenRefs);
+      var positions = [];
+
+      childrenRefs.forEach(function (r) {
+        positions.push(r.current.getBoundingClientRect());
+      });
       setChildrenPositions(positions);
     }
   }
@@ -115,7 +131,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
    */
   function showOpZone(mousePosition, containerUUID) {
     // 判断鼠标是否在可编辑组件区域内
-    setOpZone(true);
+    var viewPosition = mouseInView(mousePosition, containerUUID);
+    if (viewPosition) {
+      setOpZone(true);
+    } else {
+      setOpZone(false);
+    }
   }
 
   /**
