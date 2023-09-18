@@ -26,7 +26,7 @@ export default {
         component: 'M_Iframe',
         category: 'Single',
         attributes: [{ varCodeName: 'url', value: "edit.html#{{getQueryValue('ui')}}" }],
-        styles: { dimensions: { width: '400px', height: '300px' }, border: { border: 'none' } },
+        styles: { dimensions: { width: '70%', height: '300px' }, border: { border: 'none' } },
         actions: [
           {
             eventCodeName: 'onLoad',
