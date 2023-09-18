@@ -54,11 +54,11 @@ export function RenderView({ view }) {
         }
 
         // console.log(e.target.getBoundingClientRect());
-        // for (var key in e) {
-        //   if (typeof e[key] !== 'function' && typeof e[key] !== 'object') {
-        //     data[key] = e[key];
-        //   }
-        // }
+        for (var key in e) {
+          if (typeof e[key] !== 'function' && typeof e[key] !== 'object') {
+            data[key] = e[key];
+          }
+        }
         //console.log(JSON.stringify(data));
 
         window.parent.postMessage(JSON.stringify(data), '*');

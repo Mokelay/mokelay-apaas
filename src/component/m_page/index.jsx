@@ -72,7 +72,7 @@ const M_Page = forwardRef(function M_Page(
     // childRef.push(gridRef);
     childRef.current.push(gridRef);
     return (
-      <Grid key={view.key} item xs={12} ref={gridRef}>
+      <Grid key={view.key} item xs={8} ref={gridRef}>
         {view}
       </Grid>
     );

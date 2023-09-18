@@ -39,21 +39,24 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       try {
         if (typeof e.data == 'string') {
           var data = JSON.parse(e.data);
-          // console.log(data);
+          // console.log(data.clientX + ',' + data.clientY);
+          var mousePosition = { x: data.clientX, y: data.clientY };
           var eventName = data['eventName'];
           var containerUUID = data['containerUUID'];
           if (eventName == 'onMouseEnter') {
             setActive(true);
 
-            showChildrenBorder(containerUUID);
+            showChildrenBorder(mousePosition, containerUUID);
             //监听渲染层的iframe事件
             var f = function () {
-              showChildrenBorder(containerUUID);
+              showChildrenBorder({}, containerUUID);
             };
             window._Edit_Iframe.contentWindow.removeEventListener('scroll', f);
             window._Edit_Iframe.contentWindow.addEventListener('scroll', f);
+          } else if (eventName == 'onMouseMove') {
+            showChildrenBorder(mousePosition, containerUUID);
           } else if (eventName == 'onMouseLeave') {
-            // setActive(false);
+            setActive(false);
           }
         }
       } catch (error) {
@@ -72,7 +75,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
    *
    * @param {*} containerUUID
    */
-  function showChildrenBorder(containerUUID) {
+  function showChildrenBorder(mousePosition, containerUUID) {
+    // console.log(mousePosition);
     //获取容器布局对象
     var containerRef =
       window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
@@ -80,12 +84,27 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     var childrenRefs = containerRef.current.getChildrenRefs() || [];
     // console.log(childrenRefs);
     var positions = [];
+    var onlyShowPosition = null;
     childrenRefs.forEach(function (r) {
       // console.log(r);
-      positions.push(r.current.getBoundingClientRect());
+      var rect = r.current.getBoundingClientRect();
+      if (
+        mousePosition.x >= rect.x &&
+        mousePosition.x <= rect.x + rect.width &&
+        mousePosition.y >= rect.y &&
+        mousePosition.y <= rect.y + rect.height
+      ) {
+        onlyShowPosition = rect;
+      }
+
+      positions.push(rect);
     });
     // console.log(positions);
-    setChildrenPositions(positions);
+    if (onlyShowPosition) {
+      setChildrenPositions([onlyShowPosition]);
+    } else {
+      setChildrenPositions(positions);
+    }
   }
 
   /**
