@@ -9,7 +9,7 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
  */
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
-  const [opZone, setOpZone] = useState(false);
+  const [opZone, setOpZone] = useState(null);
   const [childrenPositions, setChildrenPositions] = useState([]);
 
   //暴露对外函数
@@ -59,7 +59,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           } else if (eventName == 'onClick') {
             showOpZone(mousePosition, containerUUID);
           } else if (eventName == 'onMouseLeave') {
-            setActive(false);
+            // setActive(false);
           }
         }
       } catch (error) {
@@ -132,11 +132,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   function showOpZone(mousePosition, containerUUID) {
     // 判断鼠标是否在可编辑组件区域内
     var viewPosition = mouseInView(mousePosition, containerUUID);
-    if (viewPosition) {
-      setOpZone(true);
-    } else {
-      setOpZone(false);
-    }
+    setOpZone(viewPosition);
   }
 
   /**
@@ -192,13 +188,15 @@ function Layout_Edit({ position, childrenPositions, opZone }) {
       <div className="nclc-screen-accessory">
         <div className="nclc-selecting-box" style={{ left: position.left, top: position.top }}>
           {/* 显示View的操作 */}
-          {opZone && <ShowViewOperation />}
+          <ShowViewOperation opZone={opZone} />
 
           {/* 显示UI的Border */}
           {<ShowUIBorder position={position} />}
 
           {/* 显示所有View的虚框 */}
-          {<ShowViewBorders position={position} childrenPositions={childrenPositions} />}
+          {opZone == null && (
+            <ShowViewBorders position={position} childrenPositions={childrenPositions} />
+          )}
         </div>
       </div>
       {/* 显示拖动ICON */}
@@ -247,19 +245,29 @@ function ShowUIBorder({ position }) {
 /**
  * 显示针对每个View的操作
  */
-function ShowViewOperation() {
+function ShowViewOperation({ opZone }) {
+  console.log(opZone);
   return (
-    <div className="nclc-scrolled-box">
+    opZone && (
       <div
         className="nclc-border nclc-border-selecting"
         style={{
-          width: '74.0938px',
-          height: 42,
-          transform: 'translate3d(0px, 76px, 0px)',
+          top: opZone.top + 'px',
+          left: opZone.left + 'px',
+          width: opZone.width + 'px',
+          height: opZone.height + 'px',
+          // transform: 'translate3d(' + opZone.left + 'px, ' + opZone.top + 'px, 0px)',
           zIndex: 10,
         }}
       >
-        <div className="nclc-border-actionbar" style={{ top: '-28px', height: 24, left: 0 }}>
+        <div
+          className="nclc-border-actionbar"
+          style={{
+            // top: opZone.top + 'px',
+            // left: opZone.left + 'px',
+            height: '24px',
+          }}
+        >
           <div className="nclc-context-crumbs" data-testid="crumbs">
             <div className="nclc-context-crumbs-item">
               <svg
@@ -350,17 +358,17 @@ function ShowViewOperation() {
             </div>
           </div>
         </div>
-        <div className="nclc-grid-width-modifier">
-          <div className="position-preview" />
+        <div className="nclc-grid-width-modifier" style={{}}>
+          {/* <div className="position-preview" /> */}
           <div className="modifier-border">
-            <svg
+            {/* <svg
               width={592}
               height={863}
               fill="transparent"
               style={{ transform: 'translate(-10px, -86px)' }}
             >
               <rect x={10} y={86} height={42} width="74.09375" strokeWidth={2} stroke="#3370FF" />
-            </svg>
+            </svg> */}
             <div
               className="modifier-handler left-handler"
               style={{
@@ -375,11 +383,11 @@ function ShowViewOperation() {
                 transformOrigin: 'right top',
               }}
             />
-            <div className="drag-state-tip">取消</div>
+            {/* <div className="drag-state-tip">取消</div> */}
           </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 
