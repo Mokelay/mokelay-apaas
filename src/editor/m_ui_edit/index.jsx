@@ -9,6 +9,7 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
  */
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
+  const [opZone, setOpZone] = useState(false);
   const [childrenPositions, setChildrenPositions] = useState([]);
 
   //暴露对外函数
@@ -55,6 +56,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
             window._Edit_Iframe.contentWindow.addEventListener('scroll', f);
           } else if (eventName == 'onMouseMove') {
             showChildrenBorder(mousePosition, containerUUID);
+          } else if (eventName == 'onClick') {
+            showOpZone(mousePosition, containerUUID);
           } else if (eventName == 'onMouseLeave') {
             setActive(false);
           }
@@ -108,6 +111,14 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   }
 
   /**
+   * 显示View操作区
+   */
+  function showOpZone(mousePosition, containerUUID) {
+    // 判断鼠标是否在可编辑组件区域内
+    setOpZone(true);
+  }
+
+  /**
    * Resize
    */
   function resizeView() {
@@ -147,19 +158,20 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
         <Layout_Edit
           position={window._Edit_Iframe.getBoundingClientRect()}
           childrenPositions={childrenPositions}
+          opZone={opZone}
         />
       )}
     </>
   );
 });
 
-function Layout_Edit({ position, childrenPositions }) {
+function Layout_Edit({ position, childrenPositions, opZone }) {
   return (
     <>
       <div className="nclc-screen-accessory">
         <div className="nclc-selecting-box" style={{ left: position.left, top: position.top }}>
           {/* 显示View的操作 */}
-          {false && <ShowViewOperation />}
+          {opZone && <ShowViewOperation />}
 
           {/* 显示UI的Border */}
           {<ShowUIBorder position={position} />}

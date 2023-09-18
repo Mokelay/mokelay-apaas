@@ -69,6 +69,7 @@ export function RenderView({ view }) {
       pros['onMouseLeave'] = f;
       pros['onMouseEnter'] = f;
       pros['onMouseMove'] = f;
+      pros['onClick'] = f;
     }
   } else {
     //如果是非编辑状态，渲染配置的actions
