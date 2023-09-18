@@ -6,7 +6,7 @@
 
 // import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -51,19 +51,32 @@ const M_Page = forwardRef(function M_Page(
         deleteView() {
           console.log('delete view...');
         },
+        getChildrenRefs() {
+          return childRef.current;
+        },
       };
     },
     [],
   );
 
   children = children || [];
+
+  // const [childrenRefs, setChildrenRefs] = useState([]);
+
   //TODO xs={4} 的设置是在容器里，还是在组件里？
+  //TODO Chilref的这个实现方式是否科学？
   // eslint-disable-next-line react/prop-types
-  const ChildrenViews = children.map((view) => (
-    <Grid key={view.key} item xs={12}>
-      {view}
-    </Grid>
-  ));
+  let childRef = useRef([]);
+  const ChildrenViews = children.map(function (view) {
+    const gridRef = useRef(null);
+    // childRef.push(gridRef);
+    childRef.current.push(gridRef);
+    return (
+      <Grid key={view.key} item xs={12} ref={gridRef}>
+        {view}
+      </Grid>
+    );
+  });
 
   return (
     <Box sx={{ flexGrow: 1 }} ref={ref}>
