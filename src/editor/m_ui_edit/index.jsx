@@ -45,19 +45,13 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           if (eventName == 'onMouseEnter') {
             setActive(true);
 
-            //获取容器布局对象
-            var containerRef =
-              window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
-
-            var childrenRefs = containerRef.current.getChildrenRefs() || [];
-            // console.log(childrenRefs);
-            var positions = [];
-            childrenRefs.forEach(function (r) {
-              // console.log(r);
-              positions.push(r.current.getBoundingClientRect());
-            });
-            // console.log(positions);
-            setChildrenPositions(positions);
+            showChildrenBorder(containerUUID);
+            //监听渲染层的iframe事件
+            var f = function () {
+              showChildrenBorder(containerUUID);
+            };
+            window._Edit_Iframe.contentWindow.removeEventListener('scroll', f);
+            window._Edit_Iframe.contentWindow.addEventListener('scroll', f);
           } else if (eventName == 'onMouseLeave') {
             // setActive(false);
           }
@@ -72,6 +66,27 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       window.removeEventListener('message', f);
     };
   }, []);
+
+  /**
+   * 显示容器内所有子元素的虚框
+   *
+   * @param {*} containerUUID
+   */
+  function showChildrenBorder(containerUUID) {
+    //获取容器布局对象
+    var containerRef =
+      window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
+
+    var childrenRefs = containerRef.current.getChildrenRefs() || [];
+    // console.log(childrenRefs);
+    var positions = [];
+    childrenRefs.forEach(function (r) {
+      // console.log(r);
+      positions.push(r.current.getBoundingClientRect());
+    });
+    // console.log(positions);
+    setChildrenPositions(positions);
+  }
 
   /**
    * Resize
