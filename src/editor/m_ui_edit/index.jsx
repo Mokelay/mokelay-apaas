@@ -38,9 +38,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       try {
         if (typeof e.data == 'string') {
           var data = JSON.parse(e.data);
+          console.log(data);
           var eventName = data['eventName'];
-          if (eventName == 'onMouseDown') {
+          if (eventName == 'onMouseEnter') {
             setActive(true);
+          } else if (eventName == 'onMouseLeave') {
+            // setActive(false);
           }
         }
       } catch (error) {
@@ -88,10 +91,10 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
    */
   function deleteView() {}
 
-  return <>{active && <Layout_Edit />}</>;
+  return <>{active && <Layout_Edit position={window._Edit_Iframe.getBoundingClientRect()} />}</>;
 });
 
-function Layout_Edit() {
+function Layout_Edit({ position }) {
   return (
     <>
       <div className="nclc-screen-accessory">
@@ -99,9 +102,10 @@ function Layout_Edit() {
           <div className="nclc-scrolled-box">
             {/* 显示View的操作 */}
             {false && <ShowViewOperation />}
-            {/* 显示UI的Border */}
-            <ShowUIBorder />
           </div>
+          {/* 显示UI的Border */}
+          {<ShowUIBorder position={position} />}
+
           {/* 显示所有View的虚框 */}
           {false && <ShowViewBorders />}
         </div>
@@ -116,32 +120,35 @@ function Layout_Edit() {
  * 显示UI看板的Border
  * @returns EL
  */
-function ShowUIBorder() {
+function ShowUIBorder({ position }) {
   return (
     <div
-      className="nclc-border nclc-border-selecting inParentBox"
+      className="nclc-border nclc-border-selecting"
       style={{
-        width: 572,
-        height: 843,
+        width: position.width + 'px',
+        height: position.height + 'px',
+        top: position.top + 'px',
+        left: position.left + 'px',
         transform: 'translate3d(0px, 0px, 0px)',
       }}
     >
-      <svg
-        width={592}
-        height={863}
+      {/* 这个SVG对象还没弄清楚存在的必要性？ */}
+      {/* <svg
+        width={position.width + 20}
+        height={position.height + 20}
         fill="transparent"
         style={{ transform: 'translate(-10px, -10px)' }}
       >
         <rect
           x={10}
           y={10}
-          height={843}
-          width={572}
+          height={position.height}
+          width={position.width}
           strokeWidth={1}
           stroke="#3370FF"
           strokeDasharray="3 3"
         />
-      </svg>
+      </svg> */}
     </div>
   );
 }
@@ -158,7 +165,6 @@ function ShowViewOperation() {
         height: 42,
         transform: 'translate3d(0px, 76px, 0px)',
         zIndex: 10,
-        display: 'none',
       }}
     >
       <div className="nclc-border-actionbar" style={{ top: '-28px', height: 24, left: 0 }}>
@@ -289,13 +295,13 @@ function ShowViewOperation() {
  *
  * @returns
  */
-function ShowViewBorders() {
+function ShowViewBorders({ childrenPositions }) {
   return (
     <svg
       width={1160}
       height={321}
       fill="transparent"
-      style={{ transform: 'translate(-10px, -10px)', display: 'none' }}
+      style={{ transform: 'translate(-10px, -10px)' }}
     >
       <rect
         x={10}
@@ -325,7 +331,7 @@ function ShowViewBorders() {
  */
 function DragIcon() {
   return (
-    <div className="global-accessory-layer" style={{ display: 'none' }}>
+    <div className="global-accessory-layer" style={{}}>
       <div
         data-role="ghost"
         className="canvas-ghost-container"

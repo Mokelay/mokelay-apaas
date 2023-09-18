@@ -28,7 +28,7 @@ export default {
           },
           {
             varCodeName: 'url',
-            value: '#/app_editor/ui',
+            value: '#/app_editor/ui?ui=/app_demo/sample1',
           },
         ],
       },
