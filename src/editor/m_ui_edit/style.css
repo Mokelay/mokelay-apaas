@@ -1,19 +1,12 @@
-.nclc-screen-accessory {
-  left: 0;
-  overflow: visible;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  z-index: 9;
-}
-
 .nclc-selecting-box {
-  bottom: 0;
-  left: 0;
+  /* bottom: 0; */
+  /* left: 0; */
   opacity: 1;
   position: absolute;
-  right: 0;
-  top: 0;
+  overflow: visible;
+  pointer-events: none;
+  /* right: 0; */
+  /* top: 0; */
   -webkit-transition: opacity .15s ease 0s;
   transition: opacity .15s ease 0s;
 }
@@ -24,21 +17,15 @@
   z-index: 2;
 }
 
-.nclc-selecting-box>.nclc-scrolled-box {
-  left: 0;
-  position: absolute;
-  top: 0;
-}
-
 .nclc-border {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  left: 0;
+  /* left: 0; */
   overflow: visible;
   pointer-events: none;
   position: absolute;
-  top: 0;
+  /* top: 0; */
   will-change: transform,width,height;
   z-index: 1;
 }
@@ -223,10 +210,10 @@ crumbs-item {
 .nclc-grid-width-modifier .position-preview {
   background: #3370ff;
   height: 100%;
-  left: 0;
+  /* left: 0; */
   opacity: .15;
   position: absolute;
-  top: 0;
+  /* top: 0; */
   visibility: hidden;
   width: 100%;
 }
@@ -234,14 +221,14 @@ crumbs-item {
 .nclc-grid-width-modifier .modifier-border {
   border-radius: 2px;
   height: 100%;
-  left: 0;
+  /* left: 0; */
   position: absolute;
-  top: 0;
+  /* top: 0; */
   width: 100%;
 }
 
 .nclc-grid-width-modifier .modifier-handler.left-handler {
-  left: 0;
+  /* left: 0; */
   transform: translate(-2px,-50%);
 }
 
@@ -334,11 +321,11 @@ crumbs-item {
   -ms-flex-direction: row;
   flex-direction: row;
   gap: 8px;
-  left: 0;
+  /* left: 0; */
   padding: 6px 12px;
   pointer-events: none;
   position: fixed;
-  top: 0;
+  /* top: 0; */
   z-index: 9999;
 }
 
@@ -362,9 +349,6 @@ crumbs-item {
 
 .canvas-ghost-container .canvas-ghost-title {
   width: 55px;
-}
-
-.canvas-ghost-container .canvas-ghost-title {
   color: #3370ff;
   font-size: 12px;
   line-height: 20px;
