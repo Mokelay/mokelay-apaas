@@ -30,7 +30,7 @@ const sample1 = {
     attributes: [
       {
         varCodeName: 'spacing',
-        value: 0,
+        value: 0.5,
       },
     ],
     styles: [],

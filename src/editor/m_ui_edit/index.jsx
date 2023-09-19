@@ -9,8 +9,17 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
  */
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
+
   const [opZone, setOpZone] = useState(null);
   const [childrenPositions, setChildrenPositions] = useState([]);
+
+  // TODO 待重构
+  //需要操作的View
+  const [workView, setWorkView] = useState(null);
+  //鼠标所在的View
+  const [mouseView, setMouseView] = useState({});
+  //所有View
+  const [allView, setAllView] = useState({});
 
   //暴露对外函数
   useImperativeHandle(
@@ -44,6 +53,11 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           var mousePosition = { x: data.clientX, y: data.clientY };
           var eventName = data['eventName'];
           var containerUUID = data['containerUUID'];
+
+          //获取容器内所有的组件列表的位置坐标
+          //获取鼠标所在的组件的位置坐标
+          //
+
           if (eventName == 'onMouseEnter') {
             setActive(true);
 
@@ -85,7 +99,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     var containerRef =
       window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
 
-    var childrenRefs = containerRef.current.getChildrenRefs() || [];
+    var childMap = containerRef.current.getChildrenMap() || {};
+    var childrenRefs = Object.values(childMap) || [];
     var onlyShowPosition = null;
     childrenRefs.forEach(function (r) {
       var rect = r.current.getBoundingClientRect();
@@ -115,7 +130,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       var containerRef =
         window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
 
-      var childrenRefs = containerRef.current.getChildrenRefs() || [];
+      var childMap = containerRef.current.getChildrenMap() || {};
+      var childrenRefs = Object.values(childMap) || [];
       // console.log(childrenRefs);
       var positions = [];
 
@@ -193,9 +209,7 @@ function Layout_Edit({ position, childrenPositions, opZone }) {
         {<ShowUIBorder position={position} />}
 
         {/* 显示所有View的虚框 */}
-        {opZone == null && (
-          <ShowViewBorders position={position} childrenPositions={childrenPositions} />
-        )}
+        {<ShowViewBorders position={position} childrenPositions={childrenPositions} />}
       </div>
       {/* 显示拖动ICON */}
       {true && <DragIcon />}
