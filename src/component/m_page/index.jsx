@@ -83,7 +83,7 @@ const M_Page = forwardRef(function M_Page(
     <Box sx={{ flexGrow: 1 }} ref={ref}>
       <Grid
         container
-        spacing={2}
+        spacing={0}
         onMouseDown={onMouseDown}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
