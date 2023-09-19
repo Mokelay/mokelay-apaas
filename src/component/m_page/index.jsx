@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid';
 // eslint-disable-next-line react/prop-types
 const M_Page = forwardRef(function M_Page(
   {
+    spacing = 0,
     children,
     onMouseDown,
     onMouseEnter,
@@ -83,7 +84,7 @@ const M_Page = forwardRef(function M_Page(
     <Box sx={{ flexGrow: 1 }} ref={ref}>
       <Grid
         container
-        spacing={0}
+        spacing={spacing}
         onMouseDown={onMouseDown}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

@@ -264,6 +264,7 @@ function ShowViewOperation({ opZone }) {
             // top: opZone.top + 'px',
             // left: opZone.left + 'px',
             height: '24px',
+            marginTop: opZone.height + 'px',
           }}
         >
           <div className="nclc-context-crumbs" data-testid="crumbs">
