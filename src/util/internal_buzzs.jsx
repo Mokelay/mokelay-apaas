@@ -74,7 +74,7 @@ export default {
         {
           varShowName: '页面标题',
           varCodeName: 'title',
-          dataType: 'String',
+          varDataType: 'String',
         },
       ],
       returnDataType: null,
@@ -87,7 +87,7 @@ export default {
         {
           varShowName: 'URL地址',
           varCodeName: 'url',
-          dataType: 'String',
+          varDataType: 'String',
         },
       ],
       returnDataType: null,
@@ -100,7 +100,7 @@ export default {
         {
           varShowName: '组件UUID',
           varCodeName: 'viewUUID',
-          dataType: 'String',
+          varDataType: 'String',
         },
       ],
       returnDataType: null,
@@ -113,7 +113,7 @@ export default {
         {
           varShowName: '组件UUID',
           varCodeName: 'viewUUID',
-          dataType: 'String',
+          varDataType: 'String',
         },
       ],
       returnDataType: null,
