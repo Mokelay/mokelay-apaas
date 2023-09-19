@@ -14,12 +14,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [childrenPositions, setChildrenPositions] = useState([]);
 
   // TODO 待重构
-  //需要操作的View
-  const [workView, setWorkView] = useState(null);
-  //鼠标所在的View
-  const [mouseView, setMouseView] = useState({});
-  //所有View
-  const [allView, setAllView] = useState({});
+  // //所有View的坐标
+  // const [allView, setAllView] = useState({});
+  // //鼠标所在的View的坐标
+  // const [mouseViewUUID, setMouseViewUUID] = useState(null);
+  // //需要操作的View UUID
+  // const [workViewUUID, setWorkViewUUID] = useState(null);
 
   //暴露对外函数
   useImperativeHandle(
@@ -48,33 +48,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     var f = function (e) {
       try {
         if (typeof e.data == 'string') {
-          var data = JSON.parse(e.data);
-          // console.log(data.clientX + ',' + data.clientY);
-          var mousePosition = { x: data.clientX, y: data.clientY };
-          var eventName = data['eventName'];
-          var containerUUID = data['containerUUID'];
-
-          //获取容器内所有的组件列表的位置坐标
-          //获取鼠标所在的组件的位置坐标
-          //
-
-          if (eventName == 'onMouseEnter') {
-            setActive(true);
-
-            showChildrenBorder(mousePosition, containerUUID);
-            //监听渲染层的iframe事件
-            var f = function () {
-              showChildrenBorder({}, containerUUID);
-            };
-            window._Edit_Iframe.contentWindow.removeEventListener('scroll', f);
-            window._Edit_Iframe.contentWindow.addEventListener('scroll', f);
-          } else if (eventName == 'onMouseMove') {
-            showChildrenBorder(mousePosition, containerUUID);
-          } else if (eventName == 'onClick') {
-            showOpZone(mousePosition, containerUUID);
-          } else if (eventName == 'onMouseLeave') {
-            // setActive(false);
-          }
+          actionEvent(JSON.parse(e.data));
         }
       } catch (error) {
         console.log(error);
@@ -88,67 +62,75 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   }, []);
 
   /**
-   * 通过鼠标位置和容器对象，获取鼠标位置是否在容器某个组件里
-   *
-   * @param {鼠标位置}} mousePosition
-   * @param {*} containerUUID
-   * @returns
+   * Action Event
+   * @param {*} data
    */
-  function mouseInView(mousePosition, containerUUID) {
+  function actionEvent(data) {
+    var mousePosition = { x: data.clientX, y: data.clientY };
+    var eventName = data['eventName'];
+    var containerUUID = data['containerUUID'];
+
     //获取容器布局对象
     var containerRef =
       window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
-
     var childMap = containerRef.current.getChildrenMap() || {};
-    var childrenRefs = Object.values(childMap) || [];
-    var onlyShowPosition = null;
-    childrenRefs.forEach(function (r) {
-      var rect = r.current.getBoundingClientRect();
+    //获取容器内所有的组件列表的位置坐标
+    //获取鼠标所在的组件的位置坐标
+    var _allView = {};
+    var _mouseViewUUID = null;
+    for (var k in childMap) {
+      var rect = childMap[k].current.getBoundingClientRect();
+      _allView[k] = rect;
+
       if (
+        _mouseViewUUID == null &&
         mousePosition.x >= rect.x &&
         mousePosition.x <= rect.x + rect.width &&
         mousePosition.y >= rect.y &&
         mousePosition.y <= rect.y + rect.height
       ) {
-        onlyShowPosition = rect;
+        _mouseViewUUID = k;
       }
-    });
-    return onlyShowPosition;
-  }
-
-  /**
-   * 显示容器内所有子元素的虚框
-   *
-   * @param {*} containerUUID
-   */
-  function showChildrenBorder(mousePosition, containerUUID) {
-    var viewPosition = mouseInView(mousePosition, containerUUID);
-    if (viewPosition) {
-      setChildrenPositions([viewPosition]);
-    } else {
-      //获取容器布局对象
-      var containerRef =
-        window._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
-
-      var childMap = containerRef.current.getChildrenMap() || {};
-      var childrenRefs = Object.values(childMap) || [];
-      // console.log(childrenRefs);
-      var positions = [];
-
-      childrenRefs.forEach(function (r) {
-        positions.push(r.current.getBoundingClientRect());
-      });
-      setChildrenPositions(positions);
     }
-  }
 
-  /**
-   * 显示View操作区
-   */
-  function showOpZone(mousePosition, containerUUID) {
-    // 判断鼠标是否在可编辑组件区域内
-    var viewPosition = mouseInView(mousePosition, containerUUID);
-    setOpZone(viewPosition);
+    var _executeAction = function () {
+      if (_mouseViewUUID != null) {
+        setChildrenPositions([_allView[_mouseViewUUID]]);
+      } else {
+        setChildrenPositions(Object.values(_allView));
+      }
+    };
+
+    if (eventName == 'onMouseEnter') {
+      setActive(true);
+
+      _executeAction();
+
+      //监听渲染层的iframe事件
+      var f = function () {
+        actionEvent({
+          x: data.clientX,
+          y: data.clientY,
+          eventName: 'onScroll',
+          containerUUID: containerUUID,
+        });
+      };
+
+      window._Edit_Iframe.contentWindow.removeEventListener('scroll', f);
+      window._Edit_Iframe.contentWindow.addEventListener('scroll', f);
+    } else if (eventName == 'onMouseMove') {
+      _executeAction();
+    } else if (eventName == 'onClick') {
+      setOpZone(_allView[_mouseViewUUID] || null);
+
+      //把编辑的UUID记录到window下面
+      window._Edit_View_UUID = _mouseViewUUID || null;
+    } else if (eventName == 'onScroll') {
+      _executeAction();
+      setOpZone(_allView[window._Edit_View_UUID] || null);
+    } else if (eventName == 'onMouseLeave') {
+      setActive(false);
+    }
   }
 
   /**
