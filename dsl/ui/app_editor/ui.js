@@ -21,6 +21,13 @@ export default {
         ],
       },
       {
+        uuid: 'view_tree',
+        name: '组件树',
+        component: 'M_Tree',
+        category: 'Single',
+        attributes: [],
+      },
+      {
         uuid: 'view_iframe',
         name: '编辑Ifram',
         component: 'M_Iframe',

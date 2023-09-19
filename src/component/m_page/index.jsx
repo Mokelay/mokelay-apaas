@@ -23,6 +23,7 @@ const M_Page = forwardRef(function M_Page(
     onMouseOver,
     onMouseUp,
     onClick,
+    onDrag,
   },
   ref,
 ) {
@@ -94,6 +95,7 @@ const M_Page = forwardRef(function M_Page(
         onMouseOver={onMouseOver}
         onMouseUp={onMouseUp}
         onClick={onClick}
+        onDrag={onDrag}
       >
         {ChildrenViews}
       </Grid>
