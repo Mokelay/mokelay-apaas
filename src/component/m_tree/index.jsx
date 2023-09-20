@@ -12,33 +12,31 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { forwardRef, useImperativeHandle } from 'react';
 import { useState } from 'react';
 
-const M_Tree = forwardRef(function M_Tree({ data }, ref) {
-  //  const [content, setContent] = useState(initContent);
+const M_Tree = forwardRef(function M_Tree({ initData }, ref) {
+  const [data, setData] = useState(initData);
 
   useImperativeHandle(
     ref,
     () => {
-      return {};
+      return {
+        loadData: function (d) {
+          setData(d);
+        },
+      };
     },
     [],
   );
 
+  const renderTree = (nodes) =>
+    nodes && (
+      <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+        {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+      </TreeItem>
+    );
+
   return (
-    <TreeView
-      aria-label="file system navigator"
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      sx={{ height: 'auto', flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
-    >
-      <TreeItem nodeId="1" label="Applications">
-        <TreeItem nodeId="2" label="Calendar" />
-      </TreeItem>
-      <TreeItem nodeId="5" label="Documents">
-        <TreeItem nodeId="10" label="OSS" />
-        <TreeItem nodeId="6" label="MUI">
-          <TreeItem nodeId="8" label="index.js" />
-        </TreeItem>
-      </TreeItem>
+    <TreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
+      {renderTree(data)}
     </TreeView>
   );
 });

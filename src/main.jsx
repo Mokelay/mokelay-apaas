@@ -113,6 +113,7 @@ function UIRender() {
       }
     }
     document.title = Util.executeStr(renderUI['title']);
+    window.__Mokelay.UIViewConfig = renderUI['view'];
     return <RenderView view={renderUI['view']} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
