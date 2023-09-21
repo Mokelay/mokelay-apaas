@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef, createElement, forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, useEffect, createElement, forwardRef, useImperativeHandle } from 'react';
 import Util from './util.jsx';
 
 /**
@@ -10,9 +10,12 @@ import Util from './util.jsx';
  * @returns
  */
 const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
-  //TODO 很奇怪，这里useState居然没用了
-  // const [view, updateView] = useState(initView);
-  var view = initView;
+  const [view, updateView] = useState(initView);
+
+  //监控initView的变黄，如果有变化，强制更新
+  useEffect(() => {
+    updateView(initView);
+  }, [initView]);
 
   useImperativeHandle(
     ref,
