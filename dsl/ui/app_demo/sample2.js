@@ -17,7 +17,7 @@ export default {
         value: '测试一下_1',
       },
     ],
-    styles: [],
+    styles: {},
     events: [],
     modals: [{}],
   },

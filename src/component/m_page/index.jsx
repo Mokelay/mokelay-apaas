@@ -73,10 +73,16 @@ const M_Page = forwardRef(function M_Page(
   const ChildrenViews = children.map(function (view) {
     // console.log(view);
     const gridRef = useRef(null);
-    // childMap.push(gridRef);
     childMap.current[view['key']] = gridRef;
+
+    //TODO 这里每个子元素的dimensions样式全部交给了容器来管理
+    //从Children里面获取到样式，并且读取尺寸样式(dimensions)进行控制
+    var viewDSL = view['props']['view'] || {};
+    var styles = viewDSL['styles'] || {};
+    var dimensions = styles['dimensions'] || {};
+    var xs = dimensions['xs'] || 12;
     return (
-      <Grid key={view.key} item xs={8} ref={gridRef}>
+      <Grid key={view.key} item xs={xs} ref={gridRef}>
         {view}
       </Grid>
     );

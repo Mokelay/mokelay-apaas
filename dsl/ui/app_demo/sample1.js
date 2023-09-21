@@ -11,7 +11,7 @@ for (var i = 0; i < 50; i++) {
         value: '文本内容' + i,
       },
     ],
-    style: [],
+    styles: { dimensions: { xs: 4 } },
     events: [],
   });
 }
@@ -33,7 +33,7 @@ const sample1 = {
         value: 0.5,
       },
     ],
-    styles: [],
+    styles: {},
     events: [],
     modals: [{}],
   },
