@@ -1,6 +1,11 @@
 import './style.css';
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
+import SmartButtonOutlinedIcon from '@mui/icons-material/SmartButtonOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined';
+
 /**
  * M_Ui_Edit
  * 包含 top-area left-area main-area right-area bottom-area 5个区域
@@ -278,27 +283,7 @@ function ShowViewOperation({ opZone }) {
         >
           <div className="nclc-context-crumbs" data-testid="crumbs">
             <div className="nclc-context-crumbs-item">
-              <svg
-                fill="currentColor"
-                stroke="none"
-                preserveAspectRatio="xMidYMid meet"
-                width="1em"
-                height="1em"
-                viewBox="0 0 480 480"
-                className="done-icon "
-                style={{ color: 'currentcolor' }}
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M66 113.664C54.9543 113.664 46 122.543 46 133.496V250.504C46 261.457 54.9543 270.336 66 270.336H116L125 310H66C32.8629 310 6 283.363 6 250.504V133.496C6 100.637 32.8629 74 66 74H414C447.137 74 474 100.637 474 133.496V248.521C474 281.38 447.137 306.034 414 306.034L358 268.353H414C425.046 268.353 434 259.474 434 248.521V133.496C434 122.543 425.046 113.664 414 113.664H66Z"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M152.46 235.443C148.349 215.386 169.626 199.722 187.556 209.605L356.277 302.599C376.628 313.816 370.751 344.521 347.696 347.429L289.738 354.741L343.85 429.2L311.492 452.715L258.866 380.301L236.652 427.723C226.887 448.568 196.221 445.043 191.441 422.526L172.983 335.579L152.46 235.443ZM293.91 313.898L198.605 261.368L212.141 327.41L220.664 367.559L237.169 332.324C240.662 324.868 247.731 319.724 255.899 318.693L293.91 313.898Z"
-                />
-              </svg>
+              <SmartButtonOutlinedIcon fontSize="small" />
               <span className="label" data-tip="按钮" data-testid="label">
                 按钮
               </span>
@@ -306,63 +291,13 @@ function ShowViewOperation({ opZone }) {
           </div>
           <div className="view-actions">
             <div className="nclc-context-actionitem" onClick={deleteView}>
-              <span className="universe-icon">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  data-icon="DeleteTrashOutlined"
-                >
-                  <path
-                    d="M8 4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h5a1 1 0 1 1 0 2h-1v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6H3a1 1 0 0 1 0-2h5ZM6 6v14h12V6H6Zm4 3a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1Zm4 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </span>
+              <DeleteOutlineOutlinedIcon fontSize="small" />
             </div>
             <div className="nclc-context-actionitem" onClick={createCopyDSL}>
-              <span className="universe-icon">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  data-icon="BulkAddOutlined"
-                >
-                  <path
-                    d="M11 10.5a1 1 0 1 0-2 0V13H6.5a1 1 0 1 0 0 2H9v2.5a1 1 0 1 0 2 0V15h2.5a1 1 0 1 0 0-2H11v-2.5Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M6 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V4Zm14 12V4H8v2h8a2 2 0 0 1 2 2v8h2Zm-4-8H4v12h12V8Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </span>
+              <DifferenceOutlinedIcon fontSize="small" />
             </div>
             <div className="nclc-context-actionitem" onClick={copyViewDSL}>
-              <span className="universe-icon">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  data-icon="CopyOutlined"
-                >
-                  <path
-                    d="M9 3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v12a1 1 0 1 1-2 0V4h-9a1 1 0 0 1-1-1Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M5 6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5Zm0 2h10v12H5V8Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </span>
+              <ContentCopyOutlinedIcon fontSize="small" />
             </div>
           </div>
         </div>
@@ -471,27 +406,7 @@ function DragIcon() {
       }}
     >
       <div className="canvas-ghost-icon">
-        <svg
-          fill="currentColor"
-          stroke="none"
-          preserveAspectRatio="xMidYMid meet"
-          width="1em"
-          height="1em"
-          viewBox="0 0 480 480"
-          className="done-icon "
-          style={{ color: 'currentcolor' }}
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M66 113.664C54.9543 113.664 46 122.543 46 133.496V250.504C46 261.457 54.9543 270.336 66 270.336H116L125 310H66C32.8629 310 6 283.363 6 250.504V133.496C6 100.637 32.8629 74 66 74H414C447.137 74 474 100.637 474 133.496V248.521C474 281.38 447.137 306.034 414 306.034L358 268.353H414C425.046 268.353 434 259.474 434 248.521V133.496C434 122.543 425.046 113.664 414 113.664H66Z"
-          />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M152.46 235.443C148.349 215.386 169.626 199.722 187.556 209.605L356.277 302.599C376.628 313.816 370.751 344.521 347.696 347.429L289.738 354.741L343.85 429.2L311.492 452.715L258.866 380.301L236.652 427.723C226.887 448.568 196.221 445.043 191.441 422.526L172.983 335.579L152.46 235.443ZM293.91 313.898L198.605 261.368L212.141 327.41L220.664 367.559L237.169 332.324C240.662 324.868 247.731 319.724 255.899 318.693L293.91 313.898Z"
-          />
-        </svg>
+        <SmartButtonOutlinedIcon />
       </div>
       <div className="canvas-ghost-title">按钮</div>
     </div>
