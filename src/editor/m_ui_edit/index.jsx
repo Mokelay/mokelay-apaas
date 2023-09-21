@@ -74,6 +74,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     var mousePosition = { x: data.clientX, y: data.clientY };
     var eventName = data['eventName'];
     var containerUUID = data['containerUUID'];
+    // console.log(eventName + ',' + new Date().getTime());
 
     //获取容器布局对象
     var containerRef =

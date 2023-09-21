@@ -246,7 +246,7 @@ crumbs-item {
   height: 24px;
   justify-content: center;
   /* 鼠标无法显示resize了 */
-  pointer-events: none;
+  pointer-events: all;
   position: absolute;
   top: 50%;
   width: 8px;
