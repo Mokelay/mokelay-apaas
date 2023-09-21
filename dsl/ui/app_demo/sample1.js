@@ -1,5 +1,5 @@
 var longTextEl = [];
-for (var i = 0; i < 50; i++) {
+for (var i = 0; i < 70; i++) {
   longTextEl.push({
     uuid: 'view_sample_' + i,
     name: '文本' + i,

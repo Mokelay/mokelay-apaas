@@ -42,6 +42,31 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           // setActive(true);
           //设置编辑层所在iframe
           window.__Mokelay._Edit._Iframe = e.target;
+
+          //TODO 实现加载node tree ，不是很完美的实现方式，临时方案，后面优化
+          setTimeout(function () {
+            var editDSL =
+              window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.Root.UIRef.current.getDSL();
+            console.log(editDSL);
+
+            var _copy = function (node) {
+              var n = {};
+              n['id'] = node['uuid'];
+              n['name'] = node['name'];
+
+              var children = node['children'];
+              if (children) {
+                n['children'] = [];
+                children.map(function (c) {
+                  n['children'].push(_copy(c));
+                });
+              }
+
+              return n;
+            };
+            // console.log(_copy(editDSL));
+            window.__Mokelay.ComponentInstantMap.view_tree.current.loadData(_copy(editDSL));
+          }, 0);
         },
         action: function () {
           resizeView();

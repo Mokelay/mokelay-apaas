@@ -21,10 +21,14 @@ const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
     ref,
     () => {
       return {
-        //刷新
+        //重新加载DSL
         reloadDSL(viewDSL) {
           console.log('reloadDSL...');
           updateView(viewDSL);
+        },
+        //获取DSL
+        getDSL() {
+          return view;
         },
       };
     },
