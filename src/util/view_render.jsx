@@ -10,7 +10,9 @@ import Util from './util.jsx';
  * @returns
  */
 const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
-  const [view, updateView] = useState(initView);
+  //TODO 很奇怪，这里useState居然没用了
+  // const [view, updateView] = useState(initView);
+  var view = initView;
 
   useImperativeHandle(
     ref,
