@@ -77,6 +77,7 @@ export function UIRender() {
     //TODO 是否要放在window下？
     var rootUIRef = useRef(null);
     window.__Mokelay.Root.UIRef = rootUIRef;
+    // console.log(renderUI['view']);
     return <ViewRender initView={renderUI['view']} ref={rootUIRef} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？

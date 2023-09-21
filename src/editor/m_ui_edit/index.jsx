@@ -12,7 +12,9 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined';
  *
  *
  */
+//存储编辑状态的全局变量
 window.__Mokelay._Edit = {};
+
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
 
