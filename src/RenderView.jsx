@@ -54,9 +54,9 @@ export function RenderView({ view }) {
         }
 
         // console.log(e.target.getBoundingClientRect());
-        for (var key in e) {
-          if (typeof e[key] !== 'function' && typeof e[key] !== 'object') {
-            data[key] = e[key];
+        for (var k in e) {
+          if (typeof e[k] !== 'function' && typeof e[k] !== 'object') {
+            data[k] = e[k];
           }
         }
         //console.log(JSON.stringify(data));
@@ -101,10 +101,7 @@ export function RenderView({ view }) {
   //TODO 每一层的modal处理方式抽象
 
   //处理子节点
-  var children = [];
   var childViews = view['children'] || [];
-  childViews.map(function (childView) {
-    children.push(<RenderView view={childView} key={childView['uuid']} />);
-  });
-  return createElement(window.__Mokelay.ComponentMap[view['component']], pros, children);
+
+  return createElement(window.__Mokelay.ComponentMap[view['component']], pros, childViews);
 }

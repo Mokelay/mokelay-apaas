@@ -10,6 +10,8 @@ import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
+import { RenderView } from '../../RenderView';
+
 // eslint-disable-next-line react/prop-types
 const M_Page = forwardRef(function M_Page(
   {
@@ -63,30 +65,30 @@ const M_Page = forwardRef(function M_Page(
   );
 
   children = children || [];
-
-  // const [childrenRefs, setChildrenRefs] = useState([]);
+  // console.log(children);
 
   //TODO xs={4} 的设置是在容器里，还是在组件里？
   //TODO Chilref的这个实现方式是否科学？
   // eslint-disable-next-line react/prop-types
   let childMap = useRef({});
-  const ChildrenViews = children.map(function (view) {
-    // console.log(view);
+
+  //Child Render
+  function ChildRender({ view }) {
     const gridRef = useRef(null);
-    childMap.current[view['key']] = gridRef;
+    childMap.current[view['uuid']] = gridRef;
 
     //TODO 这里每个子元素的dimensions样式全部交给了容器来管理
+    //TODO 是否有更优美的方式？
     //从Children里面获取到样式，并且读取尺寸样式(dimensions)进行控制
-    var viewDSL = view['props']['view'] || {};
-    var styles = viewDSL['styles'] || {};
+    var styles = view['styles'] || {};
     var dimensions = styles['dimensions'] || {};
     var xs = dimensions['xs'] || 12;
     return (
-      <Grid key={view.key} item xs={xs} ref={gridRef}>
-        {view}
+      <Grid item xs={xs} ref={gridRef}>
+        <RenderView view={view} />
       </Grid>
     );
-  });
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }} ref={ref}>
@@ -103,9 +105,12 @@ const M_Page = forwardRef(function M_Page(
         onClick={onClick}
         onDrag={onDrag}
       >
-        {ChildrenViews}
+        {children.map(function (view) {
+          return <ChildRender view={view} key={'m_page_child_' + view.uuid} />;
+        })}
       </Grid>
     </Box>
   );
 });
+
 export default M_Page;
