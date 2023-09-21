@@ -130,7 +130,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       setOpZone(_allView[window.__Mokelay._Edit_View_UUID] || null);
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
-      setActive(false);
+      // setActive(false);
     }
   }
 
@@ -242,6 +242,18 @@ function ShowUIBorder({ position }) {
  */
 function ShowViewOperation({ opZone }) {
   // console.log(opZone);
+  function deleteView() {
+    // console.log(e);
+    // e.preventDefault();
+    console.log('delete view...');
+  }
+  function copyViewDSL() {
+    console.log('copy view dsl...');
+  }
+
+  function createCopyDSL() {
+    console.log('create copy dsl...');
+  }
   return (
     opZone && (
       <div
@@ -292,8 +304,8 @@ function ShowViewOperation({ opZone }) {
               </span>
             </div>
           </div>
-          <div className="nclc-context-actions">
-            <div className="nclc-context-actionitem">
+          <div className="view-actions">
+            <div className="nclc-context-actionitem" onClick={deleteView}>
               <span className="universe-icon">
                 <svg
                   width="1em"
@@ -310,7 +322,7 @@ function ShowViewOperation({ opZone }) {
                 </svg>
               </span>
             </div>
-            <div className="nclc-context-actionitem">
+            <div className="nclc-context-actionitem" onClick={createCopyDSL}>
               <span className="universe-icon">
                 <svg
                   width="1em"
@@ -331,7 +343,7 @@ function ShowViewOperation({ opZone }) {
                 </svg>
               </span>
             </div>
-            <div className="nclc-context-actionitem">
+            <div className="nclc-context-actionitem" onClick={copyViewDSL}>
               <span className="universe-icon">
                 <svg
                   width="1em"

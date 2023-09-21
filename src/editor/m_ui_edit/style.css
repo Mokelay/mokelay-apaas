@@ -33,10 +33,8 @@
 .nclc-border-actionbar {
   border-radius: 4px;
   color: #fff;
-  gap: 0;
-}
+  /* gap: 0; */
 
-.nclc-border>.nclc-border-actionbar {
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -ms-flex-align: stretch;
@@ -49,7 +47,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 3px;
-  pointer-events: none;
+  pointer-events: all;
   position: absolute;
   z-index: 10;
 }
@@ -115,7 +113,7 @@ crumbs-item {
   white-space: nowrap;
 }
 
-.nclc-context-actions {
+.view-actions {
   background-color: #3370ff;
   border: none;
   border-bottom-left-radius: 0;
@@ -126,7 +124,7 @@ crumbs-item {
   position: relative;
 }
 
-.nclc-border>.nclc-border-actionbar .nclc-context-actions {
+.nclc-border>.nclc-border-actionbar .view-actions {
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -ms-flex-align: stretch;
@@ -159,15 +157,15 @@ crumbs-item {
   padding: 0 8px;
 }
 
-.nclc-context-actions .nclc-context-actionitem {
+.view-actions .nclc-context-actionitem {
   opacity: 1;
 }
 
-.nclc-border>.nclc-border-actionbar .nclc-context-actions>.nclc-context-actionitem:not(:last-child) {
+.nclc-border>.nclc-border-actionbar .view-actions>.nclc-context-actionitem:not(:last-child) {
   margin-left: 4px;
 }
 
-.nclc-border>.nclc-border-actionbar .nclc-context-actions>.nclc-context-actionitem {
+.nclc-border>.nclc-border-actionbar .view-actions>.nclc-context-actionitem {
   -ms-flex-negative: 0;
   -webkit-box-align: center;
   -moz-box-align: center;
