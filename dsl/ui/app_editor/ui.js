@@ -36,7 +36,7 @@ export default {
         category: 'Single',
         attributes: [{ varCodeName: 'url', value: "edit.html#{{getQueryValue('ui')}}" }],
         styles: {
-          dimensions: { width: '100%', height: '300px', xs: 10 },
+          dimensions: { width: '100%', height: '300px', xs: 8 },
           border: { border: 'none' },
         },
         actions: [
@@ -47,6 +47,19 @@ export default {
             paramsData: [],
           },
         ],
+      },
+      {
+        uuid: 'view_1_2_3_d',
+        name: '文本2',
+        component: 'M_Text',
+        category: 'Single',
+        attributes: [
+          {
+            varCodeName: 'initContent',
+            value: '属性面板',
+          },
+        ],
+        styles: { dimensions: { xs: 2 } },
       },
       {
         uuid: 'view_layout_edit',
