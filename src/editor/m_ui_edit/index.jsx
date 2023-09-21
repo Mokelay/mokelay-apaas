@@ -47,7 +47,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           setTimeout(function () {
             var editDSL =
               window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.Root.UIRef.current.getDSL();
-            console.log(editDSL);
 
             var _copy = function (node) {
               var n = {};
