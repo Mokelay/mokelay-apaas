@@ -220,25 +220,7 @@ function ShowUIBorder({ position }) {
         // left: position.left + 'px',
         transform: 'translate3d(0px, 0px, 0px)',
       }}
-    >
-      {/* 这个SVG对象还没弄清楚存在的必要性？ */}
-      {/* <svg
-        width={position.width + 20}
-        height={position.height + 20}
-        fill="transparent"
-        style={{ transform: 'translate(-10px, -10px)' }}
-      >
-        <rect
-          x={10}
-          y={10}
-          height={position.height}
-          width={position.width}
-          strokeWidth={1}
-          stroke="#3370FF"
-          strokeDasharray="3 3"
-        />
-      </svg> */}
-    </div>
+    ></div>
   );
 }
 
@@ -304,14 +286,6 @@ function ShowViewOperation({ opZone }) {
         <div className="nclc-grid-width-modifier" style={{}}>
           {/* <div className="position-preview" /> */}
           <div className="modifier-border">
-            {/* <svg
-              width={592}
-              height={863}
-              fill="transparent"
-              style={{ transform: 'translate(-10px, -86px)' }}
-            >
-              <rect x={10} y={86} height={42} width="74.09375" strokeWidth={2} stroke="#3370FF" />
-            </svg> */}
             <div
               className="modifier-handler left-handler"
               style={{
@@ -326,7 +300,6 @@ function ShowViewOperation({ opZone }) {
                 transformOrigin: 'right top',
               }}
             />
-            {/* <div className="drag-state-tip">取消</div> */}
           </div>
         </div>
       </div>
@@ -368,24 +341,6 @@ function ShowViewBorders({ position, childrenPositions }) {
       }
     >
       {Rects}
-      {/* <rect
-        x={10}
-        y={10}
-        height={50}
-        width={1140}
-        strokeWidth={1}
-        stroke="#3370FF"
-        strokeDasharray="3 3"
-      />
-      <rect
-        x={10}
-        y={60}
-        height={38}
-        width={1140}
-        strokeWidth={1}
-        stroke="#3370FF"
-        strokeDasharray="3 3"
-      /> */}
     </svg>
   );
 }
@@ -396,7 +351,6 @@ function ShowViewBorders({ position, childrenPositions }) {
  */
 function DragIcon() {
   return (
-    // <div className="global-accessory-layer" style={{}}>
     <div
       data-role="ghost"
       className="canvas-ghost-container"
@@ -410,7 +364,6 @@ function DragIcon() {
       </div>
       <div className="canvas-ghost-title">按钮</div>
     </div>
-    // </div>
   );
 }
 
