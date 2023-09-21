@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useRef, createElement } from 'react';
+import { useState, useRef, createElement, forwardRef, useImperativeHandle } from 'react';
 import Util from './util.jsx';
 
 /**
@@ -9,8 +9,24 @@ import Util from './util.jsx';
  * @param {统一View JSON对象} view
  * @returns
  */
-export function ViewRender({ view }) {
-  var ref = useRef(null);
+const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
+  const [view, updateView] = useState(initView);
+
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        //刷新
+        reloadDSL(viewDSL) {
+          console.log('reloadDSL...');
+          updateView(viewDSL);
+        },
+      };
+    },
+    [],
+  );
+
+  var viewRef = useRef(null);
   //处理属性
   var attributes = view['attributes'] || [];
   var pros = {};
@@ -31,7 +47,7 @@ export function ViewRender({ view }) {
   pros['key'] = view['uuid'];
 
   //处理ref
-  pros['ref'] = ref;
+  pros['ref'] = viewRef;
   window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
 
   //处理样式
@@ -104,4 +120,6 @@ export function ViewRender({ view }) {
   var childViews = view['children'] || [];
 
   return createElement(window.__Mokelay.ComponentMap[view['component']], pros, childViews);
-}
+});
+
+export default ViewRender;

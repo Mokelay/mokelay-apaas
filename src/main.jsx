@@ -40,10 +40,11 @@ import { UIRender } from './util/ui_render.jsx';
 /**
  * 开始正式渲染页面，挂载到root节点
  */
-if (!window.__Mokelay.Root) {
-  window.__Mokelay.Root = createRoot(document.getElementById('root'));
+window.__Mokelay.Root = {};
+if (!window.__Mokelay.Root.El) {
+  window.__Mokelay.Root.El = createRoot(document.getElementById('root'));
 }
-window.__Mokelay.Root.render(
+window.__Mokelay.Root.El.render(
   <StrictMode>
     <Router>
       <Routes>

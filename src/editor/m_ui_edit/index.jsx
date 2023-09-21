@@ -12,6 +12,7 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined';
  *
  *
  */
+window.__Mokelay._Edit = {};
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
 
@@ -38,7 +39,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           //激活编辑模式
           // setActive(true);
           //设置编辑层所在iframe
-          window.__Mokelay._Edit_Iframe = e.target;
+          window.__Mokelay._Edit._Iframe = e.target;
         },
         action: function () {
           resizeView();
@@ -78,7 +79,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
 
     //获取容器布局对象
     var containerRef =
-      window.__Mokelay._Edit_Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
+      window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
     var childMap = containerRef.current.getChildrenMap() || {};
     //获取容器内所有的组件列表的位置坐标
     //获取鼠标所在的组件的位置坐标
@@ -122,18 +123,18 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
         });
       };
 
-      window.__Mokelay._Edit_Iframe.contentWindow.removeEventListener('scroll', f);
-      window.__Mokelay._Edit_Iframe.contentWindow.addEventListener('scroll', f);
+      window.__Mokelay._Edit._Iframe.contentWindow.removeEventListener('scroll', f);
+      window.__Mokelay._Edit._Iframe.contentWindow.addEventListener('scroll', f);
     } else if (eventName == 'onMouseMove') {
       _executeAction();
     } else if (eventName == 'onClick') {
       setOpZone(_allView[_mouseViewUUID] || null);
 
       //把编辑的UUID记录到window下面
-      window.__Mokelay._Edit_View_UUID = _mouseViewUUID || null;
+      window.__Mokelay._Edit._Edit_View_UUID = _mouseViewUUID || null;
     } else if (eventName == 'onScroll') {
       _executeAction();
-      setOpZone(_allView[window.__Mokelay._Edit_View_UUID] || null);
+      setOpZone(_allView[window.__Mokelay._Edit._Edit_View_UUID] || null);
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
       // setActive(false);
@@ -145,7 +146,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
    */
   function resizeView() {
     //TODO
-    var editMokelay = window.__Mokelay._Edit_Iframe.contentWindow.__Mokelay;
+    var editMokelay = window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay;
     editMokelay.ComponentInstantMap.home_page.current.resizeView();
   }
 
@@ -178,7 +179,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     <>
       {active && (
         <Layout_Edit
-          position={window.__Mokelay._Edit_Iframe.getBoundingClientRect()}
+          position={window.__Mokelay._Edit._Iframe.getBoundingClientRect()}
           childrenPositions={childrenPositions}
           opZone={opZone}
         />

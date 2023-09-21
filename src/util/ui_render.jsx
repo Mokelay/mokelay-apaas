@@ -1,5 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
-import { ViewRender } from './view_render.jsx';
+import { useRef } from 'react';
+
+import ViewRender from './view_render.jsx';
 import Util from './util.jsx';
 
 /**
@@ -73,8 +75,9 @@ export function UIRender() {
     document.title = Util.executeStr(renderUI['title']);
 
     //TODO 是否要放在window下？
-    window.__Mokelay.UIViewConfig = renderUI['view'];
-    return <ViewRender view={renderUI['view']} />;
+    var rootUIRef = useRef(null);
+    window.__Mokelay.Root.UIRef = rootUIRef;
+    return <ViewRender initView={renderUI['view']} ref={rootUIRef} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
     return <div>Can not found any app</div>;
