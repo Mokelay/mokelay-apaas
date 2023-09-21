@@ -10,7 +10,7 @@ import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { RenderView } from '../../RenderView';
+import { ViewRender } from '../../util/view_render.jsx';
 
 // eslint-disable-next-line react/prop-types
 const M_Page = forwardRef(function M_Page(
@@ -85,7 +85,7 @@ const M_Page = forwardRef(function M_Page(
     var xs = dimensions['xs'] || 12;
     return (
       <Grid item xs={xs} ref={gridRef}>
-        <RenderView view={view} />
+        <ViewRender view={view} />
       </Grid>
     );
   }

@@ -68,7 +68,7 @@ Object.keys(fs).forEach(function (f) {
   }
 });
 
-import { RenderView } from './RenderView';
+import { ViewRender } from './util/view_render.jsx';
 /**
  * 渲染UI
  *
@@ -114,7 +114,7 @@ function UIRender() {
     }
     document.title = Util.executeStr(renderUI['title']);
     window.__Mokelay.UIViewConfig = renderUI['view'];
-    return <RenderView view={renderUI['view']} />;
+    return <ViewRender view={renderUI['view']} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
     return <div>Can not found any app</div>;

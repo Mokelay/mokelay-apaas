@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRef, createElement } from 'react';
-import Util from './util/util.jsx';
+import Util from './util.jsx';
 
 /**
  * 统一的View渲染函数
@@ -9,7 +9,7 @@ import Util from './util/util.jsx';
  * @param {统一View JSON对象} view
  * @returns
  */
-export function RenderView({ view }) {
+export function ViewRender({ view }) {
   var ref = useRef(null);
   //处理属性
   var attributes = view['attributes'] || [];
