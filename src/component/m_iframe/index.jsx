@@ -11,9 +11,11 @@ const M_Iframe = forwardRef(function M_Iframe({ url, onLoad, styles }, ref) {
   styles = styles || {};
 
   var layoutSX = styles['layout'] || {};
-  var dimensionsSX = styles['dimensions'] || {};
+  // 尺寸交由容器来设置
+  // var dimensionsSX = styles['dimensions'] || {};
+  var dimensionsSX = {};
   var borderSX = styles['border'] || {};
-  var sx = Object.assign({}, layoutSX, dimensionsSX, borderSX);
+  var sx = Object.assign({ width: '100%', height: '100%' }, layoutSX, dimensionsSX, borderSX);
 
   useImperativeHandle(
     ref,
