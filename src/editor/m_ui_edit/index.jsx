@@ -18,8 +18,15 @@ window.__Mokelay._Edit = {};
 const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   const [active, setActive] = useState(false);
 
+  //编辑区域位置
+  const [editPosition, setEditPosition] = useState(null);
+  //编辑View
   const [opZone, setOpZone] = useState(null);
+  //编辑区域内所有子节点
   const [childrenPositions, setChildrenPositions] = useState([]);
+
+  // 是否开始resize
+  const [resizeStart, setResizeStart] = useState(false);
 
   // TODO 待重构
   // //所有View的坐标
@@ -42,6 +49,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           // setActive(true);
           //设置编辑层所在iframe
           window.__Mokelay._Edit._Iframe = e.target;
+          //设置编辑区域位置
+          setEditPosition(window.__Mokelay._Edit._Iframe.getBoundingClientRect());
 
           //TODO 实现加载node tree ，不是很完美的实现方式，临时方案，后面优化
           setTimeout(function () {
@@ -66,9 +75,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
             // console.log(_copy(editDSL));
             window.__Mokelay.ComponentInstantMap.view_tree.current.loadData(_copy(editDSL));
           }, 0);
-        },
-        action: function () {
-          resizeView();
         },
       };
     },
@@ -100,12 +106,17 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
   function actionEvent(data) {
     var mousePosition = { x: data.clientX, y: data.clientY };
     var eventName = data['eventName'];
-    var containerUUID = data['containerUUID'];
+
+    if (data['containerUUID']) {
+      window.__Mokelay._Edit._Container_UUID = data['containerUUID'];
+    }
     // console.log(eventName + ',' + new Date().getTime());
 
     //获取容器布局对象
     var containerRef =
-      window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.ComponentInstantMap[containerUUID];
+      window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.ComponentInstantMap[
+        window.__Mokelay._Edit._Container_UUID
+      ];
     var childMap = containerRef.current.getChildrenMap() || {};
     //获取容器内所有的组件列表的位置坐标
     //获取鼠标所在的组件的位置坐标
@@ -126,18 +137,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       }
     }
 
-    var _executeAction = function () {
-      if (_mouseViewUUID != null) {
-        setChildrenPositions([_allView[_mouseViewUUID]]);
-      } else {
-        setChildrenPositions(Object.values(_allView));
-      }
-    };
-
     if (eventName == 'onMouseEnter') {
       setActive(true);
 
-      _executeAction();
+      setChildrenPositions(
+        _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
+      );
 
       //监听渲染层的iframe事件
       var f = function () {
@@ -145,93 +150,72 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           x: data.clientX,
           y: data.clientY,
           eventName: 'onScroll',
-          containerUUID: containerUUID,
+          containerUUID: window.__Mokelay._Edit._Container_UUID,
         });
       };
 
       window.__Mokelay._Edit._Iframe.contentWindow.removeEventListener('scroll', f);
       window.__Mokelay._Edit._Iframe.contentWindow.addEventListener('scroll', f);
     } else if (eventName == 'onMouseMove') {
-      _executeAction();
+      setChildrenPositions(
+        _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
+      );
+    } else if (eventName == 'onMouseDown') {
+      //TODO
+      console.log('mouse donw..');
+    } else if (eventName == 'onMouseUp') {
+      //如果正在resize，则取消
+      if (resizeStart) {
+        setResizeStart(false);
+      }
     } else if (eventName == 'onClick') {
       setOpZone(_allView[_mouseViewUUID] || null);
 
       //把编辑的UUID记录到window下面
       window.__Mokelay._Edit._Edit_View_UUID = _mouseViewUUID || null;
     } else if (eventName == 'onScroll') {
-      _executeAction();
+      setChildrenPositions(
+        _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
+      );
       setOpZone(_allView[window.__Mokelay._Edit._Edit_View_UUID] || null);
+    } else if (eventName == 'onResizeBegin') {
+      setResizeStart(true);
+    } else if (eventName == 'onResizeEnd') {
+      setResizeStart(false);
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
       // setActive(false);
     }
   }
 
-  /**
-   * Resize
-   */
-  function resizeView() {
-    //TODO
-    var editMokelay = window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay;
-    editMokelay.ComponentInstantMap.home_page.current.resizeView();
-  }
-
-  /**
-   * 排序
-   */
-  function sortView() {}
-
-  /**
-   * 新加
-   */
-  function addNewView() {}
-
-  /**
-   * 拷贝DSL
-   */
-  function copyView() {}
-
-  /**
-   * 创建副本
-   */
-  function createCopyView() {}
-
-  /**
-   * 删除UI
-   */
-  function deleteView() {}
-
   return (
     <>
       {active && (
-        <Layout_Edit
-          position={window.__Mokelay._Edit._Iframe.getBoundingClientRect()}
-          childrenPositions={childrenPositions}
-          opZone={opZone}
-        />
+        <>
+          <div
+            className="nclc-selecting-box"
+            style={{ left: editPosition.left, top: editPosition.top }}
+          >
+            {/* 显示View的操作 */}
+            <ShowViewOperation
+              opZone={opZone}
+              onResizeBegin={actionEvent}
+              onResizeEnd={actionEvent}
+            />
+
+            {/* 显示UI的Border */}
+            {<ShowUIBorder position={editPosition} showLattice={resizeStart} />}
+
+            {/* 显示所有View的虚框 */}
+            {<ShowViewBorders position={editPosition} childrenPositions={childrenPositions} />}
+          </div>
+          {/* 显示拖动ICON */}
+          {true && <DragIcon />}
+        </>
       )}
     </>
   );
 });
-
-function Layout_Edit({ position, childrenPositions, opZone }) {
-  return (
-    <>
-      <div className="nclc-selecting-box" style={{ left: position.left, top: position.top }}>
-        {/* 显示View的操作 */}
-        <ShowViewOperation opZone={opZone} />
-
-        {/* 显示UI的Border */}
-        {<ShowUIBorder position={position} />}
-
-        {/* 显示所有View的虚框 */}
-        {<ShowViewBorders position={position} childrenPositions={childrenPositions} />}
-      </div>
-      {/* 显示拖动ICON */}
-      {true && <DragIcon />}
-    </>
-  );
-}
 
 /**
  * 显示UI看板的Border
@@ -257,14 +241,13 @@ function ShowUIBorder({ position, showLattice = false }) {
       style,
     );
   }
-  console.log(style);
   return <div className="nclc-border nclc-border-selecting" style={style}></div>;
 }
 
 /**
  * 显示针对每个View的操作
  */
-function ShowViewOperation({ opZone }) {
+function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
   // console.log(opZone);
   function deleteView() {
     // console.log(e);
@@ -277,6 +260,27 @@ function ShowViewOperation({ opZone }) {
 
   function createCopyDSL() {
     console.log('create copy dsl...');
+  }
+
+  //开始resize
+  function resizeBegin(e) {
+    if (onResizeBegin) {
+      onResizeBegin({
+        eventName: 'onResizeBegin',
+        clientX: e.clientX,
+        clientY: e.clientY,
+      });
+    }
+  }
+  //结束resize
+  function resizeEnd(e) {
+    if (onResizeEnd) {
+      onResizeEnd({
+        eventName: 'onResizeEnd',
+        clientX: e.clientX,
+        clientY: e.clientY,
+      });
+    }
   }
   return (
     opZone && (
@@ -328,14 +332,20 @@ function ShowViewOperation({ opZone }) {
               style={{
                 transform: 'translate(-50%, -50%)',
                 transformOrigin: 'left top',
+                pointerEvents: 'all',
               }}
+              onMouseDown={resizeBegin}
+              onMouseUp={resizeEnd}
             />
             <div
               className="modifier-handler right-handler"
               style={{
                 transform: 'translate(50%, -50%)',
                 transformOrigin: 'right top',
+                pointerEvents: 'all',
               }}
+              onMouseDown={resizeBegin}
+              onMouseUp={resizeEnd}
             />
           </div>
         </div>

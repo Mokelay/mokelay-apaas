@@ -69,13 +69,13 @@ export default {
         attributes: [],
       },
     ],
-    actions: [
-      {
-        eventCodeName: 'onMouseDown',
-        targetUUId: 'view_1_1_d',
-        methodCodeName: 'updateContent',
-        paramsData: ['更新下内容...'],
-      },
-    ],
+    // actions: [
+    //   {
+    //     eventCodeName: 'onMouseDown',
+    //     targetUUId: 'view_1_1_d',
+    //     methodCodeName: 'updateContent',
+    //     paramsData: ['更新下内容...'],
+    //   },
+    // ],
   },
 };
