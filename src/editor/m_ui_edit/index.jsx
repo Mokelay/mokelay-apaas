@@ -159,7 +159,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       );
     } else if (eventName == 'onMouseDown') {
       //TODO
-      console.log('mouse donw..');
+      // console.log('mouse donw..');
     } else if (eventName == 'onMouseUp') {
       //如果正在resize，则取消
       if (resizeStart) {
@@ -304,29 +304,35 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
             </div>
           </div>
         </div>
-        <div className="width-modifier">
-          <div className="modifier-border">
-            <div
-              className="modifier-handler left-handler"
-              style={{
-                transform: 'translate(-50%, -50%)',
-                transformOrigin: 'left top',
-                pointerEvents: 'all',
-              }}
-              onMouseDown={resizeBegin}
-              onMouseUp={resizeEnd}
-            />
-            <div
-              className="modifier-handler right-handler"
-              style={{
-                transform: 'translate(50%, -50%)',
-                transformOrigin: 'right top',
-                pointerEvents: 'all',
-              }}
-              onMouseDown={resizeBegin}
-              onMouseUp={resizeEnd}
-            />
-          </div>
+        <div className="width-modifier" style={{ pointerEvents: 'all' }}>
+          <div
+            className="modifier-handler left-handler"
+            style={{
+              transform: 'translate(-50%, -50%)',
+              transformOrigin: 'left top',
+              pointerEvents: 'all',
+            }}
+            draggable="true"
+            // onMouseDown={resizeBegin}
+            // onMouseUp={resizeEnd}
+            onDragStart={resizeBegin}
+            onDrag={resizeBegin}
+            onDragEnd={resizeEnd}
+          />
+          <div
+            className="modifier-handler right-handler"
+            style={{
+              transform: 'translate(50%, -50%)',
+              transformOrigin: 'right top',
+              pointerEvents: 'all',
+            }}
+            draggable="true"
+            // onMouseDown={resizeBegin}
+            // onMouseUp={resizeEnd}
+            onDragStart={resizeBegin}
+            onDrag={resizeBegin}
+            onDragEnd={resizeEnd}
+          />
         </div>
       </div>
     )

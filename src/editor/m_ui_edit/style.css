@@ -159,15 +159,7 @@
   height: 100%;
   position: absolute;
   width: 100%;
-}
-
-.width-modifier .modifier-border {
   border-radius: 2px;
-  height: 100%;
-  /* left: 0; */
-  position: absolute;
-  /* top: 0; */
-  width: 100%;
 }
 
 .width-modifier .modifier-handler.left-handler {
