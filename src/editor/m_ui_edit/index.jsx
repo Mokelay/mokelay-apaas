@@ -205,9 +205,10 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
 
             {/* 显示所有View的虚框 */}
             {<ShowViewBorders position={editPosition} childrenPositions={childrenPositions} />}
+
+            {/* 显示拖动ICON */}
+            {true && <DragIcon />}
           </div>
-          {/* 显示拖动ICON */}
-          {true && <DragIcon />}
         </>
       )}
     </>
@@ -288,26 +289,19 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
           left: opZone.left + 'px',
           width: opZone.width + 'px',
           height: opZone.height + 'px',
-          // transform: 'translate3d(' + opZone.left + 'px, ' + opZone.top + 'px, 0px)',
           zIndex: 10,
         }}
       >
         <div
           className="nclc-border-actionbar"
           style={{
-            // top: opZone.top + 'px',
-            // left: opZone.left + 'px',
             height: '24px',
             marginTop: opZone.height + 'px',
           }}
         >
-          <div className="nclc-context-crumbs" data-testid="crumbs">
-            <div className="nclc-context-crumbs-item">
-              <SmartButtonOutlinedIcon fontSize="small" />
-              <span className="label" data-tip="按钮" data-testid="label">
-                按钮
-              </span>
-            </div>
+          <div className="view-context">
+            <SmartButtonOutlinedIcon fontSize="small" />
+            <span className="label">按钮</span>
           </div>
           <div className="view-actions">
             <div className="action-item" onClick={deleteView}>

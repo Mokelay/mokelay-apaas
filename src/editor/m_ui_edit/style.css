@@ -44,7 +44,7 @@
   z-index: 10;
 }
 
-.nclc-context-crumbs {
+.view-context {
   background-color: #3370ff;
   border: none;
   border-bottom-right-radius: 0;
@@ -53,7 +53,7 @@
   position: relative;
 }
 
-.nclc-border>.nclc-border-actionbar .nclc-context-crumbs {
+.nclc-border>.nclc-border-actionbar .view-context {
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -ms-flex-align: stretch;
@@ -64,6 +64,7 @@
   -webkit-border-radius: 6px;
   border-radius: 6px;
   color: hsla(0,0%,100%,.85);
+  color: #1f2329;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -72,31 +73,13 @@
   font-size: 12px;
   overflow: hidden;
   position: relative;
-}
-
-crumbs-item {
-  color: #fff;
-}
-
-.nclc-border>.nclc-border-actionbar .nclc-context-crumbs .nclc-context-crumbs-item {
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  grid-gap: 2px;
-  -webkit-align-items: center;
-  align-items: center;
-  color: #1f2329;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
   gap: 2px;
   padding: 0 5px;
+  grid-gap: 2px;
+  cursor: pointer;
 }
 
-.nclc-border>.nclc-border-actionbar .nclc-context-crumbs .nclc-context-crumbs-item .label {
+.nclc-border>.nclc-border-actionbar .view-context .label {
   display: inline-block;
   max-width: 120px;
   overflow: hidden;
