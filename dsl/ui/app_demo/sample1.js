@@ -11,7 +11,7 @@ for (var i = 0; i < 70; i++) {
         value: '文本内容' + i,
       },
     ],
-    styles: { dimensions: { xs: 1 } },
+    styles: { dimensions: { xs: 4 } },
     events: [],
   });
 }

@@ -293,7 +293,7 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
         }}
       >
         <div
-          className="nclc-border-actionbar"
+          className="action-bar"
           style={{
             height: '24px',
             marginTop: opZone.height + 'px',
@@ -316,7 +316,6 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
           </div>
         </div>
         <div className="nclc-grid-width-modifier" style={{}}>
-          {/* <div className="position-preview" /> */}
           <div className="modifier-border">
             <div
               className="modifier-handler left-handler"

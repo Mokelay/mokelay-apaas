@@ -84,7 +84,7 @@ const M_Page = forwardRef(function M_Page(
     var dimensions = styles['dimensions'] || {};
     var xs = dimensions['xs'] || 12;
     return (
-      <Grid item xs={xs} ref={gridRef}>
+      <Grid item xs={xs} ref={gridRef} sx={dimensions}>
         <ViewRender initView={view} />
       </Grid>
     );

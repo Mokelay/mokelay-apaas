@@ -36,7 +36,7 @@ export default {
         category: 'Single',
         attributes: [{ varCodeName: 'url', value: "edit.html#{{getQueryValue('ui')}}" }],
         styles: {
-          dimensions: { xs: 8 },
+          dimensions: { xs: 8, height: '400px' },
           border: { border: 'none' },
         },
         actions: [

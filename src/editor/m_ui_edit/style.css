@@ -24,7 +24,7 @@
   z-index: 1;
 }
 
-.nclc-border-actionbar {
+.action-bar {
   border-radius: 4px;
   color: #fff;
   -webkit-box-align: stretch;
@@ -53,7 +53,7 @@
   position: relative;
 }
 
-.nclc-border>.nclc-border-actionbar .view-context {
+.action-bar .view-context {
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -ms-flex-align: stretch;
@@ -79,7 +79,7 @@
   cursor: pointer;
 }
 
-.nclc-border>.nclc-border-actionbar .view-context .label {
+.action-bar .view-context .label {
   display: inline-block;
   max-width: 120px;
   overflow: hidden;
@@ -99,7 +99,7 @@
   position: relative;
 }
 
-.nclc-border>.nclc-border-actionbar .view-actions {
+.action-bar .view-actions {
   -webkit-box-align: stretch;
   -moz-box-align: stretch;
   -ms-flex-align: stretch;
@@ -132,15 +132,11 @@
   padding: 0 8px;
 }
 
-.view-actions .action-item {
-  opacity: 1;
-}
-
-.nclc-border>.nclc-border-actionbar .view-actions>.action-item:not(:last-child) {
+.action-bar .view-actions>.action-item:not(:last-child) {
   margin-left: 4px;
 }
 
-.nclc-border>.nclc-border-actionbar .view-actions>.action-item {
+.action-bar .view-actions>.action-item {
   -ms-flex-negative: 0;
   -webkit-box-align: center;
   -moz-box-align: center;
@@ -162,16 +158,6 @@
 .nclc-grid-width-modifier {
   height: 100%;
   position: absolute;
-  width: 100%;
-}
-.nclc-grid-width-modifier .position-preview {
-  background: #3370ff;
-  height: 100%;
-  /* left: 0; */
-  opacity: .15;
-  position: absolute;
-  /* top: 0; */
-  visibility: hidden;
   width: 100%;
 }
 
