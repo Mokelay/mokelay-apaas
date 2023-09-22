@@ -237,25 +237,28 @@ function Layout_Edit({ position, childrenPositions, opZone }) {
  * 显示UI看板的Border
  * @returns EL
  */
-function ShowUIBorder({ position }) {
-  return (
-    <div
-      className="nclc-border nclc-border-selecting"
-      style={{
-        width: position.width + 'px',
-        height: position.height + 'px',
-        // top: position.top + 'px',
-        // left: position.left + 'px',
-        transform: 'translate3d(0px, 0px, 0px)',
-
+function ShowUIBorder({ position, showLattice = false }) {
+  var style = {
+    width: position.width + 'px',
+    height: position.height + 'px',
+    // top: position.top + 'px',
+    // left: position.left + 'px',
+    transform: 'translate3d(0px, 0px, 0px)',
+  };
+  if (showLattice) {
+    style = Object.assign(
+      {
         backgroundImage:
           'url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221200%22%20height%3D%22400%22%3E%20%3Cg%20opacity%3D%220.8%22%3E%20%20%3Cline%20id%3D%22svg_2%22%20y2%3D%22400%22%20x2%3D%22100%22%20y1%3D%220%22%20x1%3D%22100%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_3%22%20y2%3D%22400%22%20x2%3D%22200%22%20y1%3D%220%22%20x1%3D%22200%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_4%22%20y2%3D%22400%22%20x2%3D%22300%22%20y1%3D%220%22%20x1%3D%22300%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_5%22%20y2%3D%22400%22%20x2%3D%22400%22%20y1%3D%220%22%20x1%3D%22400%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_6%22%20y2%3D%22400%22%20x2%3D%22500%22%20y1%3D%220%22%20x1%3D%22500%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_7%22%20y2%3D%22400%22%20x2%3D%22600%22%20y1%3D%220%22%20x1%3D%22600%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_8%22%20y2%3D%22400%22%20x2%3D%22700%22%20y1%3D%220%22%20x1%3D%22700%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_9%22%20y2%3D%22400%22%20x2%3D%22800%22%20y1%3D%220%22%20x1%3D%22800%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_10%22%20y2%3D%22400%22%20x2%3D%22900%22%20y1%3D%220%22%20x1%3D%22900%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_11%22%20y2%3D%22400%22%20x2%3D%221000%22%20y1%3D%220%22%20x1%3D%221000%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%20%2F%3E%20%20%3Cline%20id%3D%22svg_12%22%20y2%3D%22400%22%20x2%3D%221100%22%20y1%3D%220%22%20x1%3D%221100%22%20stroke-width%3D%222%22%20stroke%3D%22%23bacefd%22%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E")',
         backgroundPosition: 'center center',
         backgroundSize: '100%',
         backgroundRepeat: 'repeat',
-      }}
-    ></div>
-  );
+      },
+      style,
+    );
+  }
+  console.log(style);
+  return <div className="nclc-border nclc-border-selecting" style={style}></div>;
 }
 
 /**
