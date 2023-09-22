@@ -190,7 +190,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       {active && (
         <>
           <div
-            className="nclc-selecting-box"
+            className="ui-edit-container"
             style={{ left: editPosition.left, top: editPosition.top }}
           >
             {/* 显示View的操作 */}
@@ -238,7 +238,7 @@ function ShowUIBorder({ position, showLattice = false }) {
       style,
     );
   }
-  return <div className="nclc-border nclc-border-selecting" style={style}></div>;
+  return <div className="nclc-border ui-border-selecting" style={style}></div>;
 }
 
 /**
@@ -282,7 +282,7 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
   return (
     opZone && (
       <div
-        className="nclc-border nclc-border-selecting"
+        className="nclc-border ui-border-selecting"
         style={{
           top: opZone.top + 'px',
           left: opZone.left + 'px',
@@ -310,13 +310,13 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
             </div>
           </div>
           <div className="view-actions">
-            <div className="nclc-context-actionitem" onClick={deleteView}>
+            <div className="action-item" onClick={deleteView}>
               <DeleteOutlineOutlinedIcon fontSize="small" />
             </div>
-            <div className="nclc-context-actionitem" onClick={createCopyDSL}>
+            <div className="action-item" onClick={createCopyDSL}>
               <DifferenceOutlinedIcon fontSize="small" />
             </div>
-            <div className="nclc-context-actionitem" onClick={copyViewDSL}>
+            <div className="action-item" onClick={copyViewDSL}>
               <ContentCopyOutlinedIcon fontSize="small" />
             </div>
           </div>
@@ -396,7 +396,6 @@ function ShowViewBorders({ position, childrenPositions }) {
 function DragIcon() {
   return (
     <div
-      data-role="ghost"
       className="canvas-ghost-container"
       style={{
         // transform: 'translate(570.405px, 322.979px)',
