@@ -25,6 +25,11 @@ window.__Mokelay.ComponentMap = ComponentMap;
  */
 
 /**
+ * 存储编辑状态的全局变量
+ */
+window.__Mokelay._Edit = {};
+
+/**
  * 加载内置巴斯 = 内置函数+内置变量
  */
 import InternalBuzzs from './util/internal_buzzs.jsx';
