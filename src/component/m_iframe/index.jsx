@@ -1,3 +1,5 @@
+import './style.css';
+
 /* eslint-disable react/prop-types */
 /**
  *  Text
