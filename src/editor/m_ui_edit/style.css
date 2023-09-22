@@ -13,7 +13,7 @@
   z-index: 2;
 }
 
-.nclc-border {
+.ui-border {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -155,13 +155,13 @@
   padding: 0 4px;
 }
 
-.nclc-grid-width-modifier {
+.width-modifier {
   height: 100%;
   position: absolute;
   width: 100%;
 }
 
-.nclc-grid-width-modifier .modifier-border {
+.width-modifier .modifier-border {
   border-radius: 2px;
   height: 100%;
   /* left: 0; */
@@ -170,16 +170,16 @@
   width: 100%;
 }
 
-.nclc-grid-width-modifier .modifier-handler.left-handler {
+.width-modifier .modifier-handler.left-handler {
   transform: translate(-2px,-50%);
 }
 
-.nclc-grid-width-modifier .modifier-handler.right-handler {
+.width-modifier .modifier-handler.right-handler {
   right: 0;
   transform: translate(2px,-50%);
 }
 
-.nclc-grid-width-modifier .modifier-handler {
+.width-modifier .modifier-handler {
   align-items: center;
   background: #fff;
   border: 1.5px solid #3370ff;
@@ -197,7 +197,7 @@
   z-index: 100;
 }
 
-.nclc-grid-width-modifier .drag-state-tip {
+.width-modifier .drag-state-tip {
   background: #3370ff;
   border-radius: 4px;
   box-sizing: border-box;
