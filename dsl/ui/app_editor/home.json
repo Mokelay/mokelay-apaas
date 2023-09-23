@@ -27,7 +27,7 @@
           },
           {
             "varCodeName": "url",
-            "value": "#/app_editor/ui?ui=/app_demo/sample1"
+            "value": "#/app_editor/ui?app=app_demo&ui=sample1"
           }
         ]
       },

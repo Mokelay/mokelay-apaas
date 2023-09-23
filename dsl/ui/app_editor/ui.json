@@ -45,7 +45,7 @@
         "attributes": [
           {
             "varCodeName": "url",
-            "value": "edit.html#{{getQueryValue('ui')}}"
+            "value": "edit.html#/{{getQueryValue('app')}}/{{getQueryValue('ui')}}"
           }
         ],
         "styles": {
@@ -91,5 +91,41 @@
         "attributes": []
       }
     ]
-  }
+  },
+  "dsList": [
+    {
+      "uuid": "api_00001",
+      "name": "获取UI配置参数",
+      "url": "/dsl/ui/{{getQueryValue('app')}}/{{getQueryValue('ui')}}.json",
+      "method": "GET",
+      "inputs": [],
+      "outputs": {}
+    }
+  ],
+  "customVars": [
+    {
+      "uuid": "custom_vars_00001",
+      "varShowName": "页面配置数据",
+      "varCodeName": "ui_dsl",
+      "varDataType": "Object",
+      "valueAssignType": "RemoteValue",
+      "dsUUID": "api_00001",
+      "dsInputParamsValue": {},
+      "valueChangeActions": [
+        {
+          "targetUUId": "view_tree",
+          "methodCodeName": "loadData",
+          "paramsData": []
+        }
+      ]
+    },
+    {
+      "uuid": "custom_vars_00002",
+      "varShowName": "测试变量",
+      "varCodeName": "ui_test_var",
+      "varDataType": "String",
+      "valueAssignType": "VarValue",
+      "varValue": "abc"
+    }
+  ]
 }

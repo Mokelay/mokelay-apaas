@@ -91,6 +91,36 @@ export default {
     );
   },
 
+  //通过DS来获取数据
+  loadByDS: function (dsUUID, param, options) {
+    var t = this;
+    var ds = t.getDSByUUID(dsUUID);
+
+    if (ds != null) {
+      var url = t.executeStr(ds['url']);
+      var method = ds['method'];
+      if (method == 'GET') {
+        return this.get(url, param, options);
+      } else if (method == 'POST') {
+        return this.post(url, param, options);
+      }
+    } else {
+      throw 'no ds config find.';
+    }
+  },
+
+  //通过UUID获取真实DS
+  getDSByUUID: function (dsUUID) {
+    var dsList = window.__Mokelay.DataSource_List;
+    var ds = null;
+    dsList.forEach(function (_ds) {
+      if (_ds['uuid'] == dsUUID) {
+        ds = _ds;
+      }
+    });
+    return ds;
+  },
+
   resolve: function (str) {
     //TODO
   },

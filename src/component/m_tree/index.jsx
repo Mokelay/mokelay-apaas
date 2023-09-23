@@ -18,7 +18,7 @@ const M_Tree = forwardRef(function M_Tree({ initData }, ref) {
     ref,
     () => {
       return {
-        loadData: function (d) {
+        loadData: function (e, d) {
           setData(d);
         },
       };
