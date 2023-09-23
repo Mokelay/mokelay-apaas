@@ -4,26 +4,27 @@ import Qs from 'qs';
 
 export default {
   invoke: function (options) {
+    var t = this;
     return new Promise((resolve, reject) => {
-      if (!util.ajax) {
-        util.ajax = axios.create({
-          baseURL: window._TY_APIHost,
+      if (!t.ajax) {
+        t.ajax = axios.create({
+          baseURL: window.__Mokelay.API_HOST,
           timeout: 30000,
           withCredentials: true,
         });
       }
-      util
-        .ajax(options)
+      t.ajax(options)
         .then(function (response) {
+          //TODO 如何处理微信容器，已经SSO登录
           if (
             response &&
             response['data'] &&
             response['data']['code'] &&
-            response['data']['code'] == -420 &&
-            util.isWX()
+            response['data']['code'] == -420
           ) {
+            //TODO
             //微信端没有登录，跳转微信授权
-            location.href = response['data']['message'] || window._TY_SSOURL;
+            // location.href = response['data']['message'] || window._TY_SSOURL;
           } else if (
             response &&
             response['data'] &&

@@ -29,6 +29,9 @@ window.__Mokelay.ComponentMap = ComponentMap;
  */
 window.__Mokelay._Edit = {};
 
+import Util from './util/util';
+window.__Mokelay.Util = Util;
+
 /**
  * 加载内置巴斯 = 内置函数+内置变量
  */

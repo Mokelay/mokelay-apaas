@@ -74,6 +74,9 @@ export default function M_UI() {
     }
     document.title = Util.executeStr(renderUI['title']);
 
+    //自定义变量
+    var customVars = renderUI['customVars'] || [];
+
     //TODO 是否要放在window下？
     var rootUIRef = useRef(null);
     window.__Mokelay.Root.UIRef = rootUIRef;
