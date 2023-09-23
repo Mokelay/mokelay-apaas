@@ -304,7 +304,7 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
             </div>
           </div>
         </div>
-        <div className="width-modifier" style={{ pointerEvents: 'all' }}>
+        <div className="width-modifier" style={{ pointerEvents: 'all' }} draggable="true">
           <div
             className="modifier-handler left-handler"
             style={{
