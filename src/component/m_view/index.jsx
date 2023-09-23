@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect, createElement, forwardRef, useImperativeHandle } from 'react';
-import Util from './util.jsx';
+import Util from '../../util/util';
 
 /**
  * 统一的View渲染函数
@@ -9,7 +9,7 @@ import Util from './util.jsx';
  * @param {统一View JSON对象} view
  * @returns
  */
-const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
+const M_View = forwardRef(function M_View({ initView }, ref) {
   const [view, updateView] = useState(initView);
 
   //监控initView的变黄，如果有变化，强制更新
@@ -131,4 +131,4 @@ const ViewRender = forwardRef(function ViewRender({ initView }, ref) {
   return createElement(window.__Mokelay.ComponentMap[view['component']], pros, childViews);
 });
 
-export default ViewRender;
+export default M_View;

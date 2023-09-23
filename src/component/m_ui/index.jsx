@@ -1,7 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
-import ViewRender from '../../util/view_render';
+import M_View from '../m_view/index';
 import Util from '../../util/util';
 
 /**
@@ -77,7 +77,7 @@ export default function M_UI() {
     //TODO 是否要放在window下？
     var rootUIRef = useRef(null);
     window.__Mokelay.Root.UIRef = rootUIRef;
-    return <ViewRender initView={renderUI['view']} ref={rootUIRef} />;
+    return <M_View initView={renderUI['view']} ref={rootUIRef} />;
   } else {
     //TODO 找不到对应的APP信息，如何配置页面？
     return <div>Can not found any app</div>;
