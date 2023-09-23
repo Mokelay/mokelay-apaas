@@ -1,14 +1,14 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
-import ViewRender from './view_render.jsx';
-import Util from './util.jsx';
+import ViewRender from '../../util/view_render';
+import Util from '../../util/util';
 
 /**
  * 通过URL获取页面参数，获取页面DSL，目前可以先从dsl/ui/目录里本地加载，方便测试
  */
 //App信息
-import appList from '../../dsl/ui/app_list.js';
+import appList from '../../../dsl/ui/app_list.js';
 //导入UI配置信息，开发环境为JS Config， 生产环境为接口获取
 const appMap = {};
 appList.map(function (_app) {
@@ -17,11 +17,11 @@ appList.map(function (_app) {
     uiMap: {},
   };
 });
-const fs = import.meta.globEager('../../dsl/ui/*/*.js');
+const fs = import.meta.globEager('../../../dsl/ui/*/*.js');
 Object.keys(fs).forEach(function (f) {
   var _tmp = f.split('/');
-  if (_tmp.length == 6) {
-    const appUUID = _tmp[4];
+  if (_tmp.length == 7) {
+    const appUUID = _tmp[5];
     const uiUUID = f.substr(f.lastIndexOf('/') + 1, f.lastIndexOf('.') - f.lastIndexOf('/') - 1);
     if (appMap[appUUID]) {
       appMap[appUUID]['uiMap'][uiUUID] = fs[f].default;
@@ -35,7 +35,7 @@ Object.keys(fs).forEach(function (f) {
  *
  * @returns DOM
  */
-export function UIRender() {
+export default function M_UI() {
   var params = useParams() || {};
 
   //把目前URL里的query参数存储到内置变量中

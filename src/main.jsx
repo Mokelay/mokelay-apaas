@@ -40,8 +40,6 @@ window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
 window.__Mokelay.InternalFunc = InternalBuzzs['internalFunc'];
 window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
-import { UIRender } from './util/ui_render.jsx';
-
 /**
  * 开始正式渲染页面，挂载到root节点
  */
@@ -60,10 +58,10 @@ window.__Mokelay.Root.El.render(
         {/* 读取本地JS配置，方便联调 */}
         <Route path="/:app_uuid/">
           {/* APP的默认首页*/}
-          <Route index element={<UIRender />} />
+          <Route index element={<window.__Mokelay.ComponentMap.M_UI />} />
 
           {/* 对应到APP的具体页面 */}
-          <Route path="/:app_uuid/:ui_uuid" element={<UIRender />} />
+          <Route path="/:app_uuid/:ui_uuid" element={<window.__Mokelay.ComponentMap.M_UI />} />
         </Route>
 
         {/* 单独处理layout */}
