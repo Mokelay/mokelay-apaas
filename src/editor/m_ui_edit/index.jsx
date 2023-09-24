@@ -89,7 +89,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     var containerRef =
       window.__Mokelay._Edit._Iframe.contentWindow.__Mokelay.ComponentInstantMap[
         window.__Mokelay._Edit._Container_UUID
-      ];
+      ]['ref'];
     var childMap = containerRef.current.getChildrenMap() || {};
     //获取容器内所有的组件列表的位置坐标
     //获取鼠标所在的组件的位置坐标

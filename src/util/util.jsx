@@ -166,9 +166,22 @@ export default {
   executeStr: function (str) {
     _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
     var compiled = _.template(str);
-    var data = Object.assign({}, window.__Mokelay.InternalVar, window.__Mokelay.InternalFunc);
+    var data = Object.assign(
+      {},
+      window.__Mokelay.InternalVar,
+      window.__Mokelay.InternalFunc,
+      window.__Mokelay.CustomVar,
+    );
     // console.log(data);
     return compiled(data);
+  },
+  //替换Keys
+  replaceKeysDeep: function (obj, keysMap) {
+    var t = this;
+    return _.transform(obj, function (result, value, key) {
+      var currentKey = keysMap[key] || key;
+      result[currentKey] = _.isObject(value) ? t.replaceKeysDeep(value, keysMap) : value;
+    });
   },
 };
 

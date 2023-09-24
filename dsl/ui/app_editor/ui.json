@@ -61,8 +61,7 @@
           {
             "eventCodeName": "onLoad",
             "targetUUId": "view_layout_edit",
-            "methodCodeName": "active",
-            "paramsData": []
+            "methodCodeName": "active"
           }
         ]
       },
@@ -99,7 +98,70 @@
       "url": "/dsl/ui/{{getQueryValue('app')}}/{{getQueryValue('ui')}}.json",
       "method": "GET",
       "inputs": [],
-      "outputs": {}
+      "outputs": [
+        {
+          "uuid": "api_ot_000",
+          "varShowName": "UI的UUID",
+          "varCodeName": "uuid",
+          "varDataType": "String"
+        },
+        {
+          "uuid": "api_ot_001",
+          "varShowName": "所属APP的UUID",
+          "varCodeName": "appUUID",
+          "varDataType": "String"
+        },
+        {
+          "uuid": "api_ot_002",
+          "varShowName": "APP 描述信息",
+          "varCodeName": "description",
+          "varDataType": "String"
+        },
+        {
+          "uuid": "api_ot_003",
+          "varShowName": "页面标题",
+          "varCodeName": "title",
+          "varDataType": "String"
+        },
+        {
+          "uuid": "api_ot_004",
+          "varShowName": "View对象",
+          "varCodeName": "view",
+          "varDataType": "Tree",
+          "subVariableDesc": [
+            {
+              "uuid": "api_ot_004_001",
+              "varShowName": "View UUID",
+              "varCodeName": "uuid",
+              "varDataType": "String"
+            },
+            {
+              "uuid": "api_ot_004_002",
+              "varShowName": "View名称",
+              "varCodeName": "name",
+              "varDataType": "String"
+            },
+            {
+              "uuid": "api_ot_004_003",
+              "varShowName": "组件标签",
+              "varCodeName": "component",
+              "varDataType": "String"
+            },
+            {
+              "uuid": "api_ot_004_004",
+              "varShowName": "组件类别",
+              "varCodeName": "category",
+              "varDataType": "String"
+            },
+            {
+              "uuid": "api_ot_004_005",
+              "varShowName": "Tree节点",
+              "varCodeName": "children",
+              "varDataType": "TreeNodes"
+            }
+          ]
+        }
+      ]
     }
   ],
   "customVars": [
@@ -115,7 +177,9 @@
         {
           "targetUUId": "view_tree",
           "methodCodeName": "loadData",
-          "paramsData": []
+          "paramsData": [
+            "{{ui_dsl.view}}"
+          ]
         }
       ]
     },

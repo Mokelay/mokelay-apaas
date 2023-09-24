@@ -57,7 +57,10 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
 
   //处理ref
   pros['ref'] = viewRef;
-  window.__Mokelay.ComponentInstantMap[pros['key']] = pros['ref'];
+  window.__Mokelay.ComponentInstantMap[pros['key']] = {
+    ref: pros['ref'],
+    component: view['component'],
+  };
 
   //处理样式
   pros['styles'] = view['styles'] || {};
@@ -106,7 +109,7 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
       var paramsData = action['paramsData'] || [];
       pros[eventCodeName] = function (e) {
         // console.log(arguments);
-        var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
+        var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId]['ref'];
         if (targetEl) {
           var method = targetEl['current'][methodCodeName];
           if (method) {

@@ -98,7 +98,8 @@ export default function M_UI() {
               var targetUUId = act['targetUUId'];
               var methodCodeName = act['methodCodeName'];
 
-              var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId];
+              var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
+              var targetEl = comIns['ref'];
               if (targetEl) {
                 var method = targetEl['current'][methodCodeName];
                 if (method) {
@@ -120,6 +121,7 @@ export default function M_UI() {
 
                     return n;
                   };
+                  // console.log(Util.executeStr('{{ui_dsl.view}}'));
                   method(null, _copy(r['data']['view']));
                 } else {
                   console.log('Can not find method:' + methodCodeName);
