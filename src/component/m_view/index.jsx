@@ -113,7 +113,7 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
         if (targetEl) {
           var method = targetEl['current'][methodCodeName];
           if (method) {
-            method(e, ...paramsData);
+            method(e, ...Util.dataTransferAll(paramsData));
           } else {
             console.log('Can not find method:' + methodCodeName);
           }
