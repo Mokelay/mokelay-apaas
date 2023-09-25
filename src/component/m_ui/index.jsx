@@ -97,32 +97,14 @@ export default function M_UI() {
             valueChangeActions.forEach(function (act) {
               var targetUUId = act['targetUUId'];
               var methodCodeName = act['methodCodeName'];
+              var paramsData = act['paramsData'];
 
               var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
               var targetEl = comIns['ref'];
               if (targetEl) {
                 var method = targetEl['current'][methodCodeName];
                 if (method) {
-                  // method(e, ...paramsData);
-                  //TODO 针对菜单单独处理
-                  //TODO 如何做两面的数据格式转化配置？
-                  var _copy = function (node) {
-                    var n = {};
-                    n['id'] = node['uuid'];
-                    n['name'] = node['name'];
-
-                    var children = node['children'];
-                    if (children) {
-                      n['children'] = [];
-                      children.map(function (c) {
-                        n['children'].push(_copy(c));
-                      });
-                    }
-
-                    return n;
-                  };
-                  // console.log(Util.executeStr('{{ui_dsl.view}}'));
-                  method(null, _copy(r['data']['view']));
+                  method(null, ...Util.dataTransferAll(paramsData));
                 } else {
                   console.log('Can not find method:' + methodCodeName);
                 }

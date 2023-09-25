@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Qs from 'qs';
 
 export default {
+  //Ajax invoke
   invoke: function (options) {
     var t = this;
     return new Promise((resolve, reject) => {
@@ -62,6 +63,7 @@ export default {
     });
   },
 
+  //POST API
   post: function (url, param, options) {
     return this.invoke(
       _.assignIn(
@@ -78,6 +80,7 @@ export default {
     );
   },
 
+  //GET API
   get: function (url, param, options) {
     return this.invoke(
       _.assignIn(
@@ -182,6 +185,73 @@ export default {
       var currentKey = keysMap[key] || key;
       result[currentKey] = _.isObject(value) ? t.replaceKeysDeep(value, keysMap) : value;
     });
+  },
+
+  //Data Format
+  dataFormat: function (data, dataType) {
+    if (data == null || typeof data == 'undefined') {
+      return null;
+    } else if (dataType == 'String') {
+      return _.toString(data);
+    } else if (dataType == 'Integer') {
+      return _.toInteger(data);
+    } else if (dataType == 'Float') {
+      return _.toNumber(data);
+    } else if (dataType == 'Boolean') {
+      return !!data;
+    } else if (dataType == 'Date' || dataType == 'DateTime') {
+      return new Date(data);
+    } else {
+      return JSON.parse(data);
+    }
+  },
+
+  //Data Transfer ALl
+  dataTransferAll: function (dataTransferArr) {
+    var t = this;
+    var r = [];
+    if (dataTransferArr) {
+      dataTransferArr.forEach(function (d) {
+        r.push(t.dataTransfer(d));
+      });
+    }
+    return r;
+  },
+
+  //Data Transfer
+  dataTransfer: function (dataTransfer) {
+    var t = this;
+    if (typeof dataTransfer == 'object') {
+      //如何事配置，则进行解析
+      var dataType = dataTransfer['dataType'] || 'String';
+
+      var sourceType = dataTransfer['sourceType'];
+      if (sourceType == 'DataByInput') {
+        //输入获取
+        return t.dataFormat(dataTransfer['dataByInput'], dataType);
+      } else if (sourceType == 'DataByChooseVar') {
+        //选择变量获取
+        var optVarPath = dataTransfer['optVarPath'];
+        var transferType = dataTransfer['transferType'];
+        var transferConfig = dataTransfer['transferConfig'];
+
+        var rootObj = Object.assign(
+          {},
+          window.__Mokelay.InternalVar,
+          window.__Mokelay.InternalFunc,
+          window.__Mokelay.CustomVar,
+        );
+        var v = _.get(rootObj, optVarPath);
+        if (transferType == 'FieldKeyTransfer') {
+          //转化Tree/Object/Array中的节点字段配置
+          v = t.replaceKeysDeep(v, transferConfig);
+        }
+        return v;
+      }
+    } else {
+      //直接返回
+      return dataTransfer;
+    }
   },
 };
 

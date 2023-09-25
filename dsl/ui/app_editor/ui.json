@@ -178,7 +178,16 @@
           "targetUUId": "view_tree",
           "methodCodeName": "loadData",
           "paramsData": [
-            "{{ui_dsl.view}}"
+            {
+              "dataType": "Tree",
+              "sourceType": "DataByChooseVar",
+              "optVarUUID": "custom_vars_00001",
+              "optVarPath": "ui_dsl.view",
+              "transferType": "FieldKeyTransfer",
+              "transferConfig": {
+                "uuid": "id"
+              }
+            }
           ]
         }
       ]
