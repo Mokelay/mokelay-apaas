@@ -161,6 +161,16 @@ export default {
     return transferFunc(str, window.__Mokelay.InternalFuncDesc);
   },
 
+  //Get TemplateObject
+  getTemplateObject: function () {
+    return Object.assign(
+      {},
+      window.__Mokelay.VarCenter.get('InternalVar'),
+      window.__Mokelay.InternalFunc,
+      window.__Mokelay.VarCenter.get('CustomVar'),
+    );
+  },
+
   /**
    * 执行字符串
    * @param {字符串} str
@@ -169,12 +179,7 @@ export default {
   executeStr: function (str) {
     _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
     var compiled = _.template(str);
-    var data = Object.assign(
-      {},
-      window.__Mokelay.InternalVar,
-      window.__Mokelay.InternalFunc,
-      window.__Mokelay.CustomVar,
-    );
+    var data = this.getTemplateObject();
     // console.log(data);
     return compiled(data);
   },
@@ -235,12 +240,7 @@ export default {
         var transferType = dataTransfer['transferType'];
         var transferConfig = dataTransfer['transferConfig'];
 
-        var rootObj = Object.assign(
-          {},
-          window.__Mokelay.InternalVar,
-          window.__Mokelay.InternalFunc,
-          window.__Mokelay.CustomVar,
-        );
+        var rootObj = t.getTemplateObject();
         var v = _.get(rootObj, optVarPath);
         if (transferType == 'FieldKeyTransfer') {
           //转化Tree/Object/Array中的节点字段配置

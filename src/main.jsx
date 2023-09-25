@@ -32,12 +32,17 @@ window.__Mokelay._Edit = {};
 import Util from './util/util';
 window.__Mokelay.Util = Util;
 
+//数据中心，内置变量和自定义变量统一的管理，更新的事件管理
+import JSONWatch from './util/json_watch';
+window.__Mokelay.VarCenter = new JSONWatch({});
+
 /**
  * 加载内置巴斯 = 内置函数+内置变量
  */
 import InternalBuzzs from './util/internal_buzzs.jsx';
 // 加载内置变量
-window.__Mokelay.InternalVar = InternalBuzzs['internalVar'];
+window.__Mokelay.VarCenter.set('InternalVar', InternalBuzzs['internalVar']);
+window.__Mokelay.VarCenter.set('CustomVar', {});
 window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
 // 加载内置函数
 window.__Mokelay.InternalFunc = InternalBuzzs['internalFunc'];
@@ -51,25 +56,25 @@ if (!window.__Mokelay.Root.El) {
   window.__Mokelay.Root.El = createRoot(document.getElementById('root'));
 }
 window.__Mokelay.Root.El.render(
-  <StrictMode>
-    <Router>
-      <Routes>
-        {/* 处理默认首页 */}
-        {/* TODO 如何配置全局的默认首页 */}
-        <Route index element={<Navigate to={'/app_editor/'} />} />
+  // <StrictMode>
+  <Router>
+    <Routes>
+      {/* 处理默认首页 */}
+      {/* TODO 如何配置全局的默认首页 */}
+      <Route index element={<Navigate to={'/app_editor/'} />} />
 
-        {/* 读取本地JS配置，方便联调 */}
-        <Route path="/:app_uuid/">
-          {/* APP的默认首页*/}
-          <Route index element={<window.__Mokelay.ComponentMap.M_UI />} />
+      {/* 读取本地JS配置，方便联调 */}
+      <Route path="/:app_uuid/">
+        {/* APP的默认首页*/}
+        <Route index element={<window.__Mokelay.ComponentMap.M_UI />} />
 
-          {/* 对应到APP的具体页面 */}
-          <Route path="/:app_uuid/:ui_uuid" element={<window.__Mokelay.ComponentMap.M_UI />} />
-        </Route>
+        {/* 对应到APP的具体页面 */}
+        <Route path="/:app_uuid/:ui_uuid" element={<window.__Mokelay.ComponentMap.M_UI />} />
+      </Route>
 
-        {/* 单独处理layout */}
-        {/* <Route path="/" element={<BasicLayout />}></Route> */}
-      </Routes>
-    </Router>
-  </StrictMode>,
+      {/* 单独处理layout */}
+      {/* <Route path="/" element={<BasicLayout />}></Route> */}
+    </Routes>
+  </Router>,
+  /* </StrictMode>, */
 );

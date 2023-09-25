@@ -38,23 +38,9 @@ export default {
 
   //内置函数
   internalFunc: {
-    //内置函数_设置页面标题
-    setTitle: function (title) {
-      document.title = title;
-    },
-
-    //内置函数_打开链接
-    openUrl: function (url) {},
-
-    //内置函数_显示组件
-    showView: function (viewUUID) {},
-
-    //内置函数_隐藏组件
-    hideView: function (viewUUID) {},
-
     //内置函数_获取URL Query值
     getQueryValue: function (queryName) {
-      var urlSP = window.__Mokelay.InternalVar.URL_Search_Params;
+      var urlSP = window.__Mokelay.VarCenter.get('InternalVar.URL_Search_Params');
       if (urlSP) {
         return urlSP.get(queryName);
       } else {
@@ -67,55 +53,16 @@ export default {
   internalFuncDesc: [
     {
       uuid: '',
-      funcShowName: '内置函数_设置页面标题',
-      funcCodeName: 'setTitle',
+      funcShowName: '内置函数_获取URL参数',
+      funcCodeName: 'getQueryValue',
       params: [
         {
-          varShowName: '页面标题',
-          varCodeName: 'title',
+          varShowName: '参数名',
+          varCodeName: 'queryName',
           varDataType: 'String',
         },
       ],
-      returnDataType: null,
-    },
-    {
-      uuid: '',
-      funcShowName: '内置函数_打开链接',
-      funcCodeName: 'openUrl',
-      params: [
-        {
-          varShowName: 'URL地址',
-          varCodeName: 'url',
-          varDataType: 'String',
-        },
-      ],
-      returnDataType: null,
-    },
-    {
-      uuid: '',
-      funcShowName: '内置函数_显示组件',
-      funcCodeName: 'showView',
-      params: [
-        {
-          varShowName: '组件UUID',
-          varCodeName: 'viewUUID',
-          varDataType: 'String',
-        },
-      ],
-      returnDataType: null,
-    },
-    {
-      uuid: '',
-      funcShowName: '内置函数_隐藏组件',
-      funcCodeName: 'hideView',
-      params: [
-        {
-          varShowName: '组件UUID',
-          varCodeName: 'viewUUID',
-          varDataType: 'String',
-        },
-      ],
-      returnDataType: null,
+      returnValue: null,
     },
   ],
 };

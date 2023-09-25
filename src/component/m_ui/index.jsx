@@ -26,7 +26,10 @@ export default function M_UI() {
   const [ui, setUI] = useState(_Default_UI);
 
   //把目前URL里的query参数存储到内置变量中
-  window.__Mokelay.InternalVar.URL_Search_Params = new URLSearchParams(useLocation().search);
+  window.__Mokelay.VarCenter.set(
+    'InternalVar.URL_Search_Params',
+    new URLSearchParams(useLocation().search),
+  );
 
   //存储所有组件的Key和Ref
   const ComponentInstantMap = {};
@@ -76,43 +79,52 @@ export default function M_UI() {
   //处理自定义变量
   var customVars = ui['customVars'] || [];
   window.__Mokelay.CustomVarDesc = [];
-  window.__Mokelay.CustomVar = {};
   customVars.map(function (cv) {
     window.__Mokelay.CustomVarDesc.push(cv);
+
+    var varPath = 'CustomVar.' + cv['varCodeName'];
+
     var valueAssignType = cv['valueAssignType'] || 'VarValue';
     if (valueAssignType == 'VarValue') {
       //直接赋值
-      window.__Mokelay.CustomVar[cv['varCodeName']] = cv['varValue'];
+      window.__Mokelay.VarCenter.set(varPath, cv['varValue']);
     } else if (valueAssignType == 'RemoteValue') {
+      // window.__Mokelay.VarCenter.set(varPath, null);
       //通过DS来获取
       var dsUUID = cv['dsUUID'];
       var dsInputParamsValue = cv['dsInputParamsValue'];
+
+      //当赋值后，触发的action,action处理需要和m_view合并
+      var valueChangeActions = cv['valueChangeActions'] || [];
+      if (valueChangeActions.length > 0) {
+        valueChangeActions.forEach(function (act) {
+          window.__Mokelay.VarCenter.on(varPath, function (newData) {
+            console.log('update action ');
+            console.log(newData);
+            var targetUUId = act['targetUUId'];
+            var methodCodeName = act['methodCodeName'];
+            var paramsData = act['paramsData'];
+
+            var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
+            var targetEl = comIns['ref'];
+            if (targetEl) {
+              var method = targetEl['current'][methodCodeName];
+              if (method) {
+                method(null, ...Util.dataTransferAll(paramsData));
+              } else {
+                console.log('Can not find method:' + methodCodeName);
+              }
+            } else {
+              console.log('Can not find target dom:' + targetUUId);
+            }
+          });
+        });
+      }
+
+      //远程开始获取数据
       Util.loadByDS(dsUUID, dsInputParamsValue)
         .then(function (r) {
-          window.__Mokelay.CustomVar[cv['varCodeName']] = r['data'];
-
-          //当赋值后，触发的action,action处理需要和m_view合并
-          var valueChangeActions = cv['valueChangeActions'] || [];
-          if (valueChangeActions.length > 0) {
-            valueChangeActions.forEach(function (act) {
-              var targetUUId = act['targetUUId'];
-              var methodCodeName = act['methodCodeName'];
-              var paramsData = act['paramsData'];
-
-              var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
-              var targetEl = comIns['ref'];
-              if (targetEl) {
-                var method = targetEl['current'][methodCodeName];
-                if (method) {
-                  method(null, ...Util.dataTransferAll(paramsData));
-                } else {
-                  console.log('Can not find method:' + methodCodeName);
-                }
-              } else {
-                console.log('Can not find target dom:' + targetUUId);
-              }
-            });
-          }
+          window.__Mokelay.VarCenter.set(varPath, r['data']);
         })
         .catch(function (r) {
           console.log(r);

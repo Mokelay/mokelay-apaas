@@ -66,7 +66,7 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
   pros['styles'] = view['styles'] || {};
 
   //处理动作
-  var editStatus = window.__Mokelay.InternalVar.Is_Edit_Status;
+  var editStatus = window.__Mokelay.VarCenter.get('InternalVar.Is_Edit_Status');
   if (editStatus) {
     //TODO 这段逻辑如何可配置话
     //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件和数据；
