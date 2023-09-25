@@ -1,6 +1,6 @@
 import path from 'path';
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 import { viteExternalsPlugin } from 'vite-plugin-externals';
 
 // https://vitejs.dev/config/
@@ -19,6 +19,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: /^@\//, replacement: path.resolve(__dirname, 'src') + '/' },
+      { find: /^@dsl\//, replacement: path.resolve(__dirname, 'dsl') + '/' },
     ],
   },
   build: {
@@ -45,6 +46,6 @@ export default defineConfig({
       {
         disableInServe: true,
       },
-    )
+    ),
   ],
-})
+});
