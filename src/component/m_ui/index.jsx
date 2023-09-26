@@ -1,5 +1,5 @@
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useLoaderData, useRouteError } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import M_View from '../m_view/index';
 import Util from '../../util/util';
@@ -10,68 +10,42 @@ import Util from '../../util/util';
  * @returns DOM
  */
 export default function M_UI() {
-  var params = useParams() || {};
   const navigate = useNavigate();
-
-  //TODO 默认UI DSL
-  var _Default_UI = {
-    title: 'Home',
-    view: {
-      uuid: 'view_default_page',
-      name: '默认页面',
-      component: 'M_Page',
-      category: 'Container',
-    },
-  };
-  const [ui, setUI] = useState(_Default_UI);
-
-  //把目前URL里的query参数存储到内置变量中
+  //把搜索参数放到VarCenter中，提供给界面配置用
   window.__Mokelay.VarCenter.set(
     'InternalVar.URL_Search_Params',
     new URLSearchParams(useLocation().search),
   );
 
+  let error = useRouteError();
+
+  var ui = {};
+  if (!error) {
+    const loaderData = useLoaderData() || {};
+    ui = loaderData['ui'];
+  }
+
   //存储所有组件的Key和Ref
   const ComponentInstantMap = {};
   window.__Mokelay.ComponentInstantMap = ComponentInstantMap;
 
-  //获取Params参数
-  var appUUID = params['app_uuid'];
-  var uiUUID = params['ui_uuid'];
-
   useEffect(() => {
-    Util.get('/dsl/ui/' + appUUID + '.json')
-      .then(function (r) {
-        var _app = r['data'];
-        if (_app) {
-          //APP默认首页
-          var pageDefault = _app['pages']['Page_Default'];
-
-          Util.get(
-            '/dsl/ui/' +
-              appUUID +
-              '/' +
-              (typeof uiUUID == 'undefined' ? pageDefault : uiUUID) +
-              '.json',
-          )
-            .then(function (r2) {
-              setUI(r2['data']);
-            })
-            .catch(function (rej) {
-              //APP的404页面
-              var page404 = _app['pages']['Page_404'];
-              navigate('/' + appUUID + '/' + page404);
-            });
-        }
-      })
-      .catch(function (err) {
-        console.log(err);
-        setUI(_Default_UI);
-      });
-  }, [params]);
+    //如果UI配置不合法，则转到404页面
+    if (error) {
+      if (error.appInvalid) {
+        //APP 不存在，默认到编辑APP首页
+        navigate('/app_editor/');
+      } else if (error.uiInvalid) {
+        //UI不存在
+        var app = error['app'];
+        var appUUID = error['appUUID'];
+        navigate('/' + appUUID + '/' + app['pages']['Page_404']);
+      }
+    }
+  }, []);
 
   //处理标题
-  document.title = Util.executeStr(ui['title']);
+  document.title = Util.executeStr(ui['title'] || '');
 
   //处理数据源DSList
   window.__Mokelay.DataSource_List = ui['dsList'] || [];
@@ -132,5 +106,5 @@ export default function M_UI() {
     }
   });
 
-  return <M_View initView={ui['view']} />;
+  return ui['view'] ? <M_View initView={ui['view']} /> : <></>;
 }

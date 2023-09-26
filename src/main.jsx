@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate, createHashRouter, RouterProvider } from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
@@ -48,6 +48,72 @@ window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
 window.__Mokelay.InternalFunc = InternalBuzzs['internalFunc'];
 window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
+//加载APP，UI的信息
+var APP_UI_Loader = async function ({ params, request }) {
+  // debugger;
+  // console.log(arguments);
+  //获取Params参数
+  var appUUID = params['app_uuid'];
+  var uiUUID = params['ui_uuid'];
+
+  var app = null;
+  var ui = null;
+  try {
+    var appFetch = await fetch('/dsl/ui/' + appUUID + '.json');
+    if (appFetch.ok) {
+      app = await appFetch.json();
+
+      var uiFetch = await fetch(
+        '/dsl/ui/' +
+          appUUID +
+          '/' +
+          (typeof uiUUID == 'undefined' ? app['pages']['Page_Default'] : uiUUID) +
+          '.json',
+      );
+
+      if (uiFetch.ok) {
+        ui = await uiFetch.json();
+      }
+    }
+  } catch (err) {
+    // console.log(err);
+  }
+
+  if (app == null || ui == null) {
+    throw {
+      appInvalid: app == null,
+      uiInvalid: ui == null,
+      appUUID: appUUID,
+      uiUUID: uiUUID,
+      app: app,
+      ui: ui,
+    };
+  } else {
+    return {
+      ui: ui,
+    };
+  }
+};
+
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <Navigate to={'/app_editor/'} />,
+  },
+  {
+    path: '/:app_uuid/',
+    element: <window.__Mokelay.ComponentMap.M_UI />,
+    errorElement: <window.__Mokelay.ComponentMap.M_UI />,
+    loader: APP_UI_Loader,
+  },
+  {
+    path: '/:app_uuid/:ui_uuid',
+    element: <window.__Mokelay.ComponentMap.M_UI />,
+    errorElement: <window.__Mokelay.ComponentMap.M_UI />,
+    loader: APP_UI_Loader,
+  },
+]);
+
 /**
  * 开始正式渲染页面，挂载到root节点
  */
@@ -55,26 +121,4 @@ window.__Mokelay.Root = {};
 if (!window.__Mokelay.Root.El) {
   window.__Mokelay.Root.El = createRoot(document.getElementById('root'));
 }
-window.__Mokelay.Root.El.render(
-  // <StrictMode>
-  <Router>
-    <Routes>
-      {/* 处理默认首页 */}
-      {/* TODO 如何配置全局的默认首页 */}
-      <Route index element={<Navigate to={'/app_editor/'} />} />
-
-      {/* 读取本地JS配置，方便联调 */}
-      <Route path="/:app_uuid/">
-        {/* APP的默认首页*/}
-        <Route index element={<window.__Mokelay.ComponentMap.M_UI />} />
-
-        {/* 对应到APP的具体页面 */}
-        <Route path="/:app_uuid/:ui_uuid" element={<window.__Mokelay.ComponentMap.M_UI />} />
-      </Route>
-
-      {/* 单独处理layout */}
-      {/* <Route path="/" element={<BasicLayout />}></Route> */}
-    </Routes>
-  </Router>,
-  /* </StrictMode>, */
-);
+window.__Mokelay.Root.El.render(<RouterProvider router={router} />);
