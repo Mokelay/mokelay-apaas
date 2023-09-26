@@ -32,10 +32,10 @@ export default function M_UI() {
   useEffect(() => {
     //如果UI配置不合法，则转到404页面
     if (error) {
-      if (error.appInvalid) {
+      if (error.app == null) {
         //APP 不存在，默认到编辑APP首页
         navigate('/app_editor/');
-      } else if (error.uiInvalid) {
+      } else if (error.ui == null) {
         //UI不存在
         var app = error['app'];
         var appUUID = error['appUUID'];

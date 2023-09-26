@@ -81,8 +81,6 @@ var APP_UI_Loader = async function ({ params, request }) {
 
   if (app == null || ui == null) {
     throw {
-      appInvalid: app == null,
-      uiInvalid: ui == null,
       appUUID: appUUID,
       uiUUID: uiUUID,
       app: app,
