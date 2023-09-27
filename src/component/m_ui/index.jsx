@@ -46,15 +46,15 @@ export default function M_UI({ ui }) {
       if (valueChangeActions.length > 0) {
         valueChangeActions.forEach(function (act) {
           var f = function (newData) {
-            console.log('update action ');
+            console.log('Begin to update var action ');
             console.log(newData);
             var targetUUId = act['targetUUId'];
             var methodCodeName = act['methodCodeName'];
             var paramsData = act['paramsData'];
 
             var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
-            var targetEl = comIns['ref'];
-            if (targetEl) {
+            if (comIns && comIns['ref']) {
+              var targetEl = comIns['ref'];
               var method = targetEl['current'][methodCodeName];
               if (method) {
                 method(null, ...Util.dataTransferAll(paramsData));
@@ -63,17 +63,24 @@ export default function M_UI({ ui }) {
               }
             } else {
               console.log('Can not find target dom:' + targetUUId);
+              console.log('Begin Show window.__Mokelay.ComponentInstantMap');
+              console.log(window.__Mokelay.ComponentInstantMap);
+              console.log('End Show window.__Mokelay.ComponentInstantMap');
             }
           };
 
-          //这里为了防止重复on， 用一个全局变量来控制
+          //TODO 临时解决方案
+          //1. 这里为了防止重复on， 用一个全局变量来控制
+          //2. 用setTimeou方法，解决window.__Mokelay.ComponentInstantMap为的空的问题
           // window.__Mokelay.VarCenter.off(varPath, f);
           if (!window.__Mokelay.VarOnMap) {
             window.__Mokelay.VarOnMap = {};
           }
           if (!window.__Mokelay.VarOnMap[varPath]) {
-            console.log(varPath);
-            window.__Mokelay.VarCenter.on(varPath, f);
+            console.log(varPath + ' is on .');
+            window.__Mokelay.VarCenter.on(varPath, function (newData) {
+              setTimeout(f, 1, newData);
+            });
             window.__Mokelay.VarOnMap[varPath] = true;
           }
         });
