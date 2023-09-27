@@ -29,6 +29,7 @@ export default function M_UI() {
   const ComponentInstantMap = {};
   window.__Mokelay.ComponentInstantMap = ComponentInstantMap;
 
+  //检查UI配置的合法性
   useEffect(() => {
     //如果UI配置不合法，则转到404页面
     if (error) {
