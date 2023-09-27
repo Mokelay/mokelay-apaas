@@ -1,7 +1,7 @@
 {
-  "uuid": "editor_lego",
+  "uuid": "editor_home",
   "appUUID": "app_editor",
-  "title": "Lego Editor",
+  "title": "Editor Home",
   "view": {
     "uuid": "view_edit_page",
     "name": "page",

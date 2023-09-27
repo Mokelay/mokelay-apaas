@@ -1,4 +1,3 @@
-import { useLocation, useNavigate, useLoaderData, useRouteError } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import M_View from '../m_view/index';
@@ -9,41 +8,13 @@ import Util from '../../util/util';
  *
  * @returns DOM
  */
-export default function M_UI() {
-  const navigate = useNavigate();
-  //把搜索参数放到VarCenter中，提供给界面配置用
-  window.__Mokelay.VarCenter.set(
-    'InternalVar.URL_Search_Params',
-    new URLSearchParams(useLocation().search),
-  );
-
-  let error = useRouteError();
-
-  var ui = {};
-  if (!error) {
-    const loaderData = useLoaderData() || {};
-    ui = loaderData['ui'];
-  }
-
+export default function M_UI({ ui }) {
   //存储所有组件的Key和Ref
   const ComponentInstantMap = {};
   window.__Mokelay.ComponentInstantMap = ComponentInstantMap;
 
   //检查UI配置的合法性
-  useEffect(() => {
-    //如果UI配置不合法，则转到404页面
-    if (error) {
-      if (error.app == null) {
-        //APP 不存在，默认到编辑APP首页
-        navigate('/app_editor/');
-      } else if (error.ui == null) {
-        //UI不存在
-        var app = error['app'];
-        var appUUID = error['appUUID'];
-        navigate('/' + appUUID + '/' + app['pages']['Page_404']);
-      }
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   //处理标题
   document.title = Util.executeStr(ui['title'] || '');
@@ -107,5 +78,5 @@ export default function M_UI() {
     }
   });
 
-  return ui['view'] ? <M_View initView={ui['view']} /> : <></>;
+  return ui['view'] ? <M_View initView={ui['view']} /> : <div>NO View</div>;
 }
