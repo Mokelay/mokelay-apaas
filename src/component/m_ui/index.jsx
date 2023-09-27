@@ -23,6 +23,7 @@ export default function M_UI({ ui }) {
   window.__Mokelay.DataSource_List = ui['dsList'] || [];
 
   //处理自定义变量
+  window.__Mokelay.VarCenter.set('CustomVar', {});
   var customVars = ui['customVars'] || [];
   window.__Mokelay.CustomVarDesc = [];
   customVars.map(function (cv) {
@@ -44,7 +45,7 @@ export default function M_UI({ ui }) {
       var valueChangeActions = cv['valueChangeActions'] || [];
       if (valueChangeActions.length > 0) {
         valueChangeActions.forEach(function (act) {
-          window.__Mokelay.VarCenter.on(varPath, function (newData) {
+          var f = function (newData) {
             console.log('update action ');
             console.log(newData);
             var targetUUId = act['targetUUId'];
@@ -63,7 +64,18 @@ export default function M_UI({ ui }) {
             } else {
               console.log('Can not find target dom:' + targetUUId);
             }
-          });
+          };
+
+          //这里为了防止重复on， 用一个全局变量来控制
+          // window.__Mokelay.VarCenter.off(varPath, f);
+          if (!window.__Mokelay.VarOnMap) {
+            window.__Mokelay.VarOnMap = {};
+          }
+          if (!window.__Mokelay.VarOnMap[varPath]) {
+            console.log(varPath);
+            window.__Mokelay.VarCenter.on(varPath, f);
+            window.__Mokelay.VarOnMap[varPath] = true;
+          }
         });
       }
 
