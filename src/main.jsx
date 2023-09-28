@@ -137,11 +137,11 @@ const router = createHashRouter([
   },
   {
     path: '/:app_uuid/',
-    element: <APP_UI_Loader />,
+    element: <APP_UI_Loader key="appHome" />,
   },
   {
     path: '/:app_uuid/:ui_uuid',
-    element: <APP_UI_Loader />,
+    element: <APP_UI_Loader key="appUI" />,
   },
 ]);
 
