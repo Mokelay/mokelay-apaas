@@ -42,53 +42,55 @@ export default function M_UI({ ui }) {
       var dsInputParamsValue = cv['dsInputParamsValue'];
 
       //当赋值后，触发的action,action处理需要和m_view合并
-      var valueChangeActions = cv['valueChangeActions'] || [];
-      if (valueChangeActions.length > 0) {
-        valueChangeActions.forEach(function (act) {
-          var f = function (newData) {
-            console.log('Begin to update var action ');
-            console.log(newData);
-            var targetUUId = act['targetUUId'];
-            var methodCodeName = act['methodCodeName'];
-            var paramsData = act['paramsData'];
+      //TODO 临时解决方案
+      //1. 这里为了防止重复on， 用一个全局变量window.__Mokelay.VarOnMap来控制
+      //2. 用setTimeou方法，解决window.__Mokelay.ComponentInstantMap为的空的问题
+      // window.__Mokelay.VarCenter.off(varPath, f);
+      if (!window.__Mokelay.VarOnMap) {
+        window.__Mokelay.VarOnMap = {};
+      }
+      if (!window.__Mokelay.VarOnMap[ui['uuid']]) {
+        window.__Mokelay.VarOnMap[ui['uuid']] = true;
 
-            var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
-            if (comIns && comIns['ref']) {
-              var targetEl = comIns['ref'];
-              var method = targetEl['current'][methodCodeName];
-              if (method) {
-                method(null, ...Util.dataTransferAll(paramsData));
+        var valueChangeActions = cv['valueChangeActions'] || [];
+        if (valueChangeActions.length > 0) {
+          valueChangeActions.forEach(function (act) {
+            var f = function (newData) {
+              console.log('Begin to update var action ');
+              console.log(newData);
+              var targetUUId = act['targetUUId'];
+              var methodCodeName = act['methodCodeName'];
+              var paramsData = act['paramsData'];
+
+              var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
+              if (comIns && comIns['ref']) {
+                var targetEl = comIns['ref'];
+                var method = targetEl['current'][methodCodeName];
+                if (method) {
+                  method(null, ...Util.dataTransferAll(paramsData));
+                } else {
+                  console.log('Can not find method:' + methodCodeName);
+                }
               } else {
-                console.log('Can not find method:' + methodCodeName);
+                console.log('Can not find target dom:' + targetUUId);
+                console.log('Begin Show window.__Mokelay.ComponentInstantMap');
+                console.log(window.__Mokelay.ComponentInstantMap);
+                console.log('End Show window.__Mokelay.ComponentInstantMap');
               }
-            } else {
-              console.log('Can not find target dom:' + targetUUId);
-              console.log('Begin Show window.__Mokelay.ComponentInstantMap');
-              console.log(window.__Mokelay.ComponentInstantMap);
-              console.log('End Show window.__Mokelay.ComponentInstantMap');
-            }
-          };
+            };
 
-          //TODO 临时解决方案
-          //1. 这里为了防止重复on， 用一个全局变量来控制
-          //2. 用setTimeou方法，解决window.__Mokelay.ComponentInstantMap为的空的问题
-          // window.__Mokelay.VarCenter.off(varPath, f);
-          if (!window.__Mokelay.VarOnMap) {
-            window.__Mokelay.VarOnMap = {};
-          }
-          if (!window.__Mokelay.VarOnMap[varPath]) {
             console.log(varPath + ' is on .');
             window.__Mokelay.VarCenter.on(varPath, function (newData) {
               setTimeout(f, 1, newData);
             });
-            window.__Mokelay.VarOnMap[varPath] = true;
-          }
-        });
+          });
+        }
       }
 
       //远程开始获取数据
       Util.loadByDS(dsUUID, dsInputParamsValue)
         .then(function (r) {
+          //一旦设置了值，则触发action
           window.__Mokelay.VarCenter.set(varPath, r['data']);
         })
         .catch(function (r) {

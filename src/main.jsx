@@ -69,8 +69,8 @@ var APP_UI_Loader = function ({ initUI }) {
   //UI信息
   const [ui, updateUI] = useState(initUI);
 
-  console.log('begin to load ..:');
-  console.log(ui);
+  // console.log('begin to load ..:');
+  // console.log(ui);
   // return <div>AAA</div>;
 
   //把搜索参数放到VarCenter中，提供给界面配置用
