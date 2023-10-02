@@ -11,8 +11,9 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
-const M_Tree = forwardRef(function M_Tree({ initData }, ref) {
+const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [] }, ref) {
   const [data, setData] = useState(initData);
+  const [expanded, setExpanded] = useState(initExpanded);
 
   useImperativeHandle(
     ref,
@@ -20,6 +21,10 @@ const M_Tree = forwardRef(function M_Tree({ initData }, ref) {
       return {
         loadData: function (e, d) {
           setData(d);
+
+          //默认展开第一级
+          //TODO 如何配置展开的节点
+          setExpanded([d['id']]);
         },
       };
     },
@@ -34,7 +39,11 @@ const M_Tree = forwardRef(function M_Tree({ initData }, ref) {
     );
 
   return (
-    <TreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
+    <TreeView
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+      expanded={expanded}
+    >
       {renderTree(data)}
     </TreeView>
   );
