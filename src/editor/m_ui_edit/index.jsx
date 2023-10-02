@@ -1,6 +1,8 @@
 import './style.css';
 import { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 
+import DSL from '../../util/dsl';
+
 import SmartButtonOutlinedIcon from '@mui/icons-material/SmartButtonOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
@@ -158,7 +160,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     } else if (eventName == 'onResizeEnd') {
       setResizeStart(false);
       var gridNumber = data['gridNumber'];
-      //TODO 如何传递给DSL
+      //更新DSL
+      DSL.updateGridNumber(window.__Mokelay._Edit._Edit_View_UUID, gridNumber);
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
       // setActive(false);

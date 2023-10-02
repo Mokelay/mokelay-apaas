@@ -20,8 +20,10 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [] }, ref) 
     () => {
       return {
         loadData: function (e, d) {
-          setData(d);
+          console.log('Tree begin to load Data..');
+          console.log(d);
 
+          setData(d);
           //默认展开第一级
           //TODO 如何配置展开的节点
           setExpanded([d['id']]);
