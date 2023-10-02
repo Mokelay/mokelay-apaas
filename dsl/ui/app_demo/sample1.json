@@ -35,7 +35,7 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 4
+            "xs": 6
           }
         },
         "events": []
@@ -71,7 +71,7 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 4
+            "xs": 6
           }
         },
         "events": []
@@ -107,7 +107,7 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 4
+            "xs": 6
           }
         },
         "events": []
@@ -143,7 +143,7 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 4
+            "xs": 12
           }
         },
         "events": []
