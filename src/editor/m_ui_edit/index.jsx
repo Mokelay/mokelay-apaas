@@ -1,5 +1,5 @@
 import './style.css';
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 
 import SmartButtonOutlinedIcon from '@mui/icons-material/SmartButtonOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -111,8 +111,10 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
     }
 
     if (eventName == 'onMouseEnter') {
+      //激活编辑div
       setActive(true);
 
+      //显示鼠标所在dom，或者显示所有dom
       setChildrenPositions(
         _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
       );
@@ -126,10 +128,11 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           containerUUID: window.__Mokelay._Edit._Container_UUID,
         });
       };
-
       window.__Mokelay._Edit._Iframe.contentWindow.removeEventListener('scroll', f);
       window.__Mokelay._Edit._Iframe.contentWindow.addEventListener('scroll', f);
     } else if (eventName == 'onMouseMove') {
+      // 显示鼠标所在的dom，虚框显示
+      // console.log('on mouse move');
       setChildrenPositions(
         _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
       );
@@ -137,11 +140,10 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       //TODO
       // console.log('mouse donw..');
     } else if (eventName == 'onMouseUp') {
-      //如果正在resize，则取消
-      if (resizeStart) {
-        setResizeStart(false);
-      }
+      //TODO
+      // console.log('mouse up..');
     } else if (eventName == 'onClick') {
+      //显示选中的dom，并且记录到window下面
       setOpZone(_allView[_mouseViewUUID] || null);
 
       //把编辑的UUID记录到window下面
@@ -155,6 +157,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
       setResizeStart(true);
     } else if (eventName == 'onResizeEnd') {
       setResizeStart(false);
+      var gridNumber = data['gridNumber'];
+      //TODO 如何传递给DSL
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
       // setActive(false);
@@ -190,6 +194,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
           >
             {/* 显示View的操作 */}
             <ShowViewOperation
+              position={editPosition}
               opZone={opZone}
               onResizeBegin={actionEvent}
               onResizeEnd={actionEvent}
@@ -199,7 +204,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
             {<ShowViewBorders position={editPosition} childrenPositions={childrenPositions} />}
 
             {/* 显示拖动ICON */}
-            {true && <DragIcon />}
+            {false && <DragIcon />}
           </div>
         </>
       )}
@@ -210,8 +215,17 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
 /**
  * 显示针对每个View的操作
  */
-function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
-  // console.log(opZone);
+function ShowViewOperation({ position, opZone, onResizeBegin, onResizeEnd }) {
+  //Bar ref
+  const barRef = useRef(null);
+  //是否开始Resize
+  const [beginResize, setBeginResize] = useState(false);
+  //是否右边resize
+  const [rightResize, setRightResize] = useState(false);
+  //占用的grid数字
+  const [gridNumber, setGridNumber] = useState(0);
+  // const isINOpt = useRef(false);
+
   function deleteView() {
     // console.log(e);
     // e.preventDefault();
@@ -225,8 +239,61 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
     console.log('create copy dsl...');
   }
 
+  //Mouse Leave
+  function mouseLeave() {
+    // isINOpt.current = false;
+  }
+
+  //Mouse Enter
+  function mouseEnter() {
+    // isINOpt.current = true;
+  }
+
+  function resize(e) {
+    var clientX = e.clientX;
+    var isRightResize = e.target.className.indexOf('right-handler') > 0;
+    // console.log('#############################');
+    // console.log(e);
+    // console.log(isRightResize);
+    // console.log('position.left:' + position.left);
+    // console.log('position.width:' + position.width);
+    // console.log('opZone.x:' + opZone.x);
+    // console.log('opZone.left:' + opZone.left);
+    // console.log('opZone.width:' + opZone.width);
+    // console.log('clientX:' + clientX);
+
+    //设置Resize Width
+    if (isRightResize) {
+      //右边Resize
+      var resizeWidth = clientX - position.left - opZone.left;
+      if (clientX > 0 && resizeWidth > 0) {
+        barRef.current.style.width = resizeWidth + 'px';
+        // console.log('position.width:' + position.width);
+        // console.log('resizeWidth:' + resizeWidth);
+        setGridNumber((resizeWidth / (position.width / 12)).toFixed());
+      }
+    } else {
+      //左边Resize
+      var resizeWidth = opZone.width + opZone.left - (clientX - position.left);
+      var resizeLeft = opZone.left - (resizeWidth - opZone.width);
+
+      if (clientX > 0 && resizeWidth > 0 && resizeLeft > 0) {
+        barRef.current.style.left = resizeLeft + 'px';
+        barRef.current.style.width = resizeWidth + 'px';
+
+        // console.log('resizeWidth:' + resizeWidth);
+        // console.log('resizeLeft:' + resizeLeft);
+        setGridNumber((resizeWidth / (position.width / 12)).toFixed());
+      }
+    }
+    // console.log('#############################');
+  }
+
   //开始resize
   function resizeBegin(e) {
+    setBeginResize(true);
+    setRightResize(e.target.className.indexOf('right-handler') > 0);
+
     if (onResizeBegin) {
       onResizeBegin({
         eventName: 'onResizeBegin',
@@ -237,11 +304,20 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
   }
   //结束resize
   function resizeEnd(e) {
+    //停止Resize
+    setBeginResize(false);
+
+    //复原Width/Left
+    barRef.current.style.width = opZone.width + 'px';
+    barRef.current.style.left = opZone.left + 'px';
+
     if (onResizeEnd) {
+      //把grid number 数据传递出去
       onResizeEnd({
         eventName: 'onResizeEnd',
         clientX: e.clientX,
         clientY: e.clientY,
+        gridNumber: gridNumber,
       });
     }
   }
@@ -249,6 +325,9 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
     opZone && (
       <div
         className="ui-border ui-border-selecting"
+        ref={barRef}
+        onMouseLeave={mouseLeave}
+        onMouseEnter={mouseEnter}
         style={{
           top: opZone.top + 'px',
           left: opZone.left + 'px',
@@ -289,10 +368,8 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
               pointerEvents: 'all',
             }}
             draggable="true"
-            // onMouseDown={resizeBegin}
-            // onMouseUp={resizeEnd}
             onDragStart={resizeBegin}
-            onDrag={resizeBegin}
+            onDrag={resize}
             onDragEnd={resizeEnd}
           />
           <div
@@ -303,12 +380,15 @@ function ShowViewOperation({ opZone, onResizeBegin, onResizeEnd }) {
               pointerEvents: 'all',
             }}
             draggable="true"
-            // onMouseDown={resizeBegin}
-            // onMouseUp={resizeEnd}
             onDragStart={resizeBegin}
-            onDrag={resizeBegin}
+            onDrag={resize}
             onDragEnd={resizeEnd}
           />
+          {beginResize && (
+            <div className={rightResize ? 'state-tip pos-right' : 'state-tip pos-left'}>
+              {gridNumber}
+            </div>
+          )}
         </div>
       </div>
     )
