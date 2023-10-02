@@ -40,9 +40,11 @@ export default {
   //更新GridNumber
   updateGridNumber: function (uuid, gridNumber) {
     var dsl = this.getDSL();
+    // dsl['view']['name'] = '哈哈';
     var path = this.getViewPath(uuid);
     // console.log(path);
     _.set(dsl, path + '.styles.dimensions.xs', gridNumber);
+    console.log(dsl);
     this.setDSL(dsl);
   },
 };

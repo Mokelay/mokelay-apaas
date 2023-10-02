@@ -20,8 +20,9 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [] }, ref) 
     () => {
       return {
         loadData: function (e, d) {
-          console.log('Tree begin to load Data..');
+          console.log('####Tree begin to load Data####');
           console.log(d);
+          console.log('###############################');
 
           setData(d);
           //默认展开第一级

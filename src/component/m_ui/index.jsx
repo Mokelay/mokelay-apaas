@@ -56,8 +56,9 @@ export default function M_UI({ ui }) {
         if (valueChangeActions.length > 0) {
           valueChangeActions.forEach(function (act) {
             var f = function (newData) {
-              console.log('Begin to update var action ');
+              console.log('###Begin to update var action###');
               console.log(newData);
+              console.log('################################');
               var targetUUId = act['targetUUId'];
               var methodCodeName = act['methodCodeName'];
               var paramsData = act['paramsData'];
