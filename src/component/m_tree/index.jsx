@@ -39,9 +39,8 @@ const M_Tree = forwardRef(function M_Tree(
         },
         //SelectItems
         selectItems: function ({ ...args }, selectIds) {
-          console.log('select item ..');
-          console.log(arguments);
-
+          // console.log('select item ..');
+          // console.log(arguments);
           setSelected(_.isArray(selectIds) ? selectIds : [selectIds]);
         },
       };
