@@ -12,7 +12,10 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
-const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSelected = [] }, ref) {
+const M_Tree = forwardRef(function M_Tree(
+  { initData, initExpanded = [], initSelected = [], onItemSelect },
+  ref,
+) {
   const [data, setData] = useState(initData);
   const [expanded, setExpanded] = useState(initExpanded);
   const [selected, setSelected] = useState(initSelected);
@@ -46,6 +49,41 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSel
     [],
   );
 
+  //Node Select Event
+  function onNodeSelect(e, nodeId) {
+    setSelected([nodeId]);
+    if (onItemSelect) {
+      var parentId = null;
+      var isParent = false;
+
+      var _check = function (node, parent) {
+        if (node['id'] == nodeId) {
+          parentId = parent ? parent['id'] : null;
+          var children = node['children'];
+          isParent = children && children.length > 0;
+        } else {
+          var children = node['children'];
+          if (children && children.length > 0) {
+            children.forEach(function (n) {
+              _check(n, node);
+            });
+          }
+        }
+      };
+
+      _check(data, null);
+
+      onItemSelect({
+        e: e,
+        id: nodeId,
+        isParent: isParent,
+        parentId: parentId,
+      });
+      // console.log('parentId:' + parentId);
+      // console.log('isParent:' + isParent);
+    }
+  }
+
   const renderTree = (nodes) =>
     nodes && (
       <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
@@ -59,6 +97,7 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSel
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={expanded}
       selected={selected}
+      onNodeSelect={onNodeSelect}
     >
       {renderTree(data)}
     </TreeView>

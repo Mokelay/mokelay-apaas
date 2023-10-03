@@ -51,6 +51,22 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ onViewSelect }, ref) {
           //设置编辑区域位置
           setEditPosition(window.__Mokelay._Edit._Iframe.getBoundingClientRect());
         },
+        //Select View
+        selectView: function ({ e }, viewUUID, isContainer, containerUUID) {
+          console.log('Select view:');
+          console.log(arguments);
+
+          //只对非容器的View做选择处理
+          if (!isContainer) {
+            var data = { x: e.clientX, y: e.clientY };
+            data['eventName'] = 'onSelectView';
+            data['containerUUID'] = containerUUID;
+            data['viewUUID'] = viewUUID;
+
+            console.log(data);
+            actionEvent(data);
+          }
+        },
       };
     },
     [],
@@ -155,6 +171,15 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ onViewSelect }, ref) {
       if (onViewSelect) {
         onViewSelect({ viewUUID: _mouseViewUUID });
       }
+    } else if (eventName == 'onSelectView') {
+      //激活编辑div
+      setActive(true);
+
+      //显示选中的dom，并且记录到window下面
+      setOpZone(_allView[data['viewUUID']] || null);
+
+      //把编辑的UUID记录到window下面
+      window.__Mokelay._Edit._Edit_View_UUID = _mouseViewUUID || null;
     } else if (eventName == 'onScroll') {
       setChildrenPositions(
         _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),

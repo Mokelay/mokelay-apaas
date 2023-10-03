@@ -35,7 +35,31 @@
           "dimensions": {
             "xs": 2
           }
-        }
+        },
+        "actions": [
+          {
+            "eventCodeName": "onItemSelect",
+            "targetUUId": "view_layout_edit",
+            "methodCodeName": "selectView",
+            "paramsData": [
+              {
+                "dataType": "String",
+                "sourceType": "DataByChooseVar",
+                "optVarPath": "id"
+              },
+              {
+                "dataType": "Boolean",
+                "sourceType": "DataByChooseVar",
+                "optVarPath": "isParent"
+              },
+              {
+                "dataType": "String",
+                "sourceType": "DataByChooseVar",
+                "optVarPath": "parentId"
+              }
+            ]
+          }
+        ]
       },
       {
         "uuid": "view_iframe",
