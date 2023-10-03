@@ -36,16 +36,10 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSel
         //SelectItems
         selectItems: function ({ ...args }, selectIds) {
           console.log('select item ..');
-          console.log(selectIds);
-          console.log(args);
+          console.log(arguments);
 
-          //TODO 如何传递selectIds参数
-          //TODO 目前是从args业务事件参数重读取到
-          if (selectIds) {
-            setSelected(selectIds);
-          } else {
-            setSelected([args['viewUUID']]);
-          }
+          //TODO 如何传递selectIds 数组参数
+          setSelected([selectIds]);
         },
       };
     },

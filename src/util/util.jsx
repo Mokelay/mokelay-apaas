@@ -162,12 +162,13 @@ export default {
   },
 
   //Get TemplateObject
-  getTemplateObject: function () {
+  getTemplateObject: function (currentData) {
     return Object.assign(
       {},
       window.__Mokelay.VarCenter.get('InternalVar'),
       window.__Mokelay.InternalFunc,
       window.__Mokelay.VarCenter.get('CustomVar'),
+      currentData,
     );
   },
 
@@ -212,19 +213,19 @@ export default {
   },
 
   //Data Transfer ALl
-  dataTransferAll: function (dataTransferArr) {
+  dataTransferAll: function (dataTransferArr, currentData) {
     var t = this;
     var r = [];
     if (dataTransferArr) {
       dataTransferArr.forEach(function (d) {
-        r.push(t.dataTransfer(d));
+        r.push(t.dataTransfer(d, currentData));
       });
     }
     return r;
   },
 
   //Data Transfer
-  dataTransfer: function (dataTransfer) {
+  dataTransfer: function (dataTransfer, currentData) {
     var t = this;
     if (typeof dataTransfer == 'object') {
       //如何事配置，则进行解析
@@ -240,7 +241,10 @@ export default {
         var transferType = dataTransfer['transferType'];
         var transferConfig = dataTransfer['transferConfig'];
 
-        var rootObj = t.getTemplateObject();
+        var rootObj = t.getTemplateObject(currentData);
+        console.log('###Template Obj:###');
+        console.log(rootObj);
+        console.log('###################');
         var v = _.get(rootObj, optVarPath);
         if (transferType == 'FieldKeyTransfer') {
           //转化Tree/Object/Array中的节点字段配置
@@ -251,6 +255,37 @@ export default {
     } else {
       //直接返回
       return dataTransfer;
+    }
+  },
+
+  /**
+   * 统一的Event Emit
+   * 主要调用来源
+   * 1. m_ui 自定义变量的event
+   * 2. m_view 组件的event
+   * @param {*} args
+   * @param {*} act
+   */
+  eventEmit: function (args, act) {
+    var t = this;
+    var targetUUId = act['targetUUId'];
+    var methodCodeName = act['methodCodeName'];
+    var paramsData = act['paramsData'] || [];
+
+    var targetRef = window.__Mokelay.ComponentInstantMap[targetUUId];
+    if (targetRef) {
+      var targetEl = targetRef['ref']['current'];
+      var method = targetEl[methodCodeName];
+      if (method) {
+        method(args, ...t.dataTransferAll(paramsData, args));
+      } else {
+        console.log('Can not find method:' + methodCodeName);
+      }
+    } else {
+      console.log('Can not find target dom:' + targetUUId);
+      console.log('Begin Show window.__Mokelay.ComponentInstantMap');
+      console.log(window.__Mokelay.ComponentInstantMap);
+      console.log('End Show window.__Mokelay.ComponentInstantMap');
     }
   },
 };

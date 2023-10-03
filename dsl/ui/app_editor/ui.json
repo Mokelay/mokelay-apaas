@@ -93,7 +93,13 @@
             "eventCodeName": "onViewSelect",
             "targetUUId": "view_tree",
             "methodCodeName": "selectItems",
-            "paramsData": []
+            "paramsData": [
+              {
+                "dataType": "String",
+                "sourceType": "DataByChooseVar",
+                "optVarPath": "viewUUID"
+              }
+            ]
           }
         ]
       }

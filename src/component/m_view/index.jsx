@@ -104,25 +104,8 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
     var actions = view['actions'] || [];
     actions.map(function (action) {
       var eventCodeName = action['eventCodeName'];
-      var targetUUId = action['targetUUId'];
-      var methodCodeName = action['methodCodeName'];
-      var paramsData = action['paramsData'] || [];
       pros[eventCodeName] = function ({ ...args }) {
-        // console.log('args:');
-        // console.log(args);
-        // console.log('arguments:');
-        // console.log(arguments);
-        var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId]['ref'];
-        if (targetEl) {
-          var method = targetEl['current'][methodCodeName];
-          if (method) {
-            method(args, ...Util.dataTransferAll(paramsData));
-          } else {
-            console.log('Can not find method:' + methodCodeName);
-          }
-        } else {
-          console.log('Can not find target dom:' + targetUUId);
-        }
+        Util.eventEmit(args, action);
       };
     });
   }

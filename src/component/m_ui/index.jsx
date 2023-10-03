@@ -56,30 +56,8 @@ export default function M_UI({ ui }) {
         if (valueChangeActions.length > 0) {
           valueChangeActions.forEach(function (act) {
             var f = function (newData) {
-              console.log('###Begin to update var action###');
-              console.log(newData);
-              console.log('################################');
-              var targetUUId = act['targetUUId'];
-              var methodCodeName = act['methodCodeName'];
-              var paramsData = act['paramsData'];
-
-              var comIns = window.__Mokelay.ComponentInstantMap[targetUUId];
-              if (comIns && comIns['ref']) {
-                var targetEl = comIns['ref'];
-                var method = targetEl['current'][methodCodeName];
-                if (method) {
-                  method({ newData: newData }, ...Util.dataTransferAll(paramsData));
-                } else {
-                  console.log('Can not find method:' + methodCodeName);
-                }
-              } else {
-                console.log('Can not find target dom:' + targetUUId);
-                console.log('Begin Show window.__Mokelay.ComponentInstantMap');
-                console.log(window.__Mokelay.ComponentInstantMap);
-                console.log('End Show window.__Mokelay.ComponentInstantMap');
-              }
+              Util.eventEmit({ newData: newData }, act);
             };
-
             console.log(varPath + ' is on .');
             window.__Mokelay.VarCenter.on(varPath, function (newData) {
               setTimeout(f, 1, newData);
