@@ -3,6 +3,7 @@
  *  Tree
  *
  * */
+import _ from 'lodash';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -38,8 +39,7 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSel
           console.log('select item ..');
           console.log(arguments);
 
-          //TODO 如何传递selectIds 数组参数
-          setSelected([selectIds]);
+          setSelected(_.isArray(selectIds) ? selectIds : [selectIds]);
         },
       };
     },
