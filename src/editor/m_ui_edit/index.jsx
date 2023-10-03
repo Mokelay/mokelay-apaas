@@ -14,7 +14,7 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined';
  *
  *
  */
-const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
+const M_Ui_Edit = forwardRef(function M_Ui_Edit({ onViewSelect }, ref) {
   const [active, setActive] = useState(false);
 
   //编辑区域位置
@@ -43,7 +43,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
         /**
          * 激活布局编辑
          */
-        active: function (e) {
+        active: function ({ e }) {
           //激活编辑模式
           // setActive(true);
           //设置编辑层所在iframe
@@ -150,6 +150,11 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit(props, ref) {
 
       //把编辑的UUID记录到window下面
       window.__Mokelay._Edit._Edit_View_UUID = _mouseViewUUID || null;
+
+      //把选中的View通过事件fire出去
+      if (onViewSelect) {
+        onViewSelect({ viewUUID: _mouseViewUUID });
+      }
     } else if (eventName == 'onScroll') {
       setChildrenPositions(
         _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),

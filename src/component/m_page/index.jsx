@@ -95,15 +95,60 @@ const M_Page = forwardRef(function M_Page(
       <Grid
         container
         spacing={spacing}
-        onMouseDown={onMouseDown}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onMouseMove={onMouseMove}
-        onMouseOut={onMouseOut}
-        onMouseOver={onMouseOver}
-        onMouseUp={onMouseUp}
-        onClick={onClick}
-        onDrag={onDrag}
+        onMouseDown={
+          onMouseDown &&
+          function (e) {
+            onMouseDown({ e: e });
+          }
+        }
+        onMouseEnter={
+          onMouseEnter &&
+          function (e) {
+            onMouseEnter({ e: e });
+          }
+        }
+        onMouseLeave={
+          onMouseLeave &&
+          function (e) {
+            onMouseLeave({ e: e });
+          }
+        }
+        onMouseMove={
+          onMouseMove &&
+          function (e) {
+            onMouseMove({ e: e });
+          }
+        }
+        onMouseOut={
+          onMouseOut &&
+          function (e) {
+            onMouseOut({ e: e });
+          }
+        }
+        onMouseOver={
+          onMouseOver &&
+          function (e) {
+            onMouseOver({ e: e });
+          }
+        }
+        onMouseUp={
+          onMouseUp &&
+          function (e) {
+            onMouseUp({ e: e });
+          }
+        }
+        onClick={
+          onClick &&
+          function (e) {
+            onClick({ e: e });
+          }
+        }
+        onDrag={
+          onDrag &&
+          function (e) {
+            onDrag({ e: e });
+          }
+        }
       >
         {children.map(function (view) {
           return <ChildRender view={view} key={'m_page_child_' + view.uuid} />;

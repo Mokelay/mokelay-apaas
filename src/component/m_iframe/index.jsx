@@ -29,10 +29,13 @@ const M_Iframe = forwardRef(function M_Iframe({ url, onLoad, styles }, ref) {
 
   useEffect(() => {
     if (onLoad) {
-      iframeRef.current.addEventListener('load', onLoad);
+      var f = function (e) {
+        onLoad({ e: e });
+      };
+      iframeRef.current.addEventListener('load', f);
       return () => {
         if (iframeRef && iframeRef.current) {
-          iframeRef.current.removeEventListener('load', onLoad);
+          iframeRef.current.removeEventListener('load', f);
         }
       };
     }

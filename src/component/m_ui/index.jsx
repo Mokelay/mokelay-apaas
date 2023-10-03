@@ -68,7 +68,7 @@ export default function M_UI({ ui }) {
                 var targetEl = comIns['ref'];
                 var method = targetEl['current'][methodCodeName];
                 if (method) {
-                  method(null, ...Util.dataTransferAll(paramsData));
+                  method({ newData: newData }, ...Util.dataTransferAll(paramsData));
                 } else {
                   console.log('Can not find method:' + methodCodeName);
                 }

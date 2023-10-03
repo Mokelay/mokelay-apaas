@@ -11,23 +11,41 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
-const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [] }, ref) {
+const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [], initSelected = [] }, ref) {
   const [data, setData] = useState(initData);
   const [expanded, setExpanded] = useState(initExpanded);
+  const [selected, setSelected] = useState(initSelected);
 
   useImperativeHandle(
     ref,
     () => {
       return {
-        loadData: function (e, d) {
+        loadData: function ({ ...args }, d) {
           console.log('####Tree begin to load Data####');
           console.log(d);
+          console.log(args);
           console.log('###############################');
 
           setData(d);
           //默认展开第一级
           //TODO 如何配置展开的节点
-          setExpanded([d['id']]);
+          if (d) {
+            setExpanded([d['id']]);
+          }
+        },
+        //SelectItems
+        selectItems: function ({ ...args }, selectIds) {
+          console.log('select item ..');
+          console.log(selectIds);
+          console.log(args);
+
+          //TODO 如何传递selectIds参数
+          //TODO 目前是从args业务事件参数重读取到
+          if (selectIds) {
+            setSelected(selectIds);
+          } else {
+            setSelected([args['viewUUID']]);
+          }
         },
       };
     },
@@ -46,6 +64,7 @@ const M_Tree = forwardRef(function M_Tree({ initData, initExpanded = [] }, ref) 
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={expanded}
+      selected={selected}
     >
       {renderTree(data)}
     </TreeView>

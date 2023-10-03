@@ -87,7 +87,15 @@
         "name": "编辑器",
         "component": "M_Ui_Edit",
         "category": "Single",
-        "attributes": []
+        "attributes": [],
+        "actions": [
+          {
+            "eventCodeName": "onViewSelect",
+            "targetUUId": "view_tree",
+            "methodCodeName": "selectItems",
+            "paramsData": []
+          }
+        ]
       }
     ]
   },

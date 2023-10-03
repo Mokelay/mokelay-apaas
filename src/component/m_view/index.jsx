@@ -71,7 +71,7 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
     //TODO 这段逻辑如何可配置话
     //如果是编辑状态，不渲染任何事件，并且判断是不是容器，如果是容器，需要增加编辑所需要的事件和数据；
     if (view['category'] == 'Container') {
-      var f = function (e) {
+      var f = function ({ e: e }) {
         // TODO 封装需要传递给父级编辑层的数据
         var data = {};
         // console.log(e);
@@ -107,13 +107,16 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
       var targetUUId = action['targetUUId'];
       var methodCodeName = action['methodCodeName'];
       var paramsData = action['paramsData'] || [];
-      pros[eventCodeName] = function (e) {
+      pros[eventCodeName] = function ({ ...args }) {
+        // console.log('args:');
+        // console.log(args);
+        // console.log('arguments:');
         // console.log(arguments);
         var targetEl = window.__Mokelay.ComponentInstantMap[targetUUId]['ref'];
         if (targetEl) {
           var method = targetEl['current'][methodCodeName];
           if (method) {
-            method(e, ...Util.dataTransferAll(paramsData));
+            method(args, ...Util.dataTransferAll(paramsData));
           } else {
             console.log('Can not find method:' + methodCodeName);
           }
