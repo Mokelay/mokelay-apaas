@@ -127,6 +127,7 @@ var APP_UI_Loader = function ({ initUI }) {
         // console.log(e);
         try {
           if (typeof e.data == 'string') {
+            // console.log(JSON.parse(e.data));
             updateUI(JSON.parse(e.data));
           }
         } catch (error) {

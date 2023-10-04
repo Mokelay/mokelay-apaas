@@ -43,8 +43,9 @@ export default {
     // dsl['view']['name'] = '哈哈';
     var path = this.getViewPath(uuid);
     // console.log(path);
-    _.set(dsl, path + '.styles.dimensions.xs', gridNumber);
-    console.log(dsl);
+    // console.log(gridNumber);
+    _.set(dsl, path + '.styles.dimensions.xs', parseInt(gridNumber));
+    // console.log(dsl);
     this.setDSL(dsl);
   },
 };
