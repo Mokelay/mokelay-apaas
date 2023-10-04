@@ -100,8 +100,8 @@ const M_View_Operation = function ({ position, opZone, onResizeBegin, onResizeEn
     setBeginResize(false);
 
     //复原Width/Left
-    barRef.current.style.width = opZone.width + 'px';
-    barRef.current.style.left = opZone.left + 'px';
+    // barRef.current.style.width = opZone.width + 'px';
+    // barRef.current.style.left = opZone.left + 'px';
 
     if (onResizeEnd) {
       //把grid number 数据传递出去

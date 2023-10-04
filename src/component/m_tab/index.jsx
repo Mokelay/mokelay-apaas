@@ -1,11 +1,17 @@
+import { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
+
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
 /**
  * M_Tab
  *
  * */
 // eslint-disable-next-line no-unused-vars
-import { forwardRef, useImperativeHandle } from 'react';
 
-const M_Tab = forwardRef(function M_Tab(props, ref) {
+const M_Tab = forwardRef(function M_Tab({ tabs = [], index = 0 }, ref) {
+  const [value, setValue] = useState(index);
+
   useImperativeHandle(
     ref,
     () => {
@@ -14,6 +20,24 @@ const M_Tab = forwardRef(function M_Tab(props, ref) {
     [],
   );
 
-  return <span ref={ref}></span>;
+  const changeTab = (event, newValue) => {
+    console.log('change tab');
+    console.log(newValue);
+    setValue(newValue);
+  };
+
+  return (
+    <Tabs
+      value={value}
+      onChange={changeTab}
+      variant="scrollable"
+      scrollButtons="auto"
+      aria-label="scrollable auto tabs example"
+    >
+      {tabs.map((t) => (
+        <Tab label={t.label} key={t.value} />
+      ))}
+    </Tabs>
+  );
 });
 export default M_Tab;

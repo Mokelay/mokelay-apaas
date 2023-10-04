@@ -92,14 +92,27 @@
         ]
       },
       {
-        "uuid": "view_1_2_3_d",
-        "name": "文本2",
-        "component": "M_Text",
+        "uuid": "view_setting_panel",
+        "name": "配置面板",
+        "component": "M_Tab",
         "category": "Single",
         "attributes": [
           {
-            "varCodeName": "initContent",
-            "value": "属性面板"
+            "varCodeName": "tabs",
+            "value": [
+              {
+                "label": "属性",
+                "value": 0
+              },
+              {
+                "label": "样式",
+                "value": 1
+              },
+              {
+                "label": "事件",
+                "value": 2
+              }
+            ]
           }
         ],
         "styles": {

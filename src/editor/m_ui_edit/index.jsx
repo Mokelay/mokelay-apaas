@@ -53,9 +53,8 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
         },
         //Select View
         selectView: function ({ e }, viewUUID, isContainer, containerUUID) {
-          console.log('Select view:');
-          console.log(arguments);
-
+          // console.log('Select view:');
+          // console.log(arguments);
           //只对非容器的View做选择处理
           if (!isContainer) {
             var data = { x: e.clientX, y: e.clientY };
