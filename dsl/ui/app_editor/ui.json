@@ -94,7 +94,7 @@
       {
         "uuid": "view_setting_panel",
         "name": "配置面板",
-        "component": "M_Tab",
+        "component": "M_Tabs",
         "category": "Single",
         "attributes": [
           {

@@ -4,12 +4,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 /**
- * M_Tab
+ * M_Tabs
  *
  * */
 // eslint-disable-next-line no-unused-vars
 
-const M_Tab = forwardRef(function M_Tab({ tabs = [], index = 0 }, ref) {
+const M_Tabs = forwardRef(function M_Tabs({ tabs = [], index = 0 }, ref) {
   const [value, setValue] = useState(index);
 
   useImperativeHandle(
@@ -40,4 +40,4 @@ const M_Tab = forwardRef(function M_Tab({ tabs = [], index = 0 }, ref) {
     </Tabs>
   );
 });
-export default M_Tab;
+export default M_Tabs;
