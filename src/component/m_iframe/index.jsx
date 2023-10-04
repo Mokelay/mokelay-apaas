@@ -22,23 +22,36 @@ const M_Iframe = forwardRef(function M_Iframe({ url, onLoad, styles }, ref) {
   useImperativeHandle(
     ref,
     () => {
-      return {};
+      return {
+        postMessage: function ({ ...args }, message) {
+          iframeRef.current.contentWindow.postMessage(JSON.stringify(message), '*');
+        },
+        getBoundingClientRect: function () {
+          return iframeRef.current.getBoundingClientRect();
+        },
+        getMokelay: function () {
+          return iframeRef.current.contentWindow.__Mokelay;
+        },
+        getWindow: function () {
+          return iframeRef.current.contentWindow;
+        },
+      };
     },
     [],
   );
 
   useEffect(() => {
-    if (onLoad) {
-      var f = function (e) {
+    var f = function (e) {
+      if (onLoad) {
         onLoad({ e: e });
-      };
-      iframeRef.current.addEventListener('load', f);
-      return () => {
-        if (iframeRef && iframeRef.current) {
-          iframeRef.current.removeEventListener('load', f);
-        }
-      };
-    }
+      }
+    };
+    iframeRef.current.addEventListener('load', f);
+    return () => {
+      if (iframeRef && iframeRef.current) {
+        iframeRef.current.removeEventListener('load', f);
+      }
+    };
   }, []);
 
   return <iframe ref={iframeRef} src={url} style={sx} />;

@@ -27,7 +27,7 @@ const M_Tree = forwardRef(function M_Tree(
         loadData: function ({ ...args }, d) {
           console.log('####Tree begin to load Data####');
           console.log(d);
-          console.log(args);
+          // console.log(args);
           console.log('###############################');
 
           setData(d);

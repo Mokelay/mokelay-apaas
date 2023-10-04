@@ -62,16 +62,11 @@
         ]
       },
       {
-        "uuid": "view_iframe",
-        "name": "编辑Ifram",
-        "component": "M_Iframe",
+        "uuid": "view_layout_edit",
+        "name": "编辑器",
+        "component": "M_Ui_Edit",
         "category": "Single",
-        "attributes": [
-          {
-            "varCodeName": "url",
-            "value": "edit.html#/{{getQueryValue('app')}}/{{getQueryValue('ui')}}"
-          }
-        ],
+        "attributes": [],
         "styles": {
           "dimensions": {
             "xs": 8,
@@ -83,9 +78,16 @@
         },
         "actions": [
           {
-            "eventCodeName": "onLoad",
-            "targetUUId": "view_layout_edit",
-            "methodCodeName": "active"
+            "eventCodeName": "onViewSelect",
+            "targetUUId": "view_tree",
+            "methodCodeName": "selectItems",
+            "paramsData": [
+              {
+                "dataType": "String",
+                "sourceType": "DataByChooseVar",
+                "optVarPath": "viewUUID"
+              }
+            ]
           }
         ]
       },
@@ -105,27 +107,6 @@
             "xs": 2
           }
         }
-      },
-      {
-        "uuid": "view_layout_edit",
-        "name": "编辑器",
-        "component": "M_Ui_Edit",
-        "category": "Single",
-        "attributes": [],
-        "actions": [
-          {
-            "eventCodeName": "onViewSelect",
-            "targetUUId": "view_tree",
-            "methodCodeName": "selectItems",
-            "paramsData": [
-              {
-                "dataType": "String",
-                "sourceType": "DataByChooseVar",
-                "optVarPath": "viewUUID"
-              }
-            ]
-          }
-        ]
       }
     ]
   },
@@ -225,6 +206,18 @@
               "transferConfig": {
                 "uuid": "id"
               }
+            }
+          ]
+        },
+        {
+          "targetUUId": "view_layout_edit",
+          "methodCodeName": "loadDSL",
+          "paramsData": [
+            {
+              "dataType": "Tree",
+              "sourceType": "DataByChooseVar",
+              "optVarUUID": "custom_vars_00001",
+              "optVarPath": "ui_dsl"
             }
           ]
         }

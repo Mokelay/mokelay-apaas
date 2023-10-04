@@ -90,35 +90,51 @@ var APP_UI_Loader = function ({ initUI }) {
   //检查UI配置的合法性
   useEffect(() => {
     var app = null;
-    try {
-      Util.get('/dsl/ui/' + appUUID + '.json')
-        .then(function (res) {
-          app = res['data'];
+    if (!window.__Mokelay.Is_Edit_Status) {
+      try {
+        Util.get('/dsl/ui/' + appUUID + '.json')
+          .then(function (res) {
+            app = res['data'];
 
-          Util.get(
-            '/dsl/ui/' +
-              appUUID +
-              '/' +
-              (typeof uiUUID == 'undefined' ? app['pages']['Page_Default'] : uiUUID) +
-              '.json',
-          )
-            .then(function (res) {
-              updateUI(res['data']);
-            })
-            .catch(function (res) {
-              // console.log(res);
-              //找不到页面，返回404
-              updateUI(null);
-              navigate('/' + appUUID + '/' + app['pages']['Page_404']);
-            });
-        })
-        .catch(function () {
-          //找不到APP ，默认导航到app_editor应用
-          updateUI(null);
-          navigate('/app_editor');
-        });
-    } catch (err) {
-      // console.log(err);
+            Util.get(
+              '/dsl/ui/' +
+                appUUID +
+                '/' +
+                (typeof uiUUID == 'undefined' ? app['pages']['Page_Default'] : uiUUID) +
+                '.json',
+            )
+              .then(function (res) {
+                updateUI(res['data']);
+              })
+              .catch(function (res) {
+                // console.log(res);
+                //找不到页面，返回404
+                updateUI(null);
+                navigate('/' + appUUID + '/' + app['pages']['Page_404']);
+              });
+          })
+          .catch(function () {
+            //找不到APP ，默认导航到app_editor应用
+            updateUI(null);
+            navigate('/app_editor');
+          });
+      } catch (err) {
+        // console.log(err);
+      }
+    } else {
+      //编辑状态的UI信息来自Message
+      var f = function (e) {
+        // console.log(e);
+        try {
+          if (typeof e.data == 'string') {
+            updateUI(JSON.parse(e.data));
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      window.addEventListener('message', f);
     }
   }, [uiUUID]);
 
