@@ -46,8 +46,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
       return {
         //Load DSL
         loadDSL: function ({ ...args }, dsl) {
-          //TODO 如何确保iframe加载完成后进行post message
-
+          //用全局变量来确保iframe加载完成后进行post message
           if (window.__Mokelay._Edit._Iframe_Loaded) {
             editIframe.current.postMessage({}, dsl);
           } else {
