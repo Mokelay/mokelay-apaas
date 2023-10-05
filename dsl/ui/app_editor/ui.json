@@ -26,40 +26,116 @@
         }
       },
       {
-        "uuid": "view_tree",
-        "name": "组件树",
-        "component": "M_Tree",
+        "uuid": "view_function_panel",
+        "name": "功能面板",
+        "component": "M_Tabs",
         "category": "Single",
-        "attributes": [],
+        "attributes": [
+          {
+            "varCodeName": "tabs",
+            "value": [
+              {
+                "label": "组件",
+                "value": 0
+              },
+              {
+                "label": "大纲树",
+                "value": 1
+              },
+              {
+                "label": "页面数据",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "varCodeName": "index",
+            "value": 1
+          }
+        ],
+        "children": [
+          {
+            "uuid": "view_panel_component",
+            "name": "组件面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "0"
+              }
+            ],
+            "children": []
+          },
+          {
+            "uuid": "view_panel_tree",
+            "name": "大纲树面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "1"
+              }
+            ],
+            "children": [
+              {
+                "uuid": "view_tree",
+                "name": "组件树",
+                "component": "M_Tree",
+                "category": "Single",
+                "attributes": [],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                },
+                "actions": [
+                  {
+                    "eventCodeName": "onItemSelect",
+                    "targetUUId": "view_layout_edit",
+                    "methodCodeName": "selectView",
+                    "paramsData": [
+                      {
+                        "dataType": "String",
+                        "sourceType": "DataByChooseVar",
+                        "optVarPath": "id"
+                      },
+                      {
+                        "dataType": "Boolean",
+                        "sourceType": "DataByChooseVar",
+                        "optVarPath": "isParent"
+                      },
+                      {
+                        "dataType": "String",
+                        "sourceType": "DataByChooseVar",
+                        "optVarPath": "parentId"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "uuid": "view_panel_data",
+            "name": "页面数据面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "2"
+              }
+            ],
+            "children": []
+          }
+        ],
         "styles": {
           "dimensions": {
             "xs": 2
           }
-        },
-        "actions": [
-          {
-            "eventCodeName": "onItemSelect",
-            "targetUUId": "view_layout_edit",
-            "methodCodeName": "selectView",
-            "paramsData": [
-              {
-                "dataType": "String",
-                "sourceType": "DataByChooseVar",
-                "optVarPath": "id"
-              },
-              {
-                "dataType": "Boolean",
-                "sourceType": "DataByChooseVar",
-                "optVarPath": "isParent"
-              },
-              {
-                "dataType": "String",
-                "sourceType": "DataByChooseVar",
-                "optVarPath": "parentId"
-              }
-            ]
-          }
-        ]
+        }
       },
       {
         "uuid": "view_layout_edit",

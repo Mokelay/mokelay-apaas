@@ -273,19 +273,19 @@ export default {
     var paramsData = act['paramsData'] || [];
 
     var targetRef = window.__Mokelay.ComponentInstantMap[targetUUId];
-    if (targetRef) {
+    if (targetRef && targetRef['ref'] && targetRef['ref']['current']) {
       var targetEl = targetRef['ref']['current'];
       var method = targetEl[methodCodeName];
       if (method) {
         method(args, ...t.dataTransferAll(paramsData, args));
       } else {
-        console.log('Can not find method:' + methodCodeName);
+        console.error('Can not find method:' + methodCodeName);
       }
     } else {
-      console.log('Can not find target dom:' + targetUUId);
-      console.log('Begin Show window.__Mokelay.ComponentInstantMap');
-      console.log(window.__Mokelay.ComponentInstantMap);
-      console.log('End Show window.__Mokelay.ComponentInstantMap');
+      console.error('Can not find target dom:' + targetUUId);
+      console.error('Begin Show window.__Mokelay.ComponentInstantMap');
+      console.error(window.__Mokelay.ComponentInstantMap);
+      console.error('End Show window.__Mokelay.ComponentInstantMap');
     }
   },
 };
