@@ -28,6 +28,24 @@ Object.values(baseComponents).forEach(function (baseComp) {
 window.__Mokelay.ComponentMap = ComponentMap;
 
 /**
+ * 加载组件库的DESC
+ *
+ * TODO 仅在编辑器中需要加载,渲染状态不需要
+ */
+// eslint-disable-next-line react-refresh/only-export-components
+const ComponentDescMap = {};
+const descComponents = import.meta.globEager(['./component/*/desc.jsx', './editor/*/desc.jsx']);
+Object.values(descComponents).forEach(function (descComp) {
+  // console.log(descComp);
+  var compName = descComp.default.tagName;
+  if (compName == undefined) {
+    compName = descComp.default.render.name;
+  }
+  ComponentDescMap[compName] = descComp.default;
+});
+window.__Mokelay.ComponentDescMap = ComponentDescMap;
+
+/**
  * TODO 加载自定义组件库，加载完成后，后续还可以还可以动态加载
  */
 

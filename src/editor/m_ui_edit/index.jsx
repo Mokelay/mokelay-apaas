@@ -16,8 +16,6 @@ import SmartButtonOutlinedIcon from '@mui/icons-material/SmartButtonOutlined';
  *
  */
 const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
-  // const [active, setActive] = useState(false);
-
   //Edit Iframe
   const editIframe = useRef(null);
 
@@ -50,9 +48,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
           if (window.__Mokelay._Edit._Iframe_Loaded) {
             editIframe.current.postMessage({}, dsl);
           } else {
-            setTimeout(function () {
-              editIframe.current.postMessage({}, dsl);
-            }, 1000);
+            var interval = setInterval(function () {
+              if (window.__Mokelay._Edit._Iframe_Loaded) {
+                clearInterval(interval);
+                editIframe.current.postMessage({}, dsl);
+              }
+            }, 10);
           }
         },
         //Select View
@@ -99,9 +100,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
    * @param {*} e
    */
   function active({ e }) {
-    //激活编辑模式
-    // setActive(true);
-
     //设置编辑区域位置
     window.__Mokelay._Edit._Iframe_Loaded = true;
     setEditPosition(editIframe.current.getBoundingClientRect());
@@ -146,9 +144,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
     }
 
     if (eventName == 'onMouseEnter') {
-      //激活编辑div
-      // setActive(true);
-
       //显示鼠标所在dom，或者显示所有dom
       setChildrenPositions(
         _mouseViewUUID != null ? [_allView[_mouseViewUUID]] : Object.values(_allView),
@@ -189,9 +184,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
         onViewSelect({ viewUUID: _mouseViewUUID });
       }
     } else if (eventName == 'onSelectView') {
-      //激活编辑div
-      // setActive(true);
-
       //显示选中的dom，并且记录到window下面
       setOpZone(_allView[data['viewUUID']] || null);
 
@@ -212,7 +204,6 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
       DSL.updateGridNumber(window.__Mokelay._Edit._Edit_View_UUID, gridNumber);
     } else if (eventName == 'onMouseLeave') {
       // console.log('leave.............');
-      // setActive(false);
     }
   }
 
