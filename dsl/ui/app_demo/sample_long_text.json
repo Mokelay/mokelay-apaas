@@ -6,7 +6,7 @@
   "description": "这是一个测试DSL",
   "icon": "",
   "view": {
-    "uuid": "view_page_sample_1",
+    "uuid": "view_page_sample_long_text",
     "name": "页面",
     "component": "M_Page",
     "category": "Container",

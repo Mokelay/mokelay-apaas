@@ -179,7 +179,7 @@
       },
       {
         "uuid": "m_tabs_01",
-        "name": "输入框3",
+        "name": "标签01",
         "component": "M_Tabs",
         "category": "Container",
         "attributes": [
@@ -208,7 +208,7 @@
         "children": [
           {
             "uuid": "tab_panel_00",
-            "name": "组件面板",
+            "name": "面板00",
             "component": "M_Tab_Panel",
             "category": "Container",
             "attributes": [

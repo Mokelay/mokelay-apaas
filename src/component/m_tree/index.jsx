@@ -31,10 +31,22 @@ const M_Tree = forwardRef(function M_Tree(
           console.log('###############################');
 
           setData(d);
-          //默认展开第一级
+          //默认展开所有children节点
           //TODO 如何配置展开的节点
           if (d) {
-            setExpanded([d['id']]);
+            var _expanded = [];
+
+            var _f = function (_d) {
+              if (_d['children'] && _d['children'].length > 0) {
+                _expanded.push(_d['id']);
+
+                _d['children'].forEach(function (__d) {
+                  _f(__d);
+                });
+              }
+            };
+            _f(d);
+            setExpanded(_expanded);
           }
         },
         //SelectItems

@@ -23,7 +23,7 @@ const sample1 = {
   description: '这是一个测试DSL',
   icon: '', //待定
   view: {
-    uuid: 'view_page_sample_1',
+    uuid: 'view_page_sample_js',
     name: '页面',
     component: 'M_Page',
     category: 'Container',
