@@ -181,7 +181,10 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
 
       //把选中的View通过事件fire出去
       if (onViewSelect) {
-        onViewSelect({ viewUUID: _mouseViewUUID });
+        var viewComponent =
+          editIframe.current.getMokelay().ComponentInstantMap[_mouseViewUUID].component;
+        var viewDesc = window.__Mokelay.ComponentDescMap[viewComponent];
+        onViewSelect({ viewUUID: _mouseViewUUID, viewDesc: viewDesc });
       }
     } else if (eventName == 'onSelectView') {
       //显示选中的dom，并且记录到window下面

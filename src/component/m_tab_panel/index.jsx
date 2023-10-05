@@ -20,6 +20,11 @@ const M_Tab_Panel = forwardRef(function M_Tab_Panel({ value, ...props }, ref) {
         getChildrenMap() {
           return containerRef.current.getChildrenMap();
         },
+        updateChildren({ ...args }, children) {
+          // console.log(args);
+          // console.log(children);
+          containerRef.current.updateChildren(children);
+        },
       };
     },
     [],

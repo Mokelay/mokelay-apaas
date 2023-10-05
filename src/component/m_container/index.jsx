@@ -16,7 +16,7 @@ import M_View from '../m_view/index';
 const M_Container = forwardRef(function M_Container(
   {
     spacing = 0,
-    children,
+    children = [],
     onMouseDown,
     onMouseEnter,
     onMouseLeave,
@@ -36,13 +36,16 @@ const M_Container = forwardRef(function M_Container(
         getChildrenMap() {
           return childMap.current;
         },
+        //Update Children
+        updateChildren: function (children) {
+          setChildren(children);
+        },
       };
     },
     [],
   );
 
-  children = children || [];
-  // console.log(children);
+  const [nodes, setChildren] = useState(children);
 
   //TODO xs={4} 的设置是在容器里，还是在组件里？
   //TODO Chilref的这个实现方式是否科学？
@@ -127,8 +130,8 @@ const M_Container = forwardRef(function M_Container(
           }
         }
       >
-        {children.map(function (view) {
-          return <ChildRender view={view} key={'m_container_child_' + view.uuid} />;
+        {nodes.map(function (view) {
+          return <ChildRender view={view} key={'m_c_c_' + view.uuid} />;
         })}
       </Grid>
     </Box>
