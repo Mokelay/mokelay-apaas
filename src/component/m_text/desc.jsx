@@ -8,13 +8,17 @@ export default {
   attributesEditorView: [
     {
       uuid: 'view_panel_attribute_01',
-      name: '文本',
-      component: 'M_Text',
+      name: '输入框',
+      component: 'M_Text_Field',
       category: 'Single',
       attributes: [
         {
-          varCodeName: 'initContent',
-          value: '组件属性设置',
+          varCodeName: 'label',
+          value: '文本内容',
+        },
+        {
+          varCodeName: 'variant',
+          value: 'outlined',
         },
       ],
       styles: {
