@@ -47,9 +47,14 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
         //Load DSL
         loadDSL: function ({ ...args }, dsl) {
           //TODO 如何确保iframe加载完成后进行post message
-          setTimeout(function () {
+
+          if (window.__Mokelay._Edit._Iframe_Loaded) {
             editIframe.current.postMessage({}, dsl);
-          }, 1000);
+          } else {
+            setTimeout(function () {
+              editIframe.current.postMessage({}, dsl);
+            }, 1000);
+          }
         },
         //Select View
         selectView: function ({ e }, viewUUID, isContainer, containerUUID) {
@@ -94,11 +99,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
    *
    * @param {*} e
    */
-  function active({ e: e }) {
+  function active({ e }) {
     //激活编辑模式
     // setActive(true);
 
     //设置编辑区域位置
+    window.__Mokelay._Edit._Iframe_Loaded = true;
     setEditPosition(editIframe.current.getBoundingClientRect());
   }
 
