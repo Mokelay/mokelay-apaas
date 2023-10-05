@@ -1,5 +1,11 @@
-# 为研发降本，为企业提效
-# Reduce costs for R&D and Improve efficiency for enterprises
-## mokelay-apaas
+# Mokelay Apaas
+## Introduction
+**Value:** Reduce costs for R&D and Improve efficiency for enterprises
 
-[开发文档](./DEV.md)
+## How to run
+`npm install`
+
+`npm run dev`
+
+## Dev Guide
+[Dev Document](./DEV.md)
