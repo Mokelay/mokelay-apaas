@@ -115,6 +115,101 @@
             ]
           }
         ],
+        "children": [
+          {
+            "uuid": "view_panel_attribute",
+            "name": "属性面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "0"
+              }
+            ],
+            "children": [
+              {
+                "uuid": "view_panel_attribute_01",
+                "name": "文本",
+                "component": "M_Text",
+                "category": "Single",
+                "attributes": [
+                  {
+                    "varCodeName": "initContent",
+                    "value": "组件属性设置"
+                  }
+                ],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "uuid": "view_panel_styles",
+            "name": "样式面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "1"
+              }
+            ],
+            "children": [
+              {
+                "uuid": "view_panel_styles_01",
+                "name": "文本",
+                "component": "M_Text",
+                "category": "Single",
+                "attributes": [
+                  {
+                    "varCodeName": "initContent",
+                    "value": "组件样式设置"
+                  }
+                ],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "uuid": "view_panel_events",
+            "name": "事件面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "2"
+              }
+            ],
+            "children": [
+              {
+                "uuid": "view_panel_events_01",
+                "name": "文本",
+                "component": "M_Text",
+                "category": "Single",
+                "attributes": [
+                  {
+                    "varCodeName": "initContent",
+                    "value": "组件事件设置"
+                  }
+                ],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                }
+              }
+            ]
+          }
+        ],
         "styles": {
           "dimensions": {
             "xs": 2
