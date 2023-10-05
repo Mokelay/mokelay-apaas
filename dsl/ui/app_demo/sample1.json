@@ -35,7 +35,7 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 12
+            "xs": 3
           }
         },
         "events": []
@@ -53,10 +53,129 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 12
+            "xs": 9
           }
         },
         "events": []
+      },
+      {
+        "uuid": "text_field_01",
+        "name": "输入框1",
+        "component": "M_Text_Field",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "label",
+            "value": "文本内容"
+          },
+          {
+            "varCodeName": "variant",
+            "value": "outlined"
+          },
+          {
+            "varCodeName": "name",
+            "value": "content1"
+          },
+          {
+            "varCodeName": "helperText",
+            "value": "This is very important"
+          },
+          {
+            "varCodeName": "error",
+            "value": true
+          },
+          {
+            "varCodeName": "size",
+            "value": "small"
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 4
+          }
+        }
+      },
+      {
+        "uuid": "text_field_02",
+        "name": "输入框2",
+        "component": "M_Text_Field",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "label",
+            "value": "文本内容"
+          },
+          {
+            "varCodeName": "variant",
+            "value": "outlined"
+          },
+          {
+            "varCodeName": "name",
+            "value": "content2"
+          },
+          {
+            "varCodeName": "defaultValue",
+            "value": "测试内容..."
+          },
+          {
+            "varCodeName": "required",
+            "value": true
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 4
+          }
+        }
+      },
+      {
+        "uuid": "text_field_03",
+        "name": "输入框3",
+        "component": "M_Text_Field",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "label",
+            "value": "文本内容"
+          },
+          {
+            "varCodeName": "variant",
+            "value": "outlined"
+          },
+          {
+            "varCodeName": "name",
+            "value": "content3"
+          },
+          {
+            "varCodeName": "defaultValue",
+            "value": "测试内容..."
+          },
+          {
+            "varCodeName": "required",
+            "value": true
+          },
+          {
+            "varCodeName": "multiline",
+            "value": true
+          },
+          {
+            "varCodeName": "rows",
+            "value": 3
+          },
+          {
+            "varCodeName": "size",
+            "value": "small"
+          },
+          {
+            "varCodeName": "fullWidth",
+            "value": true
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 4
+          }
+        }
       }
     ]
   },
