@@ -29,7 +29,7 @@
         "uuid": "view_function_panel",
         "name": "功能面板",
         "component": "M_Tabs",
-        "category": "Single",
+        "category": "Container",
         "attributes": [
           {
             "varCodeName": "tabs",

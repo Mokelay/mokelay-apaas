@@ -176,6 +176,85 @@
             "xs": 4
           }
         }
+      },
+      {
+        "uuid": "m_tabs_01",
+        "name": "输入框3",
+        "component": "M_Tabs",
+        "category": "Container",
+        "attributes": [
+          {
+            "varCodeName": "tabs",
+            "value": [
+              {
+                "label": "Tab0",
+                "value": 0
+              },
+              {
+                "label": "Tab1",
+                "value": 1
+              },
+              {
+                "label": "Tab2",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "varCodeName": "index",
+            "value": 0
+          }
+        ],
+        "children": [
+          {
+            "uuid": "tab_panel_00",
+            "name": "组件面板",
+            "component": "M_Tab_Panel",
+            "category": "Container",
+            "attributes": [
+              {
+                "varCodeName": "value",
+                "value": "0"
+              }
+            ],
+            "children": [
+              {
+                "uuid": "tab_panel_00_text_01",
+                "name": "文本",
+                "component": "M_Text",
+                "category": "Single",
+                "attributes": [
+                  {
+                    "varCodeName": "initContent",
+                    "value": "Tab01:内容01"
+                  }
+                ],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                }
+              },
+              {
+                "uuid": "tab_panel_00_text_02",
+                "name": "文本",
+                "component": "M_Text",
+                "category": "Single",
+                "attributes": [
+                  {
+                    "varCodeName": "initContent",
+                    "value": "Tab01:内容02"
+                  }
+                ],
+                "styles": {
+                  "dimensions": {
+                    "xs": 12
+                  }
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
