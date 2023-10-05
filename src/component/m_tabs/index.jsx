@@ -23,6 +23,7 @@ const M_Tabs = forwardRef(function M_Tabs({ tabs = [], children = [], index = 0 
         getChildrenMap() {
           return childMap.current;
         },
+        // updateTabView: function (index, children) {},
       };
     },
     [],
@@ -45,12 +46,7 @@ const M_Tabs = forwardRef(function M_Tabs({ tabs = [], children = [], index = 0 
   return (
     <>
       <TabContext value={value.toString()}>
-        <TabList
-          onChange={changeTab}
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
-        >
+        <TabList onChange={changeTab} variant="scrollable" scrollButtons="auto">
           {tabs.map((t, index) => (
             <Tab label={t.label} value={index.toString()} key={t.value} />
           ))}
