@@ -102,12 +102,23 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
   } else {
     //如果是非编辑状态，渲染配置的actions
     var actions = view['actions'] || [];
+    var _actMap = {};
     actions.map(function (action) {
       var eventCodeName = action['eventCodeName'];
-      pros[eventCodeName] = function ({ ...args }) {
-        Util.eventEmit(args, action);
-      };
+      if (!_actMap[eventCodeName]) {
+        _actMap[eventCodeName] = [];
+      }
+      _actMap[eventCodeName].push(action);
     });
+    for (var eventCodeName in _actMap) {
+      var _acts = _actMap[eventCodeName];
+      pros[eventCodeName] = function ({ ...args }) {
+        _acts.forEach(function (_act) {
+          // console.log(a);
+          Util.eventEmit(args, _act);
+        });
+      };
+    }
   }
 
   //处理模态

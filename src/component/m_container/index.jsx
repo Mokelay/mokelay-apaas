@@ -38,6 +38,9 @@ const M_Container = forwardRef(function M_Container(
         },
         //Update Children
         updateChildren: function (children) {
+          if (children == null) {
+            children = [];
+          }
           setChildren(children);
         },
       };

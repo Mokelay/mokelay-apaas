@@ -20,6 +20,10 @@ export default {
           varCodeName: 'variant',
           value: 'outlined',
         },
+        {
+          varCodeName: 'name',
+          value: 'initContent',
+        },
       ],
       styles: {
         dimensions: {

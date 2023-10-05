@@ -181,9 +181,12 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
 
       //把选中的View通过事件fire出去
       if (onViewSelect) {
-        var viewComponent =
-          editIframe.current.getMokelay().ComponentInstantMap[_mouseViewUUID].component;
-        var viewDesc = window.__Mokelay.ComponentDescMap[viewComponent];
+        var viewDesc = null;
+        if (_mouseViewUUID != null) {
+          var viewComponent =
+            editIframe.current.getMokelay().ComponentInstantMap[_mouseViewUUID].component;
+          viewDesc = window.__Mokelay.ComponentDescMap[viewComponent];
+        }
         onViewSelect({ viewUUID: _mouseViewUUID, viewDesc: viewDesc });
       }
     } else if (eventName == 'onSelectView') {
