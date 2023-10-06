@@ -38,14 +38,14 @@ export default defineConfig({
   plugins: [
     react(),
     // external 依赖包
-    viteExternalsPlugin(
-      {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-      },
-      {
-        disableInServe: true,
-      },
-    ),
+    // viteExternalsPlugin(
+    //   {
+    //     react: 'React',
+    //     'react-dom': 'ReactDOM',
+    //   },
+    //   {
+    //     disableInServe: true,
+    //   },
+    // ),
   ],
 });

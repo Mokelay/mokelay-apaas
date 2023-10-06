@@ -6,7 +6,7 @@
 
 // import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
@@ -56,6 +56,12 @@ const M_Container = forwardRef(function M_Container({ ...args }, ref) {
   console.table(args['children']);
   console.log('#############################');
   const [nodes, setChildren] = useState(children);
+
+  //监控children的变黄，如果有变化，强制更新
+  //TODO 如果是其他变量有变化呢？
+  useEffect(() => {
+    setChildren(children);
+  }, [children]);
 
   //TODO xs={4} 的设置是在容器里，还是在组件里？
   //TODO Chilref的这个实现方式是否科学？
