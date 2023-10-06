@@ -24,7 +24,7 @@ export default defineConfig({
   },
   build: {
     outDir: './build',
-    // sourcemap: true,
+    sourcemap: true,
     emptyOutDir: true,
     chunkSizeWarningLimit: 1024 * 5,
     rollupOptions: {
