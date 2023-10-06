@@ -183,7 +183,7 @@
         "uuid": "view_setting_panel",
         "name": "配置面板",
         "component": "M_Tabs",
-        "category": "Single",
+        "category": "Container",
         "attributes": [
           {
             "varCodeName": "tabs",

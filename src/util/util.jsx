@@ -242,9 +242,9 @@ export default {
         var transferConfig = dataTransfer['transferConfig'];
 
         var rootObj = t.getTemplateObject(currentData);
-        console.log('###Template Obj:###');
-        console.log(rootObj);
-        console.log('###################');
+        // console.log('###Template Obj:###');
+        // console.log(rootObj);
+        // console.log('###################');
         var v = _.get(rootObj, optVarPath);
         if (transferType == 'FieldKeyTransfer') {
           //转化Tree/Object/Array中的节点字段配置

@@ -58,7 +58,7 @@ export default function M_UI({ ui }) {
             var f = function (newData) {
               Util.eventEmit({ newData: newData }, act);
             };
-            console.log(varPath + ' is on .');
+            console.log('######Var: ' + varPath + ' is on .' + '######');
             window.__Mokelay.VarCenter.on(varPath, function (newData) {
               setTimeout(f, 1, newData);
             });

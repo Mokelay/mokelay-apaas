@@ -25,6 +25,10 @@ const M_Page = forwardRef(function M_Page({ ...props }, ref) {
     [],
   );
 
+  // console.log('##### Render M_Page :');
+  // console.log(props);
+  // console.log('#####################');
+
   return <M_Container {...props} ref={containerRef} />;
 });
 

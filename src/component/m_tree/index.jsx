@@ -25,10 +25,10 @@ const M_Tree = forwardRef(function M_Tree(
     () => {
       return {
         loadData: function ({ ...args }, d) {
-          console.log('####Tree begin to load Data####');
-          console.log(d);
+          // console.log('####Tree begin to load Data####');
+          // console.log(d);
           // console.log(args);
-          console.log('###############################');
+          // console.log('###############################');
 
           setData(d);
           //默认展开所有children节点

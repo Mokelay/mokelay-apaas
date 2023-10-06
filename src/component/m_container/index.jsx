@@ -13,8 +13,8 @@ import Box from '@mui/material/Box';
 import M_View from '../m_view/index';
 
 // eslint-disable-next-line react/prop-types
-const M_Container = forwardRef(function M_Container(
-  {
+const M_Container = forwardRef(function M_Container({ ...args }, ref) {
+  var {
     spacing = 0,
     children = [],
     onMouseDown,
@@ -26,9 +26,9 @@ const M_Container = forwardRef(function M_Container(
     onMouseUp,
     onClick,
     onDrag,
-  },
-  ref,
-) {
+    ...rest
+  } = args;
+
   useImperativeHandle(
     ref,
     () => {
@@ -47,7 +47,14 @@ const M_Container = forwardRef(function M_Container(
     },
     [],
   );
-
+  console.log(
+    '######Render M_Container :',
+    window.__Mokelay.Is_Edit_Status ? '(Edit Status = true)' : '',
+    '########',
+  );
+  console.log(args);
+  console.table(args['children']);
+  console.log('#############################');
   const [nodes, setChildren] = useState(children);
 
   //TODO xs={4} 的设置是在容器里，还是在组件里？
