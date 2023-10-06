@@ -145,9 +145,10 @@ var APP_UI_Loader = function ({ initUI }) {
         // console.log(e);
         try {
           if (typeof e.data == 'string') {
+            var _ui = JSON.parse(e.data);
             // console.log('receive data from parent:');
-            // console.log(JSON.parse(e.data));
-            updateUI(JSON.parse(e.data));
+            // console.log(_ui);
+            updateUI(_ui);
           }
         } catch (error) {
           console.log(error);
@@ -166,20 +167,30 @@ var APP_UI_Loader = function ({ initUI }) {
   }
 };
 
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <Navigate to={'/app_editor/'} />,
-  },
-  {
-    path: '/:app_uuid/',
-    element: <APP_UI_Loader key="appHome" />,
-  },
-  {
-    path: '/:app_uuid/:ui_uuid',
-    element: <APP_UI_Loader key="appUI" />,
-  },
-]);
+var router = null;
+if (window.__Mokelay.Is_Edit_Status) {
+  router = createHashRouter([
+    {
+      path: '/',
+      element: <APP_UI_Loader key="app_loader" />,
+    },
+  ]);
+} else {
+  router = createHashRouter([
+    {
+      path: '/',
+      element: <Navigate to={'/app_editor/'} />,
+    },
+    {
+      path: '/:app_uuid/',
+      element: <APP_UI_Loader key="appHome" />,
+    },
+    {
+      path: '/:app_uuid/:ui_uuid',
+      element: <APP_UI_Loader key="appUI" />,
+    },
+  ]);
+}
 
 /**
  * 开始正式渲染页面，挂载到root节点
