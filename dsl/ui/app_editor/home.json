@@ -16,20 +16,100 @@
     },
     "children": [
       {
-        "uuid": "view_link_1",
+        "uuid": "view_text_1",
         "name": "链接1",
+        "component": "M_Text",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "initContent",
+            "value": "UI 编辑器"
+          }
+        ]
+      },
+      {
+        "uuid": "view_link_1_1",
+        "name": "UI_链接1_1",
         "component": "M_Link",
         "category": "Single",
         "attributes": [
           {
             "varCodeName": "text",
-            "value": "UI 编辑器"
+            "value": "Complex Demo"
           },
           {
             "varCodeName": "url",
-            "value": "#/app_editor/ui?app=app_demo&ui=sample1"
+            "value": "#/app_editor/ui?app=app_demo&ui=sample_complex"
           }
-        ]
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 2
+          }
+        }
+      },
+      {
+        "uuid": "view_link_1_2",
+        "name": "UI_链接1_2",
+        "component": "M_Link",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "text",
+            "value": "Simple Demo"
+          },
+          {
+            "varCodeName": "url",
+            "value": "#/app_editor/ui?app=app_demo&ui=sample_simple"
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 2
+          }
+        }
+      },
+      {
+        "uuid": "view_link_1_3",
+        "name": "UI_链接1_3",
+        "component": "M_Link",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "text",
+            "value": "Long text with scroll"
+          },
+          {
+            "varCodeName": "url",
+            "value": "#/app_editor/ui?app=app_demo&ui=sample_long_text"
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 2
+          }
+        }
+      },
+      {
+        "uuid": "view_link_1_4",
+        "name": "UI_链接1_4",
+        "component": "M_Link",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "text",
+            "value": "Tabs demo"
+          },
+          {
+            "varCodeName": "url",
+            "value": "#/app_editor/ui?app=app_demo&ui=sample_tabs"
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 2
+          }
+        }
       },
       {
         "uuid": "view_link_2",
