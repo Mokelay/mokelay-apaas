@@ -1,5 +1,5 @@
 {
-  "uuid": "sample2",
+  "uuid": "uuid_sample_simple",
   "appUUID": "app_demo",
   "title": "测试页面",
   "status": "Dev",
@@ -23,7 +23,7 @@
     ],
     "children": [
       {
-        "uuid": "view_1",
+        "uuid": "view_text_001",
         "name": "文本",
         "component": "M_Text",
         "category": "Single",
