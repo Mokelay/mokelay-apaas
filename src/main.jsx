@@ -82,14 +82,14 @@ import APP_UI_Loader from './app_ui_loader';
 
 var router = null;
 if (window.__Mokelay.Is_Edit_Status) {
-  router = createHashRouter([
+  router = [
     {
       path: '/',
       element: <APP_UI_Loader key="app_loader" />,
     },
-  ]);
+  ];
 } else {
-  router = createHashRouter([
+  router = [
     {
       path: '/',
       element: <Navigate to={'/app_editor/'} />,
@@ -102,7 +102,7 @@ if (window.__Mokelay.Is_Edit_Status) {
       path: '/:app_uuid/:ui_uuid',
       element: <APP_UI_Loader key="appUI" />,
     },
-  ]);
+  ];
 }
 
 /**
@@ -112,4 +112,4 @@ window.__Mokelay.Root = {};
 if (!window.__Mokelay.Root.El) {
   window.__Mokelay.Root.El = createRoot(document.getElementById('root'));
 }
-window.__Mokelay.Root.El.render(<RouterProvider router={router} />);
+window.__Mokelay.Root.El.render(<RouterProvider router={createHashRouter(router)} />);
