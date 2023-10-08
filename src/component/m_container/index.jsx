@@ -10,8 +10,6 @@ import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 're
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import M_View from '../m_view/index';
-
 // eslint-disable-next-line react/prop-types
 const M_Container = forwardRef(function M_Container({ ...args }, ref) {
   var {
@@ -81,7 +79,7 @@ const M_Container = forwardRef(function M_Container({ ...args }, ref) {
     var xs = dimensions['xs'] || 12;
     return (
       <Grid item xs={xs} ref={gridRef} sx={dimensions}>
-        <M_View initView={view} />
+        <window.__Mokelay.ComponentMap.M_View initView={view} />
       </Grid>
     );
   }
@@ -153,5 +151,6 @@ const M_Container = forwardRef(function M_Container({ ...args }, ref) {
     </Box>
   );
 });
+M_Container.displayName = 'M_Container';
 
 export default M_Container;

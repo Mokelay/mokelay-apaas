@@ -131,4 +131,6 @@ const M_View = forwardRef(function M_View({ initView }, ref) {
   return createElement(window.__Mokelay.ComponentMap[view['component']], pros, childViews);
 });
 
+M_View.displayName = 'M_View';
+
 export default M_View;

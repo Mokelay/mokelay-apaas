@@ -5,8 +5,6 @@ import TabList from '@mui/lab/TabList';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import M_View from '../m_view/index';
-
 /**
  * M_Tabs
  *
@@ -36,7 +34,7 @@ const M_Tabs = forwardRef(function M_Tabs({ tabs = [], children = [], index = 0 
   function ChildRender({ view }) {
     const tabRef = useRef(null);
     childMap.current[view['uuid']] = tabRef;
-    return <M_View initView={view} ref={tabRef} />;
+    return <window.__Mokelay.ComponentMap.M_View initView={view} ref={tabRef} />;
   }
 
   const changeTab = (event, newValue) => {
@@ -60,4 +58,7 @@ const M_Tabs = forwardRef(function M_Tabs({ tabs = [], children = [], index = 0 
     </>
   );
 });
+
+M_Tabs.displayName = 'M_Tabs';
+
 export default M_Tabs;

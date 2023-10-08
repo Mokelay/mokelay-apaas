@@ -57,4 +57,6 @@ const M_Iframe = forwardRef(function M_Iframe({ url, onLoad, styles }, ref) {
   return <iframe ref={iframeRef} src={url} style={sx} />;
 });
 
+M_Iframe.displayName = 'M_Iframe';
+
 export default M_Iframe;

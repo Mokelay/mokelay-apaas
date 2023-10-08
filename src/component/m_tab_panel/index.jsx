@@ -36,4 +36,7 @@ const M_Tab_Panel = forwardRef(function M_Tab_Panel({ value, ...props }, ref) {
     </TabPanel>
   );
 });
+
+M_Tab_Panel.displayName = 'M_Tab_Panel';
+
 export default M_Tab_Panel;

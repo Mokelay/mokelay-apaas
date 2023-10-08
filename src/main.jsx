@@ -1,13 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, useEffect, useState } from 'react';
-import {
-  Navigate,
-  createHashRouter,
-  RouterProvider,
-  useNavigate,
-  useParams,
-  useLocation,
-} from 'react-router-dom';
+import { StrictMode } from 'react';
+import { Navigate, createHashRouter, RouterProvider } from 'react-router-dom';
 
 // 全局样式
 import './styles/index.less';
@@ -21,7 +14,14 @@ const baseComponents = import.meta.globEager(['./component/*/index.jsx', './edit
 Object.values(baseComponents).forEach(function (baseComp) {
   var compName = baseComp.default.name;
   if (compName == undefined) {
-    compName = baseComp.default.render.name;
+    if (baseComp.default.render.name && baseComp.default.render.name.length > 0) {
+      compName = baseComp.default.render.name;
+    } else {
+      compName = baseComp.default.render.displayName;
+    }
+    if (baseComp.default.displayName) {
+      compName = baseComp.default.displayName;
+    }
   }
   ComponentMap[compName] = baseComp.default;
 });
@@ -78,94 +78,7 @@ window.__Mokelay.InternalVarDesc = InternalBuzzs['internalVarDesc'];
 window.__Mokelay.InternalFunc = InternalBuzzs['internalFunc'];
 window.__Mokelay.InternalFuncDesc = InternalBuzzs['internalFuncDesc'];
 
-/**
- * 加载UI的信息
- *
- * @returns M_UI
- */
-var APP_UI_Loader = function ({ initUI }) {
-  //UI信息
-  const [ui, updateUI] = useState(initUI);
-
-  // console.log('begin to load ..:');
-  // console.log(ui);
-  // return <div>AAA</div>;
-
-  //把搜索参数放到VarCenter中，提供给界面配置用
-  window.__Mokelay.VarCenter.set(
-    'InternalVar.URL_Search_Params',
-    new URLSearchParams(useLocation().search),
-  );
-
-  //获取Router中的Params参数
-  const params = useParams();
-  const appUUID = params['app_uuid'];
-  const uiUUID = params['ui_uuid'];
-
-  //重定向对象
-  const navigate = useNavigate();
-
-  //检查UI配置的合法性
-  useEffect(() => {
-    var app = null;
-    if (!window.__Mokelay.Is_Edit_Status) {
-      try {
-        Util.get('/dsl/ui/' + appUUID + '.json')
-          .then(function (res) {
-            app = res['data'];
-
-            Util.get(
-              '/dsl/ui/' +
-                appUUID +
-                '/' +
-                (typeof uiUUID == 'undefined' ? app['pages']['Page_Default'] : uiUUID) +
-                '.json',
-            )
-              .then(function (res) {
-                updateUI(res['data']);
-              })
-              .catch(function (res) {
-                // console.log(res);
-                //找不到页面，返回404
-                updateUI(null);
-                navigate('/' + appUUID + '/' + app['pages']['Page_404']);
-              });
-          })
-          .catch(function () {
-            //找不到APP ，默认导航到app_editor应用
-            updateUI(null);
-            navigate('/app_editor');
-          });
-      } catch (err) {
-        // console.log(err);
-      }
-    } else {
-      //编辑状态的UI信息来自Message
-      var f = function (e) {
-        // console.log(e);
-        try {
-          if (typeof e.data == 'string') {
-            var _ui = JSON.parse(e.data);
-            // console.log('receive data from parent:');
-            // console.log(_ui);
-            updateUI(_ui);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      window.addEventListener('message', f);
-    }
-  }, [uiUUID]);
-
-  if (ui == null) {
-    return <div>NO UI</div>;
-  } else {
-    // console.log('M_UI Render...');
-    return <window.__Mokelay.ComponentMap.M_UI ui={ui} />;
-  }
-};
+import APP_UI_Loader from './app_ui_loader';
 
 var router = null;
 if (window.__Mokelay.Is_Edit_Status) {

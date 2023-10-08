@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, forwardRef, useImperativeHandle } from 'react';
 
-import M_View from '../m_view/index';
 import Util from '../../util/util';
 
 /**
@@ -8,10 +7,18 @@ import Util from '../../util/util';
  *
  * @returns DOM
  */
-export default function M_UI({ ui }) {
+const M_UI = forwardRef(function M_UI({ ui }, ref) {
   //存储所有组件的Key和Ref
   const ComponentInstantMap = {};
   window.__Mokelay.ComponentInstantMap = ComponentInstantMap;
+
+  useImperativeHandle(
+    ref,
+    () => {
+      return {};
+    },
+    [],
+  );
 
   //检查UI配置的合法性
   useEffect(() => {}, []);
@@ -78,5 +85,13 @@ export default function M_UI({ ui }) {
     }
   });
 
-  return ui['view'] ? <M_View initView={ui['view']} /> : <div>NO View</div>;
-}
+  return ui['view'] ? (
+    <window.__Mokelay.ComponentMap.M_View initView={ui['view']} />
+  ) : (
+    <div>NO View</div>
+  );
+});
+
+M_UI.displayName = 'M_UI';
+
+export default M_UI;

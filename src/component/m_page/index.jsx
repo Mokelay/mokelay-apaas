@@ -32,4 +32,6 @@ const M_Page = forwardRef(function M_Page({ ...props }, ref) {
   return <M_Container {...props} ref={containerRef} />;
 });
 
+M_Page.displayName = 'M_Page';
+
 export default M_Page;

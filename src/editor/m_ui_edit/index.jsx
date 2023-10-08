@@ -316,4 +316,6 @@ function DragIcon() {
   );
 }
 
+M_Ui_Edit.displayName = 'M_Ui_Edit';
+
 export default M_Ui_Edit;

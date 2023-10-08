@@ -26,4 +26,6 @@ const M_Text = forwardRef(function M_Text({ initContent, maxLine = 1 }, ref) {
   return <span ref={ref}>{content}</span>;
 });
 
+M_Text.displayName = 'M_Text';
+
 export default M_Text;

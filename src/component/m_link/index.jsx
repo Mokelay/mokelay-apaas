@@ -24,4 +24,6 @@ const M_Link = forwardRef(function M_Link({ text, url }, ref) {
   );
 });
 
+M_Link.displayName = 'M_Link';
+
 export default M_Link;

@@ -115,4 +115,6 @@ const M_Tree = forwardRef(function M_Tree(
   );
 });
 
+M_Tree.displayName = 'M_Tree';
+
 export default M_Tree;
