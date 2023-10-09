@@ -24,6 +24,10 @@
           {
             "varCodeName": "initContent",
             "value": "UI 编辑器"
+          },
+          {
+            "varCodeName": "supportEdit",
+            "value": true
           }
         ]
       },
