@@ -33,18 +33,28 @@ const M_Text = forwardRef(function M_Text(
     }
   };
 
-  var contentChange = function (e) {
-    //TODO
-    //监控keyCode = "Enter"
-    if (onContentChange) {
-      onContentChange({ e: e, content: content });
+  var keyDown = function (e) {
+    // console.log(e);
+    var newContent = e.target.value;
+    if (e.keyCode == 13) {
+      //回车，确认
+      setEditing(false);
+      if (content != newContent) {
+        if (onContentChange) {
+          onContentChange({ e: e, content: newContent });
+        }
+        setContent(newContent);
+      }
+    } else if (e.keyCode == 27) {
+      //ESC ，取消
+      setEditing(false);
     }
   };
 
   return (
     <span ref={ref} onDoubleClick={dbClick}>
       {!editing && content}
-      {editing && <input value={content} onChange={contentChange} />}
+      {editing && <input defaultValue={content} onKeyDown={keyDown} />}
     </span>
   );
 });

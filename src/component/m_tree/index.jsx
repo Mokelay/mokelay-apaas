@@ -10,6 +10,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { TreeView } from '@mui/x-tree-view/TreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
+import M_Text from '../m_text';
+
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
 const M_Tree = forwardRef(function M_Tree(
@@ -95,9 +97,23 @@ const M_Tree = forwardRef(function M_Tree(
     }
   }
 
+  function treeNodeLabelChange() {
+    //TODO 如何同步出更多信息的event？
+  }
+
   const renderTree = (nodes) =>
     nodes && (
-      <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+      <TreeItem
+        key={nodes.id}
+        nodeId={nodes.id}
+        label={
+          <M_Text
+            initContent={nodes.name}
+            supportEdit={true}
+            onContentChange={treeNodeLabelChange}
+          />
+        }
+      >
         {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
       </TreeItem>
     );
