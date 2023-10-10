@@ -10,6 +10,7 @@ export default class LegoNodeView extends HtmlNode {
   constructor(props) {
     super(props);
     this.root = document.createElement('div');
+    this.root.setAttribute('class', 'mokelay-node-container');
     this.reactComponent = View;
   }
   shouldUpdate() {

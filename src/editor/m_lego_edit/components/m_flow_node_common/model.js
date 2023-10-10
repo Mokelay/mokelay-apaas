@@ -1,5 +1,13 @@
 import { HtmlNodeModel } from '@logicflow/core';
-import { NODE_WIDTH, NODE_HEIGHT } from '../const';
+import {
+  NODE_WIDTH,
+  NODE_HEIGHT,
+  LEGO_NODE_WIDTH,
+  LEGO_NODE_HEIGHT,
+  LEGO_NODE_EDIT_WIDTH,
+  LEGO_NODE_EDIT_HEIGHT,
+} from '../../util/const';
+import { noIOFields } from '../../util';
 
 const NEXT_X_DISTANCE = 200;
 const NEXT_Y_DISTANCE = 100;
@@ -9,9 +17,10 @@ const NEXT_Y_DISTANCE = 100;
  */
 export default class LegoNodeModel extends HtmlNodeModel {
   setAttributes() {
-    this.width = NODE_WIDTH;
+    const noIoFieldFlag = noIOFields(this.properties);
+    this.width = noIoFieldFlag ? NODE_WIDTH : LEGO_NODE_WIDTH;
     // this.height = NODE_HEIGHT + 13 * 2;
-    this.height = NODE_HEIGHT;
+    this.height = noIoFieldFlag ? NODE_HEIGHT : LEGO_NODE_HEIGHT;
     this.text.editable = false;
     this.sourceRules.push({
       message: '只允许从下边的锚点连出',
@@ -19,6 +28,19 @@ export default class LegoNodeModel extends HtmlNodeModel {
         return targetAnchor.type === 'incomming';
       },
     });
+  }
+  // 获取输入字段列表
+  getInputFields() {
+    return this.properties.inputFields;
+  }
+  // 获取输出字段列表
+  getOutputFields() {
+    return this.properties.outputFields;
+  }
+  //  选中当前节点
+  editClick() {
+    this.width = LEGO_NODE_EDIT_WIDTH;
+    this.height = LEGO_NODE_EDIT_HEIGHT;
   }
   setHeight(val) {
     this.height = val;
