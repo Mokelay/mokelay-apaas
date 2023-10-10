@@ -8,7 +8,15 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { useState } from 'react';
 
 const M_Text = forwardRef(function M_Text(
-  { initContent, maxLine = 1, supportEdit = false, onContentChange },
+  {
+    textId,
+    initContent,
+    maxLine = 1,
+    supportEdit = false,
+    onContentChange,
+    onContentEdit,
+    onContentEditCancel,
+  },
   ref,
 ) {
   const [content, setContent] = useState(initContent);
@@ -27,9 +35,12 @@ const M_Text = forwardRef(function M_Text(
     [],
   );
 
-  var dbClick = function () {
+  var dbClick = function (e) {
     if (supportEdit) {
       setEditing(true);
+      if (onContentEdit) {
+        onContentEdit({ e: e, textId: textId });
+      }
     }
   };
 
@@ -44,15 +55,21 @@ const M_Text = forwardRef(function M_Text(
           onContentChange({ e: e, content: newContent });
         }
         setContent(newContent);
+      } else if (onContentEditCancel) {
+        //没有内容变化，则触发编辑取消事件
+        onContentEditCancel({ e: e });
       }
     } else if (e.keyCode == 27) {
       //ESC ，取消
       setEditing(false);
+      if (onContentEditCancel) {
+        onContentEditCancel({ e: e });
+      }
     }
   };
 
   return (
-    <span ref={ref} onDoubleClick={dbClick}>
+    <span ref={ref} onDoubleClick={dbClick} textid={textId}>
       {!editing && content}
       {editing && <input defaultValue={content} onKeyDown={keyDown} />}
     </span>

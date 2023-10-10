@@ -12,7 +12,7 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 import M_Text from '../m_text';
 
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 const M_Tree = forwardRef(function M_Tree(
   { initData, initExpanded = [], initSelected = [], onItemSelect },
@@ -21,6 +21,12 @@ const M_Tree = forwardRef(function M_Tree(
   const [data, setData] = useState(initData);
   const [expanded, setExpanded] = useState(initExpanded);
   const [selected, setSelected] = useState(initSelected);
+  const [editNodeId, setEditNodeId] = useState(null);
+
+  //接收来自渲染层的事件和数据
+  useEffect(() => {
+    setEditNodeId(editNodeId);
+  }, [editNodeId]);
 
   useImperativeHandle(
     ref,
@@ -97,8 +103,22 @@ const M_Tree = forwardRef(function M_Tree(
     }
   }
 
+  //Tree Node 内容修改
   function treeNodeLabelChange() {
     //TODO 如何同步出更多信息的event？
+    setEditNodeId(null);
+  }
+
+  //Tree Node开始编辑
+  function treeNodeEdit({ e, textId }) {
+    // console.log(e);
+    // console.log(textId);
+    setEditNodeId(textId);
+  }
+
+  //取消编辑
+  function treeNodeEditCancel() {
+    setEditNodeId(null);
   }
 
   const renderTree = (nodes) =>
@@ -108,9 +128,12 @@ const M_Tree = forwardRef(function M_Tree(
         nodeId={nodes.id}
         label={
           <M_Text
+            textId={nodes.id}
             initContent={nodes.name}
-            supportEdit={true}
+            supportEdit={editNodeId == null || editNodeId == nodes.id}
             onContentChange={treeNodeLabelChange}
+            onContentEdit={treeNodeEdit}
+            onContentEditCancel={treeNodeEditCancel}
           />
         }
       >

@@ -67,7 +67,7 @@ const M_Ui_Edit = forwardRef(function M_Ui_Edit({ styles, onViewSelect }, ref) {
             data['containerUUID'] = containerUUID;
             data['viewUUID'] = viewUUID;
 
-            console.log(data);
+            // console.log(data);
             actionEvent(data);
           }
         },
