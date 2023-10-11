@@ -8,15 +8,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { useState } from 'react';
 
 const M_Text = forwardRef(function M_Text(
-  {
-    textId,
-    initContent,
-    maxLine = 1,
-    supportEdit = false,
-    onContentChange,
-    onContentEdit,
-    onContentEditCancel,
-  },
+  { textId, initContent, supportEdit = false, onContentChange, onContentEdit, onContentEditCancel },
   ref,
 ) {
   const [content, setContent] = useState(initContent);
