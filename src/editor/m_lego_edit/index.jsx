@@ -4,6 +4,8 @@ import { Dagre } from '@logicflow/layout';
 import { MiniMap, SelectionSelect, Menu } from '@logicflow/extension';
 import LegoNode from './components/m_flow_node_common';
 
+import PropertyPanel from './components/m_flow_property_panel';
+
 import { dsl2flow } from './util/dsl2flow';
 import dsl from '@dsl/lego/ty-login.js';
 
@@ -16,6 +18,7 @@ import '@logicflow/extension/lib/style/index.css';
 const M_Lego_Edit = forwardRef(function M_Lego_Edit(props, ref) {
   const refContainer = React.useRef();
   const lf = React.useRef();
+  const [_, forceUpdate] = React.useState({});
 
   //暴露对外函数
   useImperativeHandle(
@@ -71,11 +74,13 @@ const M_Lego_Edit = forwardRef(function M_Lego_Edit(props, ref) {
     logicflow.translate(450, 0);
     lf.current = logicflow;
     window.lf = logicflow; // 挂到window，方便调试
+    forceUpdate({}); // 刷新页面
   }, []);
 
   return (
     <div>
-      <div ref={refContainer} className="mokelay-flow"></div>
+      <div ref={refContainer} className="mokelay-flow" />
+      {lf.current && <PropertyPanel lf={lf.current} />}
     </div>
   );
 });

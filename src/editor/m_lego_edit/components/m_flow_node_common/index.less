@@ -32,23 +32,17 @@
     overflow: hidden;
 
     &.hovered {
-      .node-title {
-        background: rgba(41, 97, 239, 0.08);
-        border: 1px solid var(--node-primary-color);
-      }
+      opacity: 0.8;
+      border: 1px solid var(--node-primary-color);
     }
     &.selected {
-      .node-title {
-        border: 2px solid var(--node-primary-color);
-        box-shadow: 0 0 6px 0 rgba(41, 97, 239, 0.5);
-      }
+      border: 2px solid var(--node-primary-color);
+      box-shadow: 0 0 6px 0 rgba(41, 97, 239, 0.5);
     }
     &.execute-failed {
-      .node-title {
-        border: 2px solid rgba(255, 77, 79, 0.7);
-        box-shadow: 0 0 6px 0 rgba(255, 77, 79, 0.5);
-        background: rgba(255, 77, 79, 0.5);
-      }
+      border: 2px solid rgba(255, 77, 79, 0.7);
+      box-shadow: 0 0 6px 0 rgba(255, 77, 79, 0.5);
+      background: rgba(255, 77, 79, 0.5);
     }
   }
 
