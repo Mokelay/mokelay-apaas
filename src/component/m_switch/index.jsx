@@ -4,6 +4,7 @@
  *
  * */
 import { forwardRef, useImperativeHandle } from 'react';
+import Switch from '@mui/material/Switch';
 // import { useState } from 'react';
 
 const M_Switch = forwardRef(function M_Switch({}, ref) {
@@ -16,7 +17,7 @@ const M_Switch = forwardRef(function M_Switch({}, ref) {
     [],
   );
 
-  return <></>;
+  return <Switch defaultChecked />;
 });
 
 M_Switch.displayName = 'M_Switch';

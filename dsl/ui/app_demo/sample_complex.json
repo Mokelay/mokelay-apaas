@@ -53,7 +53,20 @@
         ],
         "styles": {
           "dimensions": {
-            "xs": 9
+            "xs": 3
+          }
+        },
+        "events": []
+      },
+      {
+        "uuid": "view_switch_1",
+        "name": "开关1",
+        "component": "M_Switch",
+        "category": "Single",
+        "attributes": [],
+        "styles": {
+          "dimensions": {
+            "xs": 6
           }
         },
         "events": []
