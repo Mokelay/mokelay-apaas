@@ -3,6 +3,7 @@ import LogicFlow from '@logicflow/core';
 import { Dagre } from '@logicflow/layout';
 import { MiniMap, SelectionSelect, Menu } from '@logicflow/extension';
 import LegoNode from './components/m_flow_node_common';
+import LegoEdge from './components/m_flow_edge_common';
 
 import PropertyPanel from './components/m_flow_property_panel';
 
@@ -36,6 +37,7 @@ const M_Lego_Edit = forwardRef(function M_Lego_Edit(props, ref) {
       autoExpand: false,
       hoverOutline: false,
       edgeSelectedOutline: false,
+      edgeType: 'lego-edge',
       grid: {
         size: 10,
         visible: true,
@@ -44,7 +46,7 @@ const M_Lego_Edit = forwardRef(function M_Lego_Edit(props, ref) {
       height: 600,
     });
 
-    logicflow.batchRegister([LegoNode]);
+    logicflow.batchRegister([LegoNode, LegoEdge]);
     logicflow.render(dsl2flow(dsl));
     logicflow.setTheme({
       arrow: {

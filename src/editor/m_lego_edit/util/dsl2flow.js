@@ -23,7 +23,8 @@ export const dsl2flow = (dsl) => {
         // 第一个节点没有线
         flow.edges.push({
           id: uuidv4(),
-          type: 'polyline',
+          // type: 'polyline',
+          type: 'lego-edge',
           sourceNodeId: pre.id,
           targetNodeId: item.id,
         });

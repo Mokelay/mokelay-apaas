@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-
+import TextField from '@mui/material/TextField';
 import './index.less';
 
 /**
@@ -59,10 +59,18 @@ export default function PropertyPanel(props) {
     currentNode.current.setProperties(propertiesValue);
   };
 
+  // 获取节点属性
+  const defaultFormData = React.useMemo(() => {
+    return currentNode.current?.getProperties();
+  }, [currentNode.current]);
+
+  console.log('defaultFormData: ', defaultFormData);
+
   return (
     <>
       <SwipeableDrawer open={showDrawer} anchor="right" onClose={() => setShowDrawer(false)}>
-        <div style={{ width: '600px', padding: '12px' }}>
+        {/* 这里的key主要用于每个节点打开前刷新列表 */}
+        <div style={{ width: '600px', padding: '12px' }} key={defaultFormData?.uuid}>
           <h3>属性面板</h3>
           <div className="mokelay-property-panel">
             {/* TODO  View 组件可能 需要value 和 onChange 属性 */}
@@ -71,6 +79,13 @@ export default function PropertyPanel(props) {
             value={propertiesViewData}
             onChange={onPropertiesChange}
           /> */}
+
+            <TextField
+              required
+              id="description"
+              label="节点描述"
+              defaultValue={defaultFormData?.description}
+            />
           </div>
         </div>
       </SwipeableDrawer>

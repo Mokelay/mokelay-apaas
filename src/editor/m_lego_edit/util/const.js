@@ -6,3 +6,5 @@ export const LEGO_NODE_HEIGHT = 75; // 节点最大高度
 
 export const LEGO_NODE_EDIT_WIDTH = 600; // 节点编辑态宽度
 export const LEGO_NODE_EDIT_HEIGHT = 480; // 节点编辑态高度
+
+export const LINE_OFFSET = 24; // 线偏移

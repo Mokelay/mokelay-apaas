@@ -1,0 +1,30 @@
+.line-content {
+  // background: #fff;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #303a51;
+  --node-primary-color: #2961ef;
+}
+
+.line-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--node-primary-color);
+  color: var(--node-primary-color);
+  background: rgba(41, 97, 239, 0.08);
+  // font-size: 8px;
+  &.selected {
+    background: #fff;
+    border: 2px solid var(--node-primary-color);
+    box-shadow: 0 0 6px 0 rgba(41, 97, 239, 0.5);
+  }
+  // .icon {
+  //   width: 8px;
+  //   height: 8px;
+  // }
+}
