@@ -16,6 +16,7 @@
     "@logicflow/core": "^1.2.15",
     "@logicflow/extension": "^1.2.16",
     "@logicflow/layout": "^1.2.0-alpha.16",
+    "@monaco-editor/react": "^4.6.0",
     "@mui/icons-material": "^5.14.9",
     "@mui/lab": "^5.0.0-alpha.147",
     "@mui/material": "^5.14.6",
