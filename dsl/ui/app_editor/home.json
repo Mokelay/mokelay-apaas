@@ -116,6 +116,27 @@
         }
       },
       {
+        "uuid": "view_link_1_5",
+        "name": "UI_链接1_5",
+        "component": "M_Link",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "text",
+            "value": "Code Editor"
+          },
+          {
+            "varCodeName": "url",
+            "value": "#/app_editor/ui?app=app_demo&ui=sample_code_editor"
+          }
+        ],
+        "styles": {
+          "dimensions": {
+            "xs": 2
+          }
+        }
+      },
+      {
         "uuid": "view_link_2",
         "name": "链接2",
         "component": "M_Link",

@@ -16,7 +16,7 @@ const M_Code_Editor = forwardRef(function M_Code_Editor({ code }, ref) {
     [],
   );
 
-  return <Editor height="100px" language="javascript" theme="vs-dark" value={code} />;
+  return <Editor height="500px" language="javascript" theme="vs-dark" value={code} />;
 });
 
 M_Code_Editor.displayName = 'M_Code_Editor';

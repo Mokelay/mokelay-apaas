@@ -1,0 +1,46 @@
+{
+  "uuid": "uuid_sample_code_editor",
+  "appUUID": "app_demo",
+  "title": "代码编辑页面",
+  "status": "Dev",
+  "description": "这是一个代码编辑页面",
+  "icon": "",
+  "view": {
+    "uuid": "view_page_sample_code_editor",
+    "name": "页面",
+    "component": "M_Page",
+    "category": "Container",
+    "attributes": [
+      {
+        "varCodeName": "spacing",
+        "value": 0.5
+      }
+    ],
+    "styles": {},
+    "events": [],
+    "modals": [
+      {}
+    ],
+    "children": [
+      {
+        "uuid": "view_code_editor_001",
+        "name": "文本",
+        "component": "M_Code_Editor",
+        "category": "Single",
+        "attributes": [
+          {
+            "varCodeName": "code",
+            "value": "console.log('hello mokelay..');"
+          }
+        ],
+        "styles": {},
+        "events": [],
+        "modals": [
+          {}
+        ]
+      }
+    ]
+  },
+  "customVars": [],
+  "customFuncs": []
+}
