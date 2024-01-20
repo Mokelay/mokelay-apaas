@@ -1,5 +1,5 @@
 // 登录接口 dsl
-export default [
+[
   {
     id: 3731,
     apiAlias: 'ty-login',
@@ -373,4 +373,4 @@ export default [
     inputFields: [],
     outputFields: [],
   },
-];
+]
